@@ -61,6 +61,26 @@ cust_total_amount_last_7d,CUSTOMER: Total INR across all accounts in last 7 days
 cust_txn_count_last_30d,CUSTOMER: Transaction count across all accounts in last 30 days.,no
 cust_total_amount_last_30d,CUSTOMER: Total INR across all accounts in last 30 days.,no
 cust_unique_accounts_30d,CUSTOMER: Number of unique accounts used (cumulative proxy).,no
+ip_address,"Per-transaction IP. 70% home (stable, hash-derived), 20% roaming, 10% high-risk proxy. Always risk_ip when vpn_flag=1.",no
+ip_risk_score,"Float 0.0–1.0. Base: home=0.05, roam=0.30, risk=0.80. Modifiers: +0.15 vpn, +0.10 rooted/emulator/night each, +0.05 high-country-risk, −0.05 high-kyc. Capped [0,1].",no
+geo_lat,"Latitude of transaction origin. home_ip→home_lat±N(0,0.05°); roam_ip→Indian city±0.3°; risk_ip→global random.",no
+geo_lon,Longitude of transaction origin. Same logic as geo_lat.,no
+synthetic_flow_id,"Chain/ring identifier. FLOW_00001… (mule_ring 0–9999, layering 10000+). NULL for ATO, smurfing, identity_fraud, dormant_* typologies.",no
+flow_depth,Total hops in this flow (accounts_per_ring for mule_ring; chain_length for layering). NULL for non-flow typologies.,no
+hop_number,"Position in flow: 1=origin, flow_depth=final. NULL for non-flow typologies.",no
+time_since_origin_txn,Seconds from hop_number=1 to this transaction. 0 for origin hop. NULL for non-flow typologies.,no
+balance_before_txn,Account balance immediately before this transaction. Initialised to avg_balance on first txn; carried forward as balance_after_txn thereafter. INR.,no
+balance_after_txn,"Account balance after this transaction = max(0, balance_before_txn + signed_amount). Clamped at 0. INR.",no
+current_balance,Alias for balance_after_txn. Post-transaction account balance. INR.,no
+running_balance_txn_amount,"Signed amount applied to balance. −amount for debits, +amount for credits. Captures direction of balance change. INR.",no
+cumulative_daily_balance_change,Sum of signed_amounts for this account on the same calendar date up to this row. Resets at day boundary per account. INR.,no
+fraud_intensity_score,"Composite risk score 0–100. = min(0.5×weighted_rule_score + 0.3×label×10 + 0.2×min(amount_to_balance_ratio,10), 100). Bands: 0–20 very low, 21–40 low, 41–60 medium, 61–80 high, 81–100 critical.",no
+shared_kyc_id,Shared KYC document group (e.g. KYC_00042). NULL=unique identity. Non-NULL=multiple accounts share same KYC doc — synthetic identity / mule ring signal.,no
+shared_phone_hash,Shared phone number group. NULL=unique. Non-NULL=same phone across customers — mule recruitment / SIM-swap signal.,no
+shared_email_hash,Shared email group. NULL=unique. Non-NULL=same email across customer records — identity farm signal.,no
+home_city,Customer home city name. Seeds per-transaction geo coordinates.,no
+home_lat,Customer home city latitude. Jittered per transaction for home IPs.,no
+home_lon,Customer home city longitude. Jittered per transaction for home IPs.,no
 rule_trigger_count,Total AML rules triggered by this transaction. Higher = more suspicious.,no
 max_rule_severity,Severity (1–3) of the most severe rule triggered. 0 if none.,no
 weighted_rule_score,Sum of severities of all triggered rules. Overall suspicion weight.,no
