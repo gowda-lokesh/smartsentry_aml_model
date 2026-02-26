@@ -1,0 +1,24 @@
+column_name,table,data_type,description
+customer_id,customers,string,"PK. Unique customer identifier. Format: C0, C1, …"
+age,customers,integer,Customer age in years. Range: 21–70.
+customer_risk_rating,customers,categorical,CDD risk tier: low | medium | high | very_high.
+pep_flag,customers,binary,Politically Exposed Person: 1=PEP. Triggers EDD.
+occupation,customers,categorical,Declared occupation: salaried | self_employed | business_owner | student | retired | government_employee | freelancer | unemployed.
+industry,customers,categorical,Business sector: finance | retail | healthcare | technology | real_estate | manufacturing | education | hospitality | construction | unknown.
+account_type,customers,categorical,Primary account type: retail | corporate | savings | current | business.
+kyc_level,customers,categorical,KYC depth: low=basic ID | medium=standard | high=full EDD.
+income_bracket,customers,categorical,Declared income range: low | medium | high.
+country_risk,customers,categorical,Home jurisdiction risk: low | medium | high (FATF-aligned).
+customer_since_days,customers,integer,Days since customer relationship established. Range: 30–3650.
+account_id,accounts,string,"PK. Unique account identifier. Format: A0, A1, …"
+avg_balance,accounts,float,Average account balance in INR (lognormal). Denominator for amount_to_balance_ratio.
+account_open_days,accounts,integer,Days since account was opened. <60 days = high-risk for identity fraud.
+device_id,devices,string,"PK. Unique device fingerprint. Format: D0, D1, …"
+device_age_days,devices,integer,Age of device in days. Range: 30–1500.
+rooted_flag,devices,binary,1 = rooted (Android) / jailbroken (iOS). Tampering indicator.
+os_type,devices,categorical,Operating system: android | ios | windows | unknown.
+vpn_flag,devices,binary,1 = VPN/proxy detected. Geo-masking indicator.
+emulator_flag,devices,binary,"1 = emulated environment, not a physical device. Strong fraud signal."
+beneficiary_id,beneficiaries,string,"PK. Unique external payment destination. Format: B0, B1, …"
+beneficiary_type,beneficiaries,categorical,Type: individual | merchant | crypto | offshore. crypto/offshore = high risk.
+beneficiary_country_risk,beneficiaries,categorical,Beneficiary jurisdiction risk: low | medium | high.

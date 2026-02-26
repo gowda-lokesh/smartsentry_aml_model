@@ -1,0 +1,86 @@
+column_name,description,is_pk_fk
+transaction_id,"PK. Unique transaction identifier. Format: T0, T1, …",yes
+customer_id,FK → customers.customer_id. Denormalised for single-key joins.,yes
+sender_account_id,FK → accounts.account_id. Account that initiated the payment.,yes
+receiver_account_id,FK → accounts.account_id. NULLABLE. Set for internal transfers only.,yes
+beneficiary_id,FK → beneficiaries.beneficiary_id. NULLABLE. Set for external transfers only.,yes
+device_id,FK → devices.device_id. Device used to initiate transaction.,yes
+timestamp,Full datetime of transaction (UTC).,no
+amount,Transaction amount in INR. Lognormally distributed.,no
+channel,Channel: mobile | web | branch | atm.,no
+debit_credit,Always 'debit' — sender perspective.,no
+transaction_type,Payment instrument: UPI | IMPS | wallet_transfer | NEFT | RTGS | online_transfer | cash_deposit | cash_withdrawal | DD | balance_enquiry.,no
+cash_flag,"1 = physical cash involved (cash_deposit, cash_withdrawal, DD).",no
+fraud_type,Ground truth typology: normal | mule_ring | layering | ATO | smurfing | identity_fraud.,no
+label,"Target variable. 0 = legitimate, 1 = fraud.",no
+avg_balance,From accounts. Average account balance (INR). Denominator for ratio features.,no
+account_open_days,From accounts. Days since account opened. <60 days = elevated identity fraud risk.,no
+kyc_level,From accounts/customers. KYC depth: low | medium | high.,no
+country_risk,From accounts/customers. Home jurisdiction risk: low | medium | high.,no
+income_bracket,From accounts/customers. Declared income: low | medium | high.,no
+customer_risk_rating,From accounts/customers. CDD rating: low | medium | high | very_high.,no
+pep_flag,From accounts/customers. 1 = Politically Exposed Person.,no
+occupation,From accounts/customers. Declared occupation.,no
+industry,From accounts/customers. Business sector.,no
+account_type,From accounts/customers. Account type: retail | corporate | savings | current | business.,no
+device_age_days,From devices. Age of device in days.,no
+rooted_flag,From devices. 1 = rooted/jailbroken device.,no
+os_type,From devices. android | ios | windows | unknown.,no
+vpn_flag,From devices. 1 = VPN/proxy detected.,no
+emulator_flag,From devices. 1 = emulated environment (not physical device).,no
+beneficiary_type,From beneficiaries. individual | merchant | crypto | offshore.,no
+beneficiary_country_risk,From beneficiaries. Jurisdiction risk: low | medium | high.,no
+hour,Hour of day (0–23). Fraud peaks at 0–4 and 20–23.,no
+day_of_week,Day of week (0=Mon … 6=Sun).,no
+date,Calendar date of transaction.,no
+month,Calendar month (1–12).,no
+week_of_year,ISO week number (1–53).,no
+is_night,1 = transaction between 22:00 and 05:59.,no
+is_weekend,1 = Saturday or Sunday.,no
+is_business_hours,1 = transaction between 09:00 and 17:00.,no
+amount_to_balance_ratio,amount / avg_balance (clipped at 1). >1 means txn exceeds typical balance.,no
+is_round_amount,"1 = amount is a round multiple of ₹1,000 and ≥ ₹1,000.",no
+log_amount,log1p(amount). Log-transformed for ML models.,no
+high_risk_beneficiary,1 = beneficiary_id is in the high-risk pool (crypto/offshore/high-country-risk).,no
+account_age_days,"Account age in days at the time of this transaction (dynamic, not static).",no
+txn_count_last_1hr,ACCOUNT: Number of transactions sent in the last 1 hour.,no
+txn_count_last_24hr,ACCOUNT: Number of transactions sent in the last 24 hours.,no
+total_amount_last_24hr,ACCOUNT: Total INR sent in the last 24 hours.,no
+txn_count_last_7d,ACCOUNT: Transaction count in the last 7 days.,no
+txn_count_last_30d,ACCOUNT: Transaction count in the last 30 days.,no
+total_amount_last_7d,ACCOUNT: Total INR sent in the last 7 days.,no
+total_amount_last_30d,ACCOUNT: Total INR sent in the last 30 days.,no
+amount_zscore_30d,ACCOUNT: Z-score of this amount vs 30-day rolling mean. >3 = anomalous spike.,no
+dormancy_flag,ACCOUNT: 1 = >30 days since last transaction from this account.,no
+txn_velocity_cumulative,ACCOUNT: Cumulative count of all transactions from this account.,no
+cust_txn_count_last_1hr,CUSTOMER: Transactions across all accounts in last 1 hour.,no
+cust_txn_count_last_24hr,CUSTOMER: Transactions across all accounts in last 24 hours.,no
+cust_total_amount_last_24hr,CUSTOMER: Total INR across all accounts in last 24 hours.,no
+cust_txn_count_last_7d,CUSTOMER: Transaction count across all accounts in last 7 days.,no
+cust_total_amount_last_7d,CUSTOMER: Total INR across all accounts in last 7 days.,no
+cust_txn_count_last_30d,CUSTOMER: Transaction count across all accounts in last 30 days.,no
+cust_total_amount_last_30d,CUSTOMER: Total INR across all accounts in last 30 days.,no
+cust_unique_accounts_30d,CUSTOMER: Number of unique accounts used (cumulative proxy).,no
+ip_address,"Per-transaction IP. 70% home (stable, hash-derived), 20% roaming, 10% high-risk proxy. Always risk_ip when vpn_flag=1.",no
+ip_risk_score,"Float 0.0–1.0. Base: home=0.05, roam=0.30, risk=0.80. Modifiers: +0.15 vpn, +0.10 rooted/emulator/night each, +0.05 high-country-risk, −0.05 high-kyc. Capped [0,1].",no
+geo_lat,"Latitude of transaction origin. home_ip→home_lat±N(0,0.05°); roam_ip→Indian city±0.3°; risk_ip→global random.",no
+geo_lon,Longitude of transaction origin. Same logic as geo_lat.,no
+synthetic_flow_id,"Chain/ring identifier. FLOW_00001… (mule_ring 0–9999, layering 10000+). NULL for ATO, smurfing, identity_fraud, dormant_* typologies.",no
+flow_depth,Total hops in this flow (accounts_per_ring for mule_ring; chain_length for layering). NULL for non-flow typologies.,no
+hop_number,"Position in flow: 1=origin, flow_depth=final. NULL for non-flow typologies.",no
+time_since_origin_txn,Seconds from hop_number=1 to this transaction. 0 for origin hop. NULL for non-flow typologies.,no
+balance_before_txn,Account balance immediately before this transaction. Initialised to avg_balance on first txn; carried forward as balance_after_txn thereafter. INR.,no
+balance_after_txn,"Account balance after this transaction = max(0, balance_before_txn + signed_amount). Clamped at 0. INR.",no
+current_balance,Alias for balance_after_txn. Post-transaction account balance. INR.,no
+running_balance_txn_amount,"Signed amount applied to balance. −amount for debits, +amount for credits. Captures direction of balance change. INR.",no
+cumulative_daily_balance_change,Sum of signed_amounts for this account on the same calendar date up to this row. Resets at day boundary per account. INR.,no
+fraud_intensity_score,"Composite risk score 0–100. = min(0.5×weighted_rule_score + 0.3×label×10 + 0.2×min(amount_to_balance_ratio,10), 100). Bands: 0–20 very low, 21–40 low, 41–60 medium, 61–80 high, 81–100 critical.",no
+shared_kyc_id,Shared KYC document group (e.g. KYC_00042). NULL=unique identity. Non-NULL=multiple accounts share same KYC doc — synthetic identity / mule ring signal.,no
+shared_phone_hash,Shared phone number group. NULL=unique. Non-NULL=same phone across customers — mule recruitment / SIM-swap signal.,no
+shared_email_hash,Shared email group. NULL=unique. Non-NULL=same email across customer records — identity farm signal.,no
+home_city,Customer home city name. Seeds per-transaction geo coordinates.,no
+home_lat,Customer home city latitude. Jittered per transaction for home IPs.,no
+home_lon,Customer home city longitude. Jittered per transaction for home IPs.,no
+rule_trigger_count,Total AML rules triggered by this transaction. Higher = more suspicious.,no
+max_rule_severity,Severity (1–3) of the most severe rule triggered. 0 if none.,no
+weighted_rule_score,Sum of severities of all triggered rules. Overall suspicion weight.,no

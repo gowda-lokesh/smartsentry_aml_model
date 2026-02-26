@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SmartSentry AML — Entity Relationship Diagram</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#060a12;
+  --surface:#0c1220;
+  --card:#101826;
+  --card-hover:#131e2e;
+  --border:rgba(255,255,255,0.07);
+  --border-hi:rgba(255,255,255,0.13);
+
+  --cust :#22d3a0;
+  --acc  :#4f9fff;
+  --txn  :#ff7040;
+  --dev  :#a78bfa;
+  --bene :#f472b6;
+  --graph:#22d3ee;
+
+  --pk   :#fbbf24;
+  --fk   :#60a5fa;
+  --fkn  :#d8b4fe;
+
+  --text :#dde4ef;
+  --muted:#4a5568;
+  --dim  :#6b7280;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;
+  padding-bottom:80px;
+}
+
+/* ─── subtle dot-grid background ─── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ─── HEADER ─── */
+.header{
+  position:relative;z-index:10;
+  text-align:center;
+  padding:56px 24px 40px;
+}
+.pill{
+  display:inline-block;
+  font-family:'Fira Code',monospace;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--txn);
+  border:1px solid rgba(255,112,64,0.3);
+  background:rgba(255,112,64,0.06);
+  padding:5px 16px;border-radius:99px;
+  margin-bottom:18px;
+}
+.header h1{
+  font-size:clamp(28px,4vw,46px);
+  font-weight:700;letter-spacing:-1.5px;
+  line-height:1.1;color:var(--text);
+}
+.header h1 b{
+  background:linear-gradient(120deg,var(--txn) 0%,var(--bene) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;font-weight:700;
+}
+.header p{margin-top:10px;color:var(--dim);font-size:13px;font-weight:300}
+
+/* ─── LEGEND BAR ─── */
+.legend{
+  position:relative;z-index:10;
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:6px 20px;padding:0 20px 34px;
+}
+.li{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim)}
+.lswatch{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.ltag{
+  font-family:'Fira Code',monospace;
+  font-size:9.5px;font-weight:600;
+  padding:1px 6px;border-radius:4px;letter-spacing:.3px;
+}
+.tpk{color:var(--pk);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2)}
+.tfk{color:var(--fk);background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2)}
+.tfn{color:var(--fkn);background:rgba(216,180,254,.1);border:1px solid rgba(216,180,254,.2)}
+
+/* ─── CANVAS WRAPPER ─── */
+.canvas{
+  position:relative;z-index:2;
+  max-width:1400px;margin:0 auto;
+  padding:0 24px;
+}
+#diagram{position:relative;width:100%}
+
+/* SVG overlay */
+#svg-overlay{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  overflow:visible;pointer-events:none;z-index:1;
+}
+
+/* ─── TABLE CARDS ─── */
+.tbl{
+  position:absolute;
+  background:var(--card);
+  border:1px solid var(--border-hi);
+  border-radius:12px;overflow:hidden;z-index:5;
+  transition:box-shadow .25s,transform .2s,border-color .2s;
+  box-shadow:0 2px 12px rgba(0,0,0,.4);
+}
+.tbl:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 48px rgba(0,0,0,.6);
+  border-color:rgba(255,255,255,.18);
+}
+.tbl-bar{height:3px;width:100%}
+.tbl-head{
+  display:flex;align-items:center;gap:8px;
+  padding:11px 14px 9px;
+  border-bottom:1px solid var(--border);
+}
+.tbl-ico{
+  width:24px;height:24px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;
+}
+.tbl-title{
+  font-size:12.5px;font-weight:600;letter-spacing:.1px;
+}
+.tbl-ct{
+  margin-left:auto;
+  font-family:'Fira Code',monospace;
+  font-size:9px;color:var(--muted);
+  background:rgba(255,255,255,.04);
+  padding:2px 7px;border-radius:8px;border:1px solid var(--border);
+  white-space:nowrap;
+}
+.tbl-body{padding:5px 0 7px}
+
+/* ─── FIELD ROWS ─── */
+.fr{
+  display:grid;
+  grid-template-columns:28px 1fr auto;
+  align-items:center;gap:4px;
+  padding:3px 13px 3px 9px;
+  transition:background .1s;
+}
+.fr:hover{background:rgba(255,255,255,.03)}
+.ftag{
+  font-family:'Fira Code',monospace;
+  font-size:8px;font-weight:600;
+  text-align:center;padding:1px 3px;
+  border-radius:3px;letter-spacing:.3px;
+}
+.fname{
+  font-family:'Fira Code',monospace;
+  font-size:10.5px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.fname.pk {color:var(--pk);font-weight:600}
+.fname.fk {color:var(--fk)}
+.fname.fkn{color:var(--fkn)}
+.fname.dim{color:var(--muted);font-style:italic;font-size:10px}
+.ftype{font-family:'Fira Code',monospace;font-size:8.5px;color:var(--muted)}
+.sep{height:1px;background:var(--border);margin:4px 11px}
+.sec{
+  font-family:'Fira Code',monospace;
+  font-size:8.5px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--muted);padding:3px 13px 1px;
+}
+
+/* ─── XOR CALLOUT ─── */
+.xor{
+  position:relative;z-index:10;
+  max-width:1400px;margin:20px auto 0;padding:0 24px;
+}
+.xor-inner{
+  background:var(--surface);
+  border:1px solid rgba(216,180,254,.18);
+  border-left:3px solid var(--fkn);
+  border-radius:12px;
+  padding:20px 26px;
+  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+}
+.xor-head{
+  font-family:'Fira Code',monospace;
+  font-size:10px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--fkn);margin-bottom:8px;
+}
+.xor-body{font-size:12.5px;color:var(--dim);line-height:1.65}
+.xor-cases{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.xcase{
+  background:var(--bg);
+  border:1px solid var(--border-hi);
+  border-radius:8px;padding:12px 14px;
+  font-family:'Fira Code',monospace;font-size:10.5px;line-height:1.9;
+}
+.xcase-title{font-size:11px;font-weight:600;margin-bottom:5px;font-family:'DM Sans',sans-serif}
+.set{color:#4ade80}.nil{color:var(--muted)}
+
+/* ─── JOIN RECIPES ─── */
+.recipes{
+  position:relative;z-index:10;
+  max-width:1400px;margin:20px auto 0;padding:0 24px 0;
+}
+.recipes-head{
+  font-family:'Fira Code',monospace;
+  font-size:9.5px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);margin-bottom:14px;
+}
+.recipes-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:10px;
+}
+.rcard{
+  background:var(--surface);
+  border:1px solid var(--border-hi);
+  border-radius:10px;padding:14px 16px;
+}
+.rcard-h{
+  font-size:10.5px;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;
+  color:var(--dim);margin-bottom:5px;
+}
+.rcard-d{font-size:11.5px;color:var(--muted);margin-bottom:9px;line-height:1.5}
+.code{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:6px;padding:9px 12px;
+  font-family:'Fira Code',monospace;
+  font-size:10px;line-height:1.8;
+  white-space:pre;overflow-x:auto;
+}
+.ck{color:var(--fk)}.ct{color:var(--cust)}.cs{color:#86efac}.cm{color:var(--muted)}.cp{color:var(--fkn)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="pill">SmartSentry AML · Schema Reference</div>
+  <h1>Entity <b>Relationship</b> Diagram</h1>
+  <p>Every table · every key · every join path in the synthetic AML dataset</p>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="li"><div class="lswatch" style="background:var(--cust)"></div>customers</div>
+  <div class="li"><div class="lswatch" style="background:var(--acc)"></div>accounts</div>
+  <div class="li"><div class="lswatch" style="background:var(--txn)"></div>transactions</div>
+  <div class="li"><div class="lswatch" style="background:var(--dev)"></div>devices</div>
+  <div class="li"><div class="lswatch" style="background:var(--bene)"></div>beneficiaries</div>
+  <div class="li"><div class="lswatch" style="background:var(--graph)"></div>graph_edges</div>
+  <div class="li"><span class="ltag tpk">PK</span>Primary Key</div>
+  <div class="li"><span class="ltag tfk">FK</span>Foreign Key (mandatory)</div>
+  <div class="li"><span class="ltag tfn">FK?</span>Foreign Key (nullable / XOR)</div>
+</div>
+
+<!-- DIAGRAM -->
+<div class="canvas">
+<div id="diagram">
+
+  <svg id="svg-overlay" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr-cust"  markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="var(--cust)"/></marker>
+      <marker id="arr-acc"   markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="var(--acc)"/></marker>
+      <marker id="arr-dev"   markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="var(--dev)"/></marker>
+      <marker id="arr-bene"  markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="var(--bene)"/></marker>
+      <marker id="arr-graph" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="var(--graph)"/></marker>
+      <marker id="arr-fkn"   markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" fill="var(--fkn)"/></marker>
+    </defs>
+  </svg>
+
+  <!-- ═══ CUSTOMERS ═══ -->
+  <div class="tbl" id="t-cust" style="width:230px">
+    <div class="tbl-bar" style="background:var(--cust)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(34,211,160,.1)">👤</div>
+      <span class="tbl-title" style="color:var(--cust)">customers</span>
+      <span class="tbl-ct">20 K rows</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr" id="f-cust-pk">
+        <span class="ftag tpk">PK</span>
+        <span class="fname pk">customer_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">age</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">kyc_level</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">customer_risk_rating</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">pep_flag</span><span class="ftype">bin</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">occupation</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">industry</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">income_bracket</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">country_risk</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">account_type</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">customer_since_days</span><span class="ftype">int</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ ACCOUNTS ═══ -->
+  <div class="tbl" id="t-acc" style="width:230px">
+    <div class="tbl-bar" style="background:var(--acc)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(79,159,255,.1)">🏦</div>
+      <span class="tbl-title" style="color:var(--acc)">accounts</span>
+      <span class="tbl-ct">25 K rows</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr" id="f-acc-pk">
+        <span class="ftag tpk">PK</span>
+        <span class="fname pk">account_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="fr" id="f-acc-fk">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">customer_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">avg_balance</span><span class="ftype">float</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">account_open_days</span><span class="ftype">int</span></div>
+      <div class="sep"></div>
+      <div class="sec">↳ denormalised from customers</div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">kyc_level</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">customer_risk_rating</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">pep_flag</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">occupation, industry …</span><span class="ftype">copy</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ TRANSACTIONS (centre) ═══ -->
+  <div class="tbl" id="t-txn" style="width:260px">
+    <div class="tbl-bar" style="background:var(--txn)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(255,112,64,.1)">💳</div>
+      <span class="tbl-title" style="color:var(--txn)">transactions</span>
+      <span class="tbl-ct">~1.3 M rows</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr">
+        <span class="ftag tpk">PK</span>
+        <span class="fname pk">transaction_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="sec">Foreign Keys</div>
+      <div class="fr" id="f-txn-cust">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">customer_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="fr" id="f-txn-sender">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">sender_account_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="fr" id="f-txn-recv">
+        <span class="ftag tfn">FK?</span>
+        <span class="fname fkn">receiver_account_id</span>
+        <span class="ftype">nullable</span>
+      </div>
+      <div class="fr" id="f-txn-bene">
+        <span class="ftag tfn">FK?</span>
+        <span class="fname fkn">beneficiary_id</span>
+        <span class="ftype">nullable</span>
+      </div>
+      <div class="fr" id="f-txn-dev">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">device_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="sec">Core Fields</div>
+      <div class="fr"><span class="ftag"></span><span class="fname">timestamp</span><span class="ftype">datetime</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">amount</span><span class="ftype">float</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">channel</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">transaction_type</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">cash_flag</span><span class="ftype">bin</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">fraud_type</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">label</span><span class="ftype">bin</span></div>
+      <div class="sep"></div>
+      <div class="sec">Derived / Enriched</div>
+      <div class="fr"><span class="ftag"></span><span class="fname">hour · is_night · is_weekend</span><span class="ftype">temp</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">amount_to_balance_ratio</span><span class="ftype">ratio</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">account_age_days</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">txn_count_last_1hr / 24hr</span><span class="ftype">vel</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">total_amount_last_24hr</span><span class="ftype">vel</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">cust_txn_count_last_1hr</span><span class="ftype">vel</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">cust_total_amount_last_24hr</span><span class="ftype">vel</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">amount_zscore_30d</span><span class="ftype">stat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">dormancy_flag</span><span class="ftype">bin</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">high_risk_beneficiary</span><span class="ftype">bin</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">rule_trigger_count</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">weighted_rule_score</span><span class="ftype">int</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ DEVICES ═══ -->
+  <div class="tbl" id="t-dev" style="width:230px">
+    <div class="tbl-bar" style="background:var(--dev)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(167,139,250,.1)">📱</div>
+      <span class="tbl-title" style="color:var(--dev)">devices</span>
+      <span class="tbl-ct">18 K rows</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr" id="f-dev-pk">
+        <span class="ftag tpk">PK</span>
+        <span class="fname pk">device_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">device_age_days</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">rooted_flag</span><span class="ftype">bin</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">os_type</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">vpn_flag</span><span class="ftype">bin</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">emulator_flag</span><span class="ftype">bin</span></div>
+      <div class="sep"></div>
+      <div class="sec" style="color:rgba(167,139,250,.45)">no direct FK to customers</div>
+      <div class="sec">linked via transactions.device_id</div>
+    </div>
+  </div>
+
+  <!-- ═══ BENEFICIARIES ═══ -->
+  <div class="tbl" id="t-bene" style="width:230px">
+    <div class="tbl-bar" style="background:var(--bene)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(244,114,182,.1)">🏧</div>
+      <span class="tbl-title" style="color:var(--bene)">beneficiaries</span>
+      <span class="tbl-ct">30 K rows</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr" id="f-bene-pk">
+        <span class="ftag tpk">PK</span>
+        <span class="fname pk">beneficiary_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">beneficiary_type</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">beneficiary_country_risk</span><span class="ftype">cat</span></div>
+      <div class="sep"></div>
+      <div class="sec" style="color:rgba(244,114,182,.45)">external entities — no customer record</div>
+      <div class="sec">linked via transactions.beneficiary_id</div>
+    </div>
+  </div>
+
+  <!-- ═══ GRAPH EDGES ═══ -->
+  <div class="tbl" id="t-graph" style="width:230px">
+    <div class="tbl-bar" style="background:var(--graph)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(34,211,238,.1)">🕸</div>
+      <span class="tbl-title" style="color:var(--graph)">graph_edges</span>
+      <span class="tbl-ct">~1.3 M rows</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr" id="f-graph-txn">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">transaction_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="fr">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">source_account_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="fr">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">customer_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">target_id</span><span class="ftype">string</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">target_type</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">relation</span><span class="ftype">cat</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">timestamp</span><span class="ftype">datetime</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">amount</span><span class="ftype">float</span></div>
+    </div>
+  </div>
+
+</div><!-- /diagram -->
+</div><!-- /canvas -->
+
+<!-- XOR CALLOUT -->
+<div class="xor" style="margin-top:28px">
+  <div class="xor-inner">
+    <div style="font-size:28px;padding-top:2px">⚡</div>
+    <div>
+      <div class="xor-head">XOR Constraint — receiver_account_id vs beneficiary_id</div>
+      <p class="xor-body">
+        Every transaction row has <strong>exactly one</strong> of these two nullable FK columns set — never both, never neither.
+        The one that's populated tells you whether money moved <em>inside</em> or <em>outside</em> the bank.
+      </p>
+      <div class="xor-cases">
+        <div class="xcase">
+          <div class="xcase-title" style="color:var(--acc)">Internal Transfer (≈40% of rows)</div>
+          <span class="set">receiver_account_id = "A4521"</span><br>
+          <span class="nil">beneficiary_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= NULL</span><br><br>
+          Money stays inside the bank.<br>
+          Join accounts → get full receiver profile.<br>
+          Then join customers → age, tenure, risk.
+        </div>
+        <div class="xcase">
+          <div class="xcase-title" style="color:var(--bene)">External Transfer (≈60% of rows)</div>
+          <span class="nil">receiver_account_id = NULL</span><br>
+          <span class="set">beneficiary_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= "B0234"</span><br><br>
+          Money leaves the bank entirely.<br>
+          Join beneficiaries → type &amp; country risk.<br>
+          No customer record exists for external parties.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JOIN RECIPES -->
+<div class="recipes" style="margin-top:20px;padding-bottom:20px">
+  <div class="recipes-head">Join Recipes</div>
+  <div class="recipes-grid">
+
+    <div class="rcard">
+      <div class="rcard-h">01 · Transactions → Customers</div>
+      <div class="rcard-d"><code>customer_id</code> is denormalised into every row — single-key, zero chaining.</div>
+      <div class="code"><span class="ck">transactions</span>.merge(
+  <span class="ct">customers</span>, <span class="ck">on</span>=<span class="cs">"customer_id"</span>
+)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">02 · Transactions → Accounts (sender)</div>
+      <div class="rcard-d">Brings in balance, open_days, and all risk attributes via one join.</div>
+      <div class="code"><span class="ck">transactions</span>.merge(
+  <span class="ct">accounts</span>,
+  <span class="ck">left_on</span>=<span class="cs">"sender_account_id"</span>,
+  <span class="ck">right_on</span>=<span class="cs">"account_id"</span>
+)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">03 · Transactions → Accounts (receiver)</div>
+      <div class="rcard-d">Internal transfers only. Always <code>how="left"</code> — this FK is nullable.</div>
+      <div class="code"><span class="ck">transactions</span>.merge(
+  <span class="ct">accounts</span>,
+  <span class="ck">left_on</span>=<span class="cs">"receiver_account_id"</span>,
+  <span class="ck">right_on</span>=<span class="cs">"account_id"</span>,
+  <span class="ck">how</span>=<span class="cs">"left"</span>
+)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">04 · Transactions → Devices</div>
+      <div class="rcard-d">Get device risk signals: rooted, VPN, emulator, OS type.</div>
+      <div class="code"><span class="ck">transactions</span>.merge(
+  <span class="ct">devices</span>, <span class="ck">on</span>=<span class="cs">"device_id"</span>
+)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">05 · Transactions → Beneficiaries</div>
+      <div class="rcard-d">External transfers only. Filter first to avoid NaN rows.</div>
+      <div class="code"><span class="ck">transactions</span>[
+  <span class="ck">transactions</span>[<span class="cs">"beneficiary_id"</span>].notna()
+].merge(<span class="ct">beneficiaries</span>, <span class="ck">on</span>=<span class="cs">"beneficiary_id"</span>)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">06 · Sender + Receiver (no column clash)</div>
+      <div class="rcard-d">Prefix both sides to avoid <code>col_x / col_y</code> naming collision.</div>
+      <div class="code">s = <span class="ct">accounts</span>.add_prefix(<span class="cs">"sndr_"</span>)
+r = <span class="ct">accounts</span>.add_prefix(<span class="cs">"rcvr_"</span>)
+<span class="ck">transactions</span>
+  .merge(s, <span class="ck">left_on</span>=<span class="cs">"sender_account_id"</span>,
+            <span class="ck">right_on</span>=<span class="cs">"sndr_account_id"</span>)
+  .merge(r, <span class="ck">left_on</span>=<span class="cs">"receiver_account_id"</span>,
+            <span class="ck">right_on</span>=<span class="cs">"rcvr_account_id"</span>,
+            <span class="ck">how</span>=<span class="cs">"left"</span>)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">07 · Devices → Customers (indirect)</div>
+      <div class="rcard-d">No direct FK. Transactions is the bridge — always route through it.</div>
+      <div class="code"><span class="ck">transactions</span>
+  .merge(<span class="ct">devices</span>, <span class="ck">on</span>=<span class="cs">"device_id"</span>)
+  .merge(<span class="ct">customers</span>, <span class="ck">on</span>=<span class="cs">"customer_id"</span>)
+  .query(<span class="cs">"rooted_flag == 1"</span>)</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">08 · Beneficiaries → Customers (indirect)</div>
+      <div class="rcard-d">Who sent money to crypto exchanges? Route through transactions.</div>
+      <div class="code"><span class="ck">transactions</span>
+  .merge(<span class="ct">beneficiaries</span>, <span class="ck">on</span>=<span class="cs">"beneficiary_id"</span>)
+  .merge(<span class="ct">customers</span>, <span class="ck">on</span>=<span class="cs">"customer_id"</span>)
+  .query(<span class="cs">"beneficiary_type == 'crypto'"</span>)</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  LAYOUT + SVG LINE ENGINE
+//  Cards are positioned using JS (absolute layout) so SVG lines
+//  can be drawn to exact pixel positions of each field row.
+// ════════════════════════════════════════════════════════════════
+
+const GAP_COL  = 0;   // horizontal gap managed via column positions
+const GAP_CARD = 24;  // vertical gap between cards in same column
+const PAD      = 6;   // gap between line endpoint and card edge
+
+function run() {
+  const diagram = document.getElementById('diagram');
+  const svg     = document.getElementById('svg-overlay');
+  const W       = diagram.offsetWidth;
+
+  // Column widths — transactions is wider
+  const W_SIDE = Math.min(230, W * 0.185);
+  const W_TXN  = Math.min(260, W * 0.21);
+
+  // 3-column layout with even spacing
+  const totalCards = W_SIDE * 2 + W_TXN;
+  const space      = (W - totalCards) / 4;
+
+  const X_LEFT   = space;
+  const X_CENTRE = space * 2 + W_SIDE;
+  const X_RIGHT  = space * 3 + W_SIDE + W_TXN;
+
+  // Apply widths
+  ['t-cust','t-acc'].forEach(id => {
+    document.getElementById(id).style.width = W_SIDE + 'px';
+    document.getElementById(id).style.left  = X_LEFT + 'px';
+  });
+  ['t-dev','t-bene','t-graph'].forEach(id => {
+    document.getElementById(id).style.width = W_SIDE + 'px';
+    document.getElementById(id).style.left  = X_RIGHT + 'px';
+  });
+  const txnEl = document.getElementById('t-txn');
+  txnEl.style.width = W_TXN + 'px';
+  txnEl.style.left  = X_CENTRE + 'px';
+
+  // Measure card heights
+  const H = {};
+  ['t-cust','t-acc','t-txn','t-dev','t-bene','t-graph'].forEach(id => {
+    H[id] = document.getElementById(id).offsetHeight;
+  });
+
+  // Left column: cust on top, acc below
+  document.getElementById('t-cust').style.top = '0px';
+  document.getElementById('t-acc').style.top  = (H['t-cust'] + GAP_CARD) + 'px';
+
+  // Centre: transactions starts at 0
+  txnEl.style.top = '0px';
+  const txnH = H['t-txn'];
+
+  // Right column: distribute dev / bene / graph across transactions height
+  const rightTotalH = H['t-dev'] + H['t-bene'] + H['t-graph'];
+  const rightGap    = Math.max(GAP_CARD, (txnH - rightTotalH) / 2);
+  document.getElementById('t-dev').style.top   = '0px';
+  document.getElementById('t-bene').style.top  = (H['t-dev'] + rightGap) + 'px';
+  document.getElementById('t-graph').style.top = (H['t-dev'] + rightGap + H['t-bene'] + rightGap) + 'px';
+
+  const totalH = Math.max(
+    H['t-cust'] + GAP_CARD + H['t-acc'],
+    txnH,
+    H['t-dev'] + rightGap + H['t-bene'] + rightGap + H['t-graph']
+  );
+  diagram.style.height = (totalH + 20) + 'px';
+  svg.setAttribute('viewBox', `0 0 ${W} ${totalH + 20}`);
+  svg.style.width  = W + 'px';
+  svg.style.height = (totalH + 20) + 'px';
+
+  // ── DRAW LINES ──────────────────────────────────────────────────
+  // Clear old lines (keep defs)
+  const defs = svg.querySelector('defs');
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.appendChild(defs);
+
+  // Helper: get absolute centre-Y of a field row element
+  function fieldY(fieldId, cardId) {
+    const field = document.getElementById(fieldId);
+    const card  = document.getElementById(cardId);
+    if (!field) return card.offsetTop + card.offsetHeight / 2;
+    return card.offsetTop + field.offsetTop + field.offsetHeight / 2;
+  }
+
+  // Card bounding boxes
+  function box(id) {
+    const el = document.getElementById(id);
+    return {
+      L: el.offsetLeft,
+      R: el.offsetLeft + el.offsetWidth,
+      T: el.offsetTop,
+      B: el.offsetTop + el.offsetHeight,
+      MX: el.offsetLeft + el.offsetWidth / 2,
+      MY: el.offsetTop + el.offsetHeight / 2,
+    };
+  }
+
+  const BC = box('t-cust');
+  const BA = box('t-acc');
+  const BT = box('t-txn');
+  const BD = box('t-dev');
+  const BB = box('t-bene');
+  const BG = box('t-graph');
+
+  // Draw a smooth cubic bezier curve between two points
+  function bezier(x1, y1, x2, y2, color, marker, dashed, opacity=0.8) {
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const cx = (x1 + x2) / 2;
+    p.setAttribute('d', `M${x1},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}`);
+    p.setAttribute('stroke', color);
+    p.setAttribute('stroke-width', '1.8');
+    p.setAttribute('fill', 'none');
+    p.setAttribute('opacity', String(opacity));
+    if (dashed) p.setAttribute('stroke-dasharray', '6,4');
+    if (marker) p.setAttribute('marker-end', `url(#${marker})`);
+    svg.appendChild(p);
+  }
+
+  // Draw a straight line
+  function line(x1, y1, x2, y2, color, marker, opacity=0.8) {
+    const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+    l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+    l.setAttribute('stroke', color);
+    l.setAttribute('stroke-width', '1.8');
+    l.setAttribute('opacity', String(opacity));
+    if (marker) l.setAttribute('marker-end', `url(#${marker})`);
+    svg.appendChild(l);
+  }
+
+  // Draw an elbow (right-angle path with two turns)
+  function elbow(x1, y1, midX, x2, y2, color, marker, dashed, opacity=0.72) {
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', `M${x1},${y1} L${midX},${y1} L${midX},${y2} L${x2},${y2}`);
+    p.setAttribute('stroke', color);
+    p.setAttribute('stroke-width', '1.8');
+    p.setAttribute('fill', 'none');
+    p.setAttribute('opacity', String(opacity));
+    if (dashed) p.setAttribute('stroke-dasharray', '6,4');
+    if (marker) p.setAttribute('marker-end', `url(#${marker})`);
+    svg.appendChild(p);
+  }
+
+  // Inline SVG text label
+  function label(x, y, text, color, anchor='start') {
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', x); t.setAttribute('y', y);
+    t.setAttribute('fill', color);
+    t.setAttribute('font-size', '9');
+    t.setAttribute('font-family', 'Fira Code, monospace');
+    t.setAttribute('opacity', '0.72');
+    t.setAttribute('text-anchor', anchor);
+    t.textContent = text;
+    svg.appendChild(t);
+  }
+
+  // ── 1. customers.PK → accounts.FK (vertical connector, left col) ──
+  {
+    const x   = BC.L + W_SIDE * 0.33;
+    const y1  = BC.B + PAD;
+    const y2  = BA.T - PAD;
+    line(x, y1, x, y2, 'var(--cust)', 'arr-cust');
+    label(x + 5, (y1 + y2) / 2 + 4, 'customer_id', 'var(--cust)');
+  }
+
+  // ── 2. transactions.customer_id → customers (left of txn → right of cust) ──
+  {
+    const y1 = fieldY('f-txn-cust', 't-txn');
+    const y2 = BC.MY;
+    bezier(BT.L - PAD, y1, BC.R + PAD, y2, 'var(--cust)', 'arr-cust', false);
+  }
+
+  // ── 3. transactions.sender_account_id → accounts (left of txn → right of acc) ──
+  {
+    const y1 = fieldY('f-txn-sender', 't-txn');
+    const y2 = BA.T + 30;
+    bezier(BT.L - PAD, y1, BA.R + PAD, y2, 'var(--acc)', 'arr-acc', false);
+  }
+
+  // ── 4. transactions.receiver_account_id → accounts (nullable, dashed elbow) ──
+  {
+    const y1  = fieldY('f-txn-recv', 't-txn');
+    const y2  = BA.B - 28;
+    const bx  = BT.L - 52;   // elbow x — step left of the card
+    elbow(BT.L - PAD, y1, bx, BA.R + PAD, y2, 'var(--fkn)', 'arr-fkn', true);
+    label(bx + 3, (y1 + y2) / 2 - 4, 'nullable', 'var(--fkn)');
+  }
+
+  // ── 5. transactions.device_id → devices (right of txn → left of dev) ──
+  {
+    const y1 = fieldY('f-txn-dev', 't-txn');
+    const y2 = BD.MY;
+    bezier(BT.R + PAD, y1, BD.L - PAD, y2, 'var(--dev)', 'arr-dev', false);
+  }
+
+  // ── 6. transactions.beneficiary_id → beneficiaries (nullable, dashed) ──
+  {
+    const y1 = fieldY('f-txn-bene', 't-txn');
+    const y2 = BB.MY;
+    bezier(BT.R + PAD, y1, BB.L - PAD, y2, 'var(--bene)', 'arr-bene', true);
+  }
+
+  // ── 7. graph_edges → transactions (left of graph → right of txn, lower section) ──
+  {
+    const y1 = fieldY('f-graph-txn', 't-graph');
+    const y2 = BT.B - 60;
+    bezier(BG.L - PAD, y1, BT.R + PAD, y2, 'var(--graph)', 'arr-graph', false);
+  }
+}
+
+window.addEventListener('load', run);
+window.addEventListener('resize', () => {
+  const svg = document.getElementById('svg-overlay');
+  const defs = svg.querySelector('defs');
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.appendChild(defs);
+  run();
+});
+</script>
+</body>
+</html>
