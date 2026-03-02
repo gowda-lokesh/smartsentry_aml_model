@@ -10,6 +10,12 @@ kyc_level,customers,categorical,KYC depth: low=basic ID | medium=standard | high
 income_bracket,customers,categorical,Declared income range: low | medium | high.
 country_risk,customers,categorical,Home jurisdiction risk: low | medium | high (FATF-aligned).
 customer_since_days,customers,integer,Days since customer relationship established. Range: 30–3650.
+home_city,customers,string,Customer's home city name. Seeds per-txn geo coordinates.
+home_lat,customers,float,Home city latitude. Jittered ±0.05° per transaction for home IPs.
+home_lon,customers,float,Home city longitude. Jittered ±0.05° per transaction for home IPs.
+shared_kyc_id,customers,string,Shared KYC document group ID (e.g. KYC_00042). NULL = unique identity. Non-NULL = synthetic identity / mule ring collision.
+shared_phone_hash,customers,string,Shared phone number group ID. NULL = unique. Non-NULL = same phone used across accounts — mule recruitment signal.
+shared_email_hash,customers,string,Shared email group ID. NULL = unique. Non-NULL = same email across customers — identity farm signal.
 account_id,accounts,string,"PK. Unique account identifier. Format: A0, A1, …"
 avg_balance,accounts,float,Average account balance in INR (lognormal). Denominator for amount_to_balance_ratio.
 account_open_days,accounts,integer,Days since account was opened. <60 days = high-risk for identity fraud.
@@ -22,3 +28,7 @@ emulator_flag,devices,binary,"1 = emulated environment, not a physical device. S
 beneficiary_id,beneficiaries,string,"PK. Unique external payment destination. Format: B0, B1, …"
 beneficiary_type,beneficiaries,categorical,Type: individual | merchant | crypto | offshore. crypto/offshore = high risk.
 beneficiary_country_risk,beneficiaries,categorical,Beneficiary jurisdiction risk: low | medium | high.
+shell_jurisdiction,beneficiaries,categorical,Incorporation jurisdiction for shell companies (BVI | Cayman | Panama | Delaware | Luxembourg | Seychelles | Mauritius | Singapore). NULL for non-shell beneficiaries. Secrecy jurisdictions = high AML risk.
+shell_age_days,beneficiaries,integer,Days since shell company incorporation. NULL for non-shells. <180 days = newly incorporated = highest risk for layering.
+ubo_disclosed,beneficiaries,binary,1 = Ultimate Beneficial Owner identity is known. 0 = UBO hidden (red flag). NULL for non-shell beneficiaries. 75% of shells have hidden UBOs.
+shell_newly_incorporated,beneficiaries,binary,1 = shell company incorporated <180 days ago. Strong layering risk signal. 0 for all non-shells and older shells.
