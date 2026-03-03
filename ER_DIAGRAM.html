@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SmartSentry AML — Entity Relationship Diagram</title>
+<title>SmartSentry AML - Entity Relationship Diagram</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
@@ -35,14 +35,14 @@
 html{scroll-behavior:smooth}
 
 body{
-  background:var(--bg);
+  background:#060a12;
   color:var(--text);
   font-family:'DM Sans',sans-serif;
   min-height:100vh;
   padding-bottom:80px;
 }
 
-/* ─── subtle dot-grid background ─── */
+/* subtle dot-grid background */
 body::before{
   content:'';
   position:fixed;inset:0;
@@ -52,7 +52,7 @@ body::before{
   z-index:0;
 }
 
-/* ─── HEADER ─── */
+/*  HEADER  */
 .header{
   position:relative;z-index:10;
   text-align:center;
@@ -80,7 +80,7 @@ body::before{
 }
 .header p{margin-top:10px;color:var(--dim);font-size:13px;font-weight:300}
 
-/* ─── LEGEND BAR ─── */
+/*  LEGEND BAR  */
 .legend{
   position:relative;z-index:10;
   display:flex;flex-wrap:wrap;justify-content:center;
@@ -97,7 +97,7 @@ body::before{
 .tfk{color:var(--fk);background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2)}
 .tfn{color:var(--fkn);background:rgba(216,180,254,.1);border:1px solid rgba(216,180,254,.2)}
 
-/* ─── CANVAS WRAPPER ─── */
+/*  CANVAS WRAPPER  */
 .canvas{
   position:relative;z-index:2;
   max-width:1400px;margin:0 auto;
@@ -112,7 +112,7 @@ body::before{
   overflow:visible;pointer-events:none;z-index:1;
 }
 
-/* ─── TABLE CARDS ─── */
+/*  TABLE CARDS  */
 .tbl{
   position:absolute;
   background:var(--card);
@@ -150,7 +150,7 @@ body::before{
 }
 .tbl-body{padding:5px 0 7px}
 
-/* ─── FIELD ROWS ─── */
+/*  FIELD ROWS  */
 .fr{
   display:grid;
   grid-template-columns:28px 1fr auto;
@@ -182,7 +182,7 @@ body::before{
   color:var(--muted);padding:3px 13px 1px;
 }
 
-/* ─── XOR CALLOUT ─── */
+/*  XOR CALLOUT  */
 .xor{
   position:relative;z-index:10;
   max-width:1400px;margin:20px auto 0;padding:0 24px;
@@ -212,7 +212,7 @@ body::before{
 .xcase-title{font-size:11px;font-weight:600;margin-bottom:5px;font-family:'DM Sans',sans-serif}
 .set{color:#4ade80}.nil{color:var(--muted)}
 
-/* ─── JOIN RECIPES ─── */
+/*  JOIN RECIPES  */
 .recipes{
   position:relative;z-index:10;
   max-width:1400px;margin:20px auto 0;padding:0 24px 0;
@@ -254,9 +254,9 @@ body::before{
 
 <!-- HEADER -->
 <div class="header">
-  <div class="pill">SmartSentry AML · Schema Reference</div>
+  <div class="pill">SmartSentry AML - Schema Reference</div>
   <h1>Entity <b>Relationship</b> Diagram</h1>
-  <p>Every table · every key · every join path in the synthetic AML dataset</p>
+  <p>Every table - every key - every join path in the synthetic AML dataset</p>
 </div>
 
 <!-- LEGEND -->
@@ -267,6 +267,7 @@ body::before{
   <div class="li"><div class="lswatch" style="background:var(--dev)"></div>devices</div>
   <div class="li"><div class="lswatch" style="background:var(--bene)"></div>beneficiaries</div>
   <div class="li"><div class="lswatch" style="background:var(--graph)"></div>graph_edges</div>
+  <div class="li"><div class="lswatch" style="background:var(--graph)"></div>transaction_with_graph_features</div>
   <div class="li"><span class="ltag tpk">PK</span>Primary Key</div>
   <div class="li"><span class="ltag tfk">FK</span>Foreign Key (mandatory)</div>
   <div class="li"><span class="ltag tfn">FK?</span>Foreign Key (nullable / XOR)</div>
@@ -287,7 +288,7 @@ body::before{
     </defs>
   </svg>
 
-  <!-- ═══ CUSTOMERS ═══ -->
+  <!--  CUSTOMERS  -->
   <div class="tbl" id="t-cust" style="width:230px">
     <div class="tbl-bar" style="background:var(--cust)"></div>
     <div class="tbl-head">
@@ -312,10 +313,18 @@ body::before{
       <div class="fr"><span class="ftag"></span><span class="fname">country_risk</span><span class="ftype">cat</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">account_type</span><span class="ftype">cat</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">customer_since_days</span><span class="ftype">int</span></div>
+      <div class="sep"></div>
+      <div class="sec">Additional profile fields</div>
+      <div class="fr"><span class="ftag"></span><span class="fname">home_city</span><span class="ftype">string</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">home_lat</span><span class="ftype">float</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">home_lon</span><span class="ftype">float</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">shared_kyc_id</span><span class="ftype">hash</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">shared_phone_hash</span><span class="ftype">hash</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">shared_email_hash</span><span class="ftype">hash</span></div>
     </div>
   </div>
 
-  <!-- ═══ ACCOUNTS ═══ -->
+  <!--  ACCOUNTS  -->
   <div class="tbl" id="t-acc" style="width:230px">
     <div class="tbl-bar" style="background:var(--acc)"></div>
     <div class="tbl-head">
@@ -338,15 +347,25 @@ body::before{
       <div class="fr"><span class="ftag"></span><span class="fname">avg_balance</span><span class="ftype">float</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">account_open_days</span><span class="ftype">int</span></div>
       <div class="sep"></div>
-      <div class="sec">↳ denormalised from customers</div>
+      <div class="sec">-> denormalised from customers</div>
       <div class="fr"><span class="ftag"></span><span class="fname dim">kyc_level</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">country_risk</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">income_bracket</span><span class="ftype">copy</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname dim">customer_risk_rating</span><span class="ftype">copy</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname dim">pep_flag</span><span class="ftype">copy</span></div>
-      <div class="fr"><span class="ftag"></span><span class="fname dim">occupation, industry …</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">occupation</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">industry</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">account_type</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">home_city</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">home_lat</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">home_lon</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">shared_kyc_id</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">shared_phone_hash</span><span class="ftype">copy</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname dim">shared_email_hash</span><span class="ftype">copy</span></div>
     </div>
   </div>
 
-  <!-- ═══ TRANSACTIONS (centre) ═══ -->
+  <!--  TRANSACTIONS (centre)  -->
   <div class="tbl" id="t-txn" style="width:260px">
     <div class="tbl-bar" style="background:var(--txn)"></div>
     <div class="tbl-head">
@@ -398,7 +417,7 @@ body::before{
       <div class="fr"><span class="ftag"></span><span class="fname">label</span><span class="ftype">bin</span></div>
       <div class="sep"></div>
       <div class="sec">Derived / Enriched</div>
-      <div class="fr"><span class="ftag"></span><span class="fname">hour · is_night · is_weekend</span><span class="ftype">temp</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">hour - is_night - is_weekend</span><span class="ftype">temp</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">amount_to_balance_ratio</span><span class="ftype">ratio</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">account_age_days</span><span class="ftype">int</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">txn_count_last_1hr / 24hr</span><span class="ftype">vel</span></div>
@@ -410,10 +429,44 @@ body::before{
       <div class="fr"><span class="ftag"></span><span class="fname">high_risk_beneficiary</span><span class="ftype">bin</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">rule_trigger_count</span><span class="ftype">int</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">weighted_rule_score</span><span class="ftype">int</span></div>
+      <div class="sep"></div>
+      <div class="sec">Exact file headers (transactions.csv)</div>
+      <div class="code" style="white-space:pre-wrap;overflow-x:hidden;font-size:9px;line-height:1.45">timestamp, transaction_id, customer_id, sender_account_id, receiver_account_id, beneficiary_id, device_id, amount
+channel, debit_credit, transaction_type, cash_flag, fraud_type, label, avg_balance, account_open_days
+kyc_level, country_risk, income_bracket, customer_risk_rating, pep_flag, occupation, industry, account_type
+device_age_days, rooted_flag, os_type, vpn_flag, emulator_flag, beneficiary_type, beneficiary_country_risk, hour
+day_of_week, date, month, week_of_year, is_night, is_weekend, is_business_hours, amount_to_balance_ratio
+is_round_amount, log_amount, high_risk_beneficiary, account_age_days, txn_count_last_1hr, txn_count_last_24hr, total_amount_last_24hr, total_amount_last_7d
+total_amount_last_30d, dormancy_flag, txn_velocity_cumulative, cust_txn_count_last_1hr, cust_txn_count_last_24hr, cust_total_amount_last_24hr, cust_total_amount_last_30d, cust_unique_accounts_30d
+rule_large_cash_deposit, rule_cash_just_below_threshold, rule_high_value_transfer, rule_micro_transaction, rule_round_amount_large, rule_night_transaction, rule_weekend_high_value, rule_dormant_account_activation
+rule_high_acct_velocity_1hr, rule_high_acct_velocity_24hr, rule_high_acct_velocity_7d, rule_high_acct_volume_24hr, rule_high_acct_volume_7d, rule_amount_spike_30d, rule_rapid_burst, rule_high_cust_velocity_1hr
+rule_high_cust_velocity_24hr, rule_high_cust_volume_24hr, rule_high_cust_volume_7d, rule_low_kyc_high_amount, rule_new_account_large_txn, rule_high_amount_to_balance, rule_very_high_risk_customer, rule_pep_high_value
+rule_high_risk_country_sender, rule_corporate_large_cash, rule_high_risk_beneficiary, rule_crypto_transfer, rule_offshore_transfer, rule_high_risk_bene_country, rule_rooted_device, rule_vpn_proxy_detected
+rule_emulator_detected, rule_new_device_large_txn, rule_atm_high_withdrawal, rule_branch_night_txn, rule_structuring_pattern, rule_multiple_small_cash, rule_high_risk_industry, rule_student_high_value
+rule_unemployed_large_transfer, rule_freelancer_offshore, rule_pep_crypto_transfer, rule_very_high_risk_offshore, rule_low_kyc_offshore, rule_low_income_large_txn, rule_vpn_offshore, rule_emulator_crypto
+rule_new_account_offshore, rule_new_acct_high_cust_velocity, rule_trigger_count, max_rule_severity, weighted_rule_score</div>
+      <div class="sep"></div>
+      <div class="sec">Exact file headers (transactions_additional_features.parquet)</div>
+      <div class="code" style="white-space:pre-wrap;overflow-x:hidden;font-size:9px;line-height:1.45">timestamp, transaction_id, customer_id, sender_account_id, receiver_account_id, beneficiary_id, device_id, amount
+channel, debit_credit, transaction_type, cash_flag, synthetic_flow_id, flow_depth, hop_number, fraud_type
+label, avg_balance, account_open_days, kyc_level, country_risk, income_bracket, customer_risk_rating, pep_flag
+occupation, industry, account_type, home_lat, home_lon, home_city, shared_kyc_id, shared_phone_hash
+shared_email_hash, device_age_days, rooted_flag, os_type, vpn_flag, emulator_flag, beneficiary_type, beneficiary_country_risk
+ip_address, ip_risk_score, geo_lat, geo_lon, hour, day_of_week, date, month
+week_of_year, is_night, is_weekend, is_business_hours, amount_to_balance_ratio, is_round_amount, log_amount, high_risk_beneficiary
+account_age_days, txn_count_last_1hr, txn_count_last_24hr, total_amount_last_24hr, txn_count_last_7d, txn_count_last_30d, total_amount_last_7d, total_amount_last_30d
+txn_velocity_cumulative, dormancy_flag, cust_txn_count_last_1hr, cust_txn_count_last_24hr, cust_total_amount_last_24hr, cust_total_amount_last_30d, cust_unique_accounts_30d, time_since_origin_txn
+balance_before_txn, balance_after_txn, current_balance, running_balance_txn_amount, cumulative_daily_balance_change, fraud_intensity_score, rule_large_cash_deposit, rule_cash_just_below_threshold
+rule_high_value_transfer, rule_micro_transaction, rule_round_amount_large, rule_night_transaction, rule_weekend_high_value, rule_dormant_account_activation, rule_high_acct_velocity_1hr, rule_high_acct_velocity_24hr
+rule_high_acct_velocity_7d, rule_high_acct_volume_24hr, rule_high_acct_volume_7d, rule_amount_spike_30d, rule_rapid_burst, rule_high_cust_velocity_1hr, rule_high_cust_velocity_24hr, rule_high_cust_volume_24hr
+rule_high_cust_volume_7d, rule_low_kyc_high_amount, rule_new_account_large_txn, rule_high_amount_to_balance, rule_very_high_risk_customer, rule_pep_high_value, rule_high_risk_country_sender, rule_corporate_large_cash
+rule_high_risk_beneficiary, rule_crypto_transfer, rule_offshore_transfer, rule_high_risk_bene_country, rule_rooted_device, rule_vpn_proxy_detected, rule_emulator_detected, rule_new_device_large_txn
+rule_atm_high_withdrawal, rule_branch_night_txn, rule_structuring_pattern, rule_multiple_small_cash, rule_high_risk_industry, rule_student_high_value, rule_unemployed_large_transfer, rule_freelancer_offshore
+rule_pep_crypto_transfer, rule_very_high_risk_offshore, rule_low_kyc_offshore, rule_low_income_large_txn, rule_vpn_offshore, rule_emulator_crypto, rule_new_account_offshore, rule_new_acct_high_cust_velocity</div>
     </div>
   </div>
 
-  <!-- ═══ DEVICES ═══ -->
+  <!--  DEVICES  -->
   <div class="tbl" id="t-dev" style="width:230px">
     <div class="tbl-bar" style="background:var(--dev)"></div>
     <div class="tbl-head">
@@ -439,7 +492,7 @@ body::before{
     </div>
   </div>
 
-  <!-- ═══ BENEFICIARIES ═══ -->
+  <!--  BENEFICIARIES  -->
   <div class="tbl" id="t-bene" style="width:230px">
     <div class="tbl-bar" style="background:var(--bene)"></div>
     <div class="tbl-head">
@@ -457,12 +510,12 @@ body::before{
       <div class="fr"><span class="ftag"></span><span class="fname">beneficiary_type</span><span class="ftype">cat</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">beneficiary_country_risk</span><span class="ftype">cat</span></div>
       <div class="sep"></div>
-      <div class="sec" style="color:rgba(244,114,182,.45)">external entities — no customer record</div>
+      <div class="sec" style="color:rgba(244,114,182,.45)">external entities - no customer record</div>
       <div class="sec">linked via transactions.beneficiary_id</div>
     </div>
   </div>
 
-  <!-- ═══ GRAPH EDGES ═══ -->
+  <!--  GRAPH EDGES  -->
   <div class="tbl" id="t-graph" style="width:230px">
     <div class="tbl-bar" style="background:var(--graph)"></div>
     <div class="tbl-head">
@@ -471,27 +524,73 @@ body::before{
       <span class="tbl-ct">~1.3 M rows</span>
     </div>
     <div class="tbl-body">
+      <div class="sec">logical key: transaction_id + source_account_id + target_id</div>
+      <div class="sep"></div>
       <div class="fr" id="f-graph-txn">
         <span class="ftag tfk">FK</span>
         <span class="fname fk">transaction_id</span>
         <span class="ftype">string</span>
       </div>
-      <div class="fr">
+      <div class="fr" id="f-graph-src">
         <span class="ftag tfk">FK</span>
         <span class="fname fk">source_account_id</span>
         <span class="ftype">string</span>
       </div>
-      <div class="fr">
+      <div class="fr" id="f-graph-cust">
         <span class="ftag tfk">FK</span>
         <span class="fname fk">customer_id</span>
         <span class="ftype">string</span>
       </div>
       <div class="sep"></div>
-      <div class="fr"><span class="ftag"></span><span class="fname">target_id</span><span class="ftype">string</span></div>
+      <div class="fr" id="f-graph-target">
+        <span class="ftag"></span><span class="fname">target_id</span><span class="ftype">string</span>
+      </div>
       <div class="fr"><span class="ftag"></span><span class="fname">target_type</span><span class="ftype">cat</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">relation</span><span class="ftype">cat</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">timestamp</span><span class="ftype">datetime</span></div>
       <div class="fr"><span class="ftag"></span><span class="fname">amount</span><span class="ftype">float</span></div>
+    </div>
+  </div>
+
+  <!--  TRANSACTION GRAPH FEATURES (derived)  -->
+  <div class="tbl" id="t-txn-gf" style="width:260px">
+    <div class="tbl-bar" style="background:var(--graph)"></div>
+    <div class="tbl-head">
+      <div class="tbl-ico" style="background:rgba(34,211,238,.1)">FX</div>
+      <span class="tbl-title" style="color:var(--graph)">transaction_with_graph_features</span>
+      <span class="tbl-ct">derived parquet</span>
+    </div>
+    <div class="tbl-body">
+      <div class="fr" id="f-gf-txn">
+        <span class="ftag tfk">FK</span>
+        <span class="fname fk">transaction_id</span>
+        <span class="ftype">string</span>
+      </div>
+      <div class="sep"></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">sender_in_degree_30d</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">sender_out_degree_30d</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">pass_through_ratio_24h</span><span class="ftype">ratio</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">accounts_per_device</span><span class="ftype">int</span></div>
+      <div class="fr"><span class="ftag"></span><span class="fname">shared_device_fraud_count</span><span class="ftype">int</span></div>
+      <div class="sep"></div>
+      <div class="sec">Exact file headers (transaction_with_graph_features.parquet)</div>
+      <div class="code" style="white-space:pre-wrap;overflow-x:hidden;font-size:9px;line-height:1.45">timestamp, transaction_id, customer_id, sender_account_id, receiver_account_id, beneficiary_id, device_id, amount
+channel, debit_credit, transaction_type, cash_flag, fraud_type, label, avg_balance, account_open_days
+kyc_level, country_risk, income_bracket, customer_risk_rating, pep_flag, occupation, industry, account_type
+device_age_days, rooted_flag, os_type, vpn_flag, emulator_flag, beneficiary_type, beneficiary_country_risk, hour
+day_of_week, date, month, week_of_year, is_night, is_weekend, is_business_hours, amount_to_balance_ratio
+is_round_amount, log_amount, high_risk_beneficiary, account_age_days, txn_count_last_1hr, txn_count_last_24hr, total_amount_last_24hr, total_amount_last_7d
+total_amount_last_30d, dormancy_flag, txn_velocity_cumulative, cust_txn_count_last_1hr, cust_txn_count_last_24hr, cust_total_amount_last_24hr, cust_total_amount_last_30d, cust_unique_accounts_30d
+rule_large_cash_deposit, rule_cash_just_below_threshold, rule_high_value_transfer, rule_micro_transaction, rule_round_amount_large, rule_night_transaction, rule_weekend_high_value, rule_dormant_account_activation
+rule_high_acct_velocity_1hr, rule_high_acct_velocity_24hr, rule_high_acct_velocity_7d, rule_high_acct_volume_24hr, rule_high_acct_volume_7d, rule_amount_spike_30d, rule_rapid_burst, rule_high_cust_velocity_1hr
+rule_high_cust_velocity_24hr, rule_high_cust_volume_24hr, rule_high_cust_volume_7d, rule_low_kyc_high_amount, rule_new_account_large_txn, rule_high_amount_to_balance, rule_very_high_risk_customer, rule_pep_high_value
+rule_high_risk_country_sender, rule_corporate_large_cash, rule_high_risk_beneficiary, rule_crypto_transfer, rule_offshore_transfer, rule_high_risk_bene_country, rule_rooted_device, rule_vpn_proxy_detected
+rule_emulator_detected, rule_new_device_large_txn, rule_atm_high_withdrawal, rule_branch_night_txn, rule_structuring_pattern, rule_multiple_small_cash, rule_high_risk_industry, rule_student_high_value
+rule_unemployed_large_transfer, rule_freelancer_offshore, rule_pep_crypto_transfer, rule_very_high_risk_offshore, rule_low_kyc_offshore, rule_low_income_large_txn, rule_vpn_offshore, rule_emulator_crypto
+rule_new_account_offshore, rule_new_acct_high_cust_velocity, rule_trigger_count, max_rule_severity, weighted_rule_score, sender_out_degree_30d, sender_total_outflow_30d, sender_unique_counterparties_30d
+sender_repeat_counterparty_ratio, devices_per_account, account_id_x, sender_in_degree_30d, sender_total_inflow_30d, account_id_y, pass_through_ratio_24h, pass_through_ratio_7d
+outflow_to_inflow_ratio_7d, accounts_per_device, device_shared_high_risk_ratio, shared_device_fraud_count, avg_time_gap_in_out, receiver_in_degree_30d, receiver_total_inflow_30d, receiver_unique_senders_30d
+receiver_out_degree_30d</div>
     </div>
   </div>
 
@@ -501,28 +600,31 @@ body::before{
 <!-- XOR CALLOUT -->
 <div class="xor" style="margin-top:28px">
   <div class="xor-inner">
-    <div style="font-size:28px;padding-top:2px">⚡</div>
+    <div style="font-size:28px;padding-top:2px"></div>
     <div>
-      <div class="xor-head">XOR Constraint — receiver_account_id vs beneficiary_id</div>
+      <div class="xor-head">XOR Constraint - receiver_account_id vs beneficiary_id</div>
       <p class="xor-body">
-        Every transaction row has <strong>exactly one</strong> of these two nullable FK columns set — never both, never neither.
+        Every transaction row has <strong>exactly one</strong> of these two nullable FK columns set - never both, never neither.
         The one that's populated tells you whether money moved <em>inside</em> or <em>outside</em> the bank.
       </p>
+      <div class="code" style="margin-top:10px;white-space:pre-wrap;overflow-x:hidden">CHECK (
+  (receiver_account_id IS NULL) <> (beneficiary_id IS NULL)
+)</div>
       <div class="xor-cases">
         <div class="xcase">
-          <div class="xcase-title" style="color:var(--acc)">Internal Transfer (≈40% of rows)</div>
+          <div class="xcase-title" style="color:var(--acc)">Internal Transfer (40% of rows)</div>
           <span class="set">receiver_account_id = "A4521"</span><br>
           <span class="nil">beneficiary_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= NULL</span><br><br>
           Money stays inside the bank.<br>
-          Join accounts → get full receiver profile.<br>
-          Then join customers → age, tenure, risk.
+          Join accounts -> get full receiver profile.<br>
+          Then join customers -> age, tenure, risk.
         </div>
         <div class="xcase">
-          <div class="xcase-title" style="color:var(--bene)">External Transfer (≈60% of rows)</div>
+          <div class="xcase-title" style="color:var(--bene)">External Transfer (60% of rows)</div>
           <span class="nil">receiver_account_id = NULL</span><br>
           <span class="set">beneficiary_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= "B0234"</span><br><br>
           Money leaves the bank entirely.<br>
-          Join beneficiaries → type &amp; country risk.<br>
+          Join beneficiaries -> type &amp; country risk.<br>
           No customer record exists for external parties.
         </div>
       </div>
@@ -536,15 +638,15 @@ body::before{
   <div class="recipes-grid">
 
     <div class="rcard">
-      <div class="rcard-h">01 · Transactions → Customers</div>
-      <div class="rcard-d"><code>customer_id</code> is denormalised into every row — single-key, zero chaining.</div>
+      <div class="rcard-h">01 - Transactions -> Customers</div>
+      <div class="rcard-d"><code>customer_id</code> is denormalised into every row - single-key, zero chaining.</div>
       <div class="code"><span class="ck">transactions</span>.merge(
   <span class="ct">customers</span>, <span class="ck">on</span>=<span class="cs">"customer_id"</span>
 )</div>
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">02 · Transactions → Accounts (sender)</div>
+      <div class="rcard-h">02 - Transactions -> Accounts (sender)</div>
       <div class="rcard-d">Brings in balance, open_days, and all risk attributes via one join.</div>
       <div class="code"><span class="ck">transactions</span>.merge(
   <span class="ct">accounts</span>,
@@ -554,8 +656,8 @@ body::before{
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">03 · Transactions → Accounts (receiver)</div>
-      <div class="rcard-d">Internal transfers only. Always <code>how="left"</code> — this FK is nullable.</div>
+      <div class="rcard-h">03 - Transactions -> Accounts (receiver)</div>
+      <div class="rcard-d">Internal transfers only. Always <code>how="left"</code> - this FK is nullable.</div>
       <div class="code"><span class="ck">transactions</span>.merge(
   <span class="ct">accounts</span>,
   <span class="ck">left_on</span>=<span class="cs">"receiver_account_id"</span>,
@@ -565,7 +667,7 @@ body::before{
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">04 · Transactions → Devices</div>
+      <div class="rcard-h">04 - Transactions -> Devices</div>
       <div class="rcard-d">Get device risk signals: rooted, VPN, emulator, OS type.</div>
       <div class="code"><span class="ck">transactions</span>.merge(
   <span class="ct">devices</span>, <span class="ck">on</span>=<span class="cs">"device_id"</span>
@@ -573,7 +675,7 @@ body::before{
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">05 · Transactions → Beneficiaries</div>
+      <div class="rcard-h">05 - Transactions -> Beneficiaries</div>
       <div class="rcard-d">External transfers only. Filter first to avoid NaN rows.</div>
       <div class="code"><span class="ck">transactions</span>[
   <span class="ck">transactions</span>[<span class="cs">"beneficiary_id"</span>].notna()
@@ -581,7 +683,7 @@ body::before{
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">06 · Sender + Receiver (no column clash)</div>
+      <div class="rcard-h">06 - Sender + Receiver (no column clash)</div>
       <div class="rcard-d">Prefix both sides to avoid <code>col_x / col_y</code> naming collision.</div>
       <div class="code">s = <span class="ct">accounts</span>.add_prefix(<span class="cs">"sndr_"</span>)
 r = <span class="ct">accounts</span>.add_prefix(<span class="cs">"rcvr_"</span>)
@@ -594,8 +696,8 @@ r = <span class="ct">accounts</span>.add_prefix(<span class="cs">"rcvr_"</span>)
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">07 · Devices → Customers (indirect)</div>
-      <div class="rcard-d">No direct FK. Transactions is the bridge — always route through it.</div>
+      <div class="rcard-h">07 - Devices -> Customers (indirect)</div>
+      <div class="rcard-d">No direct FK. Transactions is the bridge - always route through it.</div>
       <div class="code"><span class="ck">transactions</span>
   .merge(<span class="ct">devices</span>, <span class="ck">on</span>=<span class="cs">"device_id"</span>)
   .merge(<span class="ct">customers</span>, <span class="ck">on</span>=<span class="cs">"customer_id"</span>)
@@ -603,7 +705,7 @@ r = <span class="ct">accounts</span>.add_prefix(<span class="cs">"rcvr_"</span>)
     </div>
 
     <div class="rcard">
-      <div class="rcard-h">08 · Beneficiaries → Customers (indirect)</div>
+      <div class="rcard-h">08 - Beneficiaries -> Customers (indirect)</div>
       <div class="rcard-d">Who sent money to crypto exchanges? Route through transactions.</div>
       <div class="code"><span class="ck">transactions</span>
   .merge(<span class="ct">beneficiaries</span>, <span class="ck">on</span>=<span class="cs">"beneficiary_id"</span>)
@@ -611,15 +713,45 @@ r = <span class="ct">accounts</span>.add_prefix(<span class="cs">"rcvr_"</span>)
   .query(<span class="cs">"beneficiary_type == 'crypto'"</span>)</div>
     </div>
 
+    <div class="rcard">
+      <div class="rcard-h">09 - Graph Edges FK Coverage</div>
+      <div class="rcard-d">graph_edges has three FK joins: transactions, accounts (source), and customers.</div>
+      <div class="code" style="white-space:pre-wrap;overflow-x:hidden"><span class="ct">graph_edges</span>
+  .merge(
+    <span class="ck">transactions</span>[["transaction_id"]],
+    <span class="ck">on</span>=<span class="cs">"transaction_id"</span>
+  )
+  .merge(
+    <span class="ck">accounts</span>[["account_id"]],
+    <span class="ck">left_on</span>=<span class="cs">"source_account_id"</span>,
+    <span class="ck">right_on</span>=<span class="cs">"account_id"</span>
+  )
+  .merge(
+    <span class="ck">customers</span>[["customer_id"]],
+    <span class="ck">on</span>=<span class="cs">"customer_id"</span>
+  )</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rcard-h">10 - Customers to Transactions Schema</div>
+      <div class="rcard-d">Cardinality: one customer can have many transactions; each transaction maps to one customer.</div>
+      <div class="code" style="white-space:pre-wrap;overflow-x:hidden"><span class="cm">customers.customer_id (PK) 1 --- * transactions.customer_id (FK)</span>
+<span class="ct">customers</span>.merge(
+  <span class="ck">transactions</span>,
+  <span class="ck">on</span>=<span class="cs">"customer_id"</span>,
+  <span class="ck">how</span>=<span class="cs">"inner"</span>
+)</div>
+    </div>
+
   </div>
 </div>
 
 <script>
-// ════════════════════════════════════════════════════════════════
+// 
 //  LAYOUT + SVG LINE ENGINE
 //  Cards are positioned using JS (absolute layout) so SVG lines
 //  can be drawn to exact pixel positions of each field row.
-// ════════════════════════════════════════════════════════════════
+// 
 
 const GAP_COL  = 0;   // horizontal gap managed via column positions
 const GAP_CARD = 24;  // vertical gap between cards in same column
@@ -630,7 +762,7 @@ function run() {
   const svg     = document.getElementById('svg-overlay');
   const W       = diagram.offsetWidth;
 
-  // Column widths — transactions is wider
+  // Column widths  transactions is wider
   const W_SIDE = Math.min(230, W * 0.185);
   const W_TXN  = Math.min(260, W * 0.21);
 
@@ -654,10 +786,13 @@ function run() {
   const txnEl = document.getElementById('t-txn');
   txnEl.style.width = W_TXN + 'px';
   txnEl.style.left  = X_CENTRE + 'px';
+  const txnGfEl = document.getElementById('t-txn-gf');
+  txnGfEl.style.width = W_TXN + 'px';
+  txnGfEl.style.left  = X_CENTRE + 'px';
 
   // Measure card heights
   const H = {};
-  ['t-cust','t-acc','t-txn','t-dev','t-bene','t-graph'].forEach(id => {
+  ['t-cust','t-acc','t-txn','t-txn-gf','t-dev','t-bene','t-graph'].forEach(id => {
     H[id] = document.getElementById(id).offsetHeight;
   });
 
@@ -668,6 +803,7 @@ function run() {
   // Centre: transactions starts at 0
   txnEl.style.top = '0px';
   const txnH = H['t-txn'];
+  txnGfEl.style.top = (txnH + GAP_CARD) + 'px';
 
   // Right column: distribute dev / bene / graph across transactions height
   const rightTotalH = H['t-dev'] + H['t-bene'] + H['t-graph'];
@@ -678,7 +814,7 @@ function run() {
 
   const totalH = Math.max(
     H['t-cust'] + GAP_CARD + H['t-acc'],
-    txnH,
+    txnH + GAP_CARD + H['t-txn-gf'],
     H['t-dev'] + rightGap + H['t-bene'] + rightGap + H['t-graph']
   );
   diagram.style.height = (totalH + 20) + 'px';
@@ -686,7 +822,7 @@ function run() {
   svg.style.width  = W + 'px';
   svg.style.height = (totalH + 20) + 'px';
 
-  // ── DRAW LINES ──────────────────────────────────────────────────
+  //  DRAW LINES 
   // Clear old lines (keep defs)
   const defs = svg.querySelector('defs');
   while (svg.firstChild) svg.removeChild(svg.firstChild);
@@ -716,6 +852,7 @@ function run() {
   const BC = box('t-cust');
   const BA = box('t-acc');
   const BT = box('t-txn');
+  const BTF = box('t-txn-gf');
   const BD = box('t-dev');
   const BB = box('t-bene');
   const BG = box('t-graph');
@@ -772,58 +909,73 @@ function run() {
     svg.appendChild(t);
   }
 
-  // ── 1. customers.PK → accounts.FK (vertical connector, left col) ──
+  //  1. customers.PK  accounts.FK (vertical connector, left col) 
   {
     const x   = BC.L + W_SIDE * 0.33;
     const y1  = BC.B + PAD;
     const y2  = BA.T - PAD;
     line(x, y1, x, y2, 'var(--cust)', 'arr-cust');
     label(x + 5, (y1 + y2) / 2 + 4, 'customer_id', 'var(--cust)');
+    label(x - 10, y1 - 2, '1', 'var(--cust)', 'end');
+    label(x - 10, y2 + 12, 'N', 'var(--cust)', 'end');
   }
 
-  // ── 2. transactions.customer_id → customers (left of txn → right of cust) ──
+  //  2. transactions.customer_id  customers (left of txn  right of cust) 
   {
     const y1 = fieldY('f-txn-cust', 't-txn');
     const y2 = BC.MY;
     bezier(BT.L - PAD, y1, BC.R + PAD, y2, 'var(--cust)', 'arr-cust', false);
+    label(BT.L - PAD - 8, y1 - 3, 'N', 'var(--cust)', 'end');
+    label(BC.R + PAD + 8, y2 - 3, '1', 'var(--cust)');
   }
 
-  // ── 3. transactions.sender_account_id → accounts (left of txn → right of acc) ──
+  //  3. transactions.sender_account_id  accounts (left of txn  right of acc) 
   {
     const y1 = fieldY('f-txn-sender', 't-txn');
     const y2 = BA.T + 30;
     bezier(BT.L - PAD, y1, BA.R + PAD, y2, 'var(--acc)', 'arr-acc', false);
+    label(BT.L - PAD - 8, y1 - 3, 'N', 'var(--acc)', 'end');
+    label(BA.R + PAD + 8, y2 - 3, '1', 'var(--acc)');
   }
 
-  // ── 4. transactions.receiver_account_id → accounts (nullable, dashed elbow) ──
+  //  4. transactions.receiver_account_id  accounts (nullable, dashed elbow) 
   {
     const y1  = fieldY('f-txn-recv', 't-txn');
     const y2  = BA.B - 28;
-    const bx  = BT.L - 52;   // elbow x — step left of the card
+    const bx  = BT.L - 52;   // elbow x  step left of the card
     elbow(BT.L - PAD, y1, bx, BA.R + PAD, y2, 'var(--fkn)', 'arr-fkn', true);
     label(bx + 3, (y1 + y2) / 2 - 4, 'nullable', 'var(--fkn)');
+    label(BT.L - PAD - 8, y1 - 3, '0..1', 'var(--fkn)', 'end');
+    label(BA.R + PAD + 8, y2 - 3, 'N', 'var(--fkn)');
   }
 
-  // ── 5. transactions.device_id → devices (right of txn → left of dev) ──
+  //  5. transactions.device_id  devices (right of txn  left of dev) 
   {
     const y1 = fieldY('f-txn-dev', 't-txn');
     const y2 = BD.MY;
     bezier(BT.R + PAD, y1, BD.L - PAD, y2, 'var(--dev)', 'arr-dev', false);
+    label(BT.R + PAD + 8, y1 - 3, 'N', 'var(--dev)');
+    label(BD.L - PAD - 8, y2 - 3, '1', 'var(--dev)', 'end');
   }
 
-  // ── 6. transactions.beneficiary_id → beneficiaries (nullable, dashed) ──
+  //  6. transactions.beneficiary_id  beneficiaries (nullable, dashed) 
   {
     const y1 = fieldY('f-txn-bene', 't-txn');
     const y2 = BB.MY;
     bezier(BT.R + PAD, y1, BB.L - PAD, y2, 'var(--bene)', 'arr-bene', true);
+    label(BT.R + PAD + 8, y1 - 3, '0..1', 'var(--bene)');
+    label(BB.L - PAD - 8, y2 - 3, 'N', 'var(--bene)', 'end');
   }
 
-  // ── 7. graph_edges → transactions (left of graph → right of txn, lower section) ──
+  //  7. graph_edges  transactions (left of graph  right of txn, lower section) 
   {
     const y1 = fieldY('f-graph-txn', 't-graph');
     const y2 = BT.B - 60;
     bezier(BG.L - PAD, y1, BT.R + PAD, y2, 'var(--graph)', 'arr-graph', false);
+    label(BG.L - PAD - 8, y1 - 3, 'N', 'var(--graph)', 'end');
+    label(BT.R + PAD + 8, y2 - 3, '1', 'var(--graph)');
   }
+
 }
 
 window.addEventListener('load', run);
