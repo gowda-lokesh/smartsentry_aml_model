@@ -23,7 +23,7 @@ warnings.filterwarnings("ignore")
 # PATHS
 # ─────────────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
-PARQUET_PATH = BASE_DIR / "outputs" / "transaction_with_graph_features.parquet"
+PARQUET_PATH = BASE_DIR / "outputs" / "stg_transactions_graph.parquet"
 OUTPUT_PATH  = BASE_DIR / "outputs" / "EDA_transaction_with_graph_features.xlsx"
 
 # ─────────────────────────────────────────────────────────────────────────────
