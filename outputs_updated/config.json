@@ -1,0 +1,303 @@
+{
+  "num_customers_individual": 4000,
+  "num_customers_entity": 1000,
+  "num_accounts_per_customer_range": [
+    1,
+    3
+  ],
+  "num_wallets_fraction": 0.3,
+  "num_transactions_per_account_range": [
+    10,
+    120
+  ],
+  "date_range_start": "2024-01-01",
+  "date_range_end": "2025-03-31",
+  "target_fraud_pct": 0.1,
+  "typology_weights": {
+    "Structuring (Smurfing)": 0.25,
+    "Circular Transaction Loop": 0.15,
+    "Funnel Account Network": 0.3,
+    "Pass-Through Transit Hub": 0.1,
+    "Rapid Multi-Hop Layering": 0.2
+  },
+  "avg_txns_per_scenario": {
+    "Structuring (Smurfing)": 9,
+    "Circular Transaction Loop": 8,
+    "Funnel Account Network": 35,
+    "Pass-Through Transit Hub": 2,
+    "Rapid Multi-Hop Layering": 9
+  },
+  "primary_currency": "INR",
+  "fx_currencies": [
+    "USD",
+    "GBP",
+    "EUR",
+    "AED",
+    "SGD"
+  ],
+  "fx_probability": 0.03,
+  "risk_weights": {
+    "Low": 0.6,
+    "Medium": 0.3,
+    "High": 0.1
+  },
+  "pep_probability": 0.02,
+  "hni_probability": 0.05,
+  "minor_probability": 0.03,
+  "income_bands": {
+    "Low": [
+      100000,
+      500000
+    ],
+    "Medium": [
+      500001,
+      2500000
+    ],
+    "High": [
+      2500001,
+      10000000
+    ],
+    "HNI": [
+      10000001,
+      100000000
+    ]
+  },
+  "wallet_kyc_categories": {
+    "Minimum KYC": {
+      "per_txn": 10000,
+      "daily": 10000,
+      "monthly": 10000,
+      "annual": 120000,
+      "max_balance": 10000
+    },
+    "Full KYC": {
+      "per_txn": 200000,
+      "daily": 200000,
+      "monthly": 200000,
+      "annual": 2400000,
+      "max_balance": 200000
+    }
+  },
+  "bank_ifsc_prefixes": [
+    "SBIN0",
+    "HDFC0",
+    "ICIC0",
+    "UTIB0",
+    "PUNB0",
+    "BARB0",
+    "CNRB0",
+    "KKBK0",
+    "IOBA0",
+    "BKID0"
+  ],
+  "mcc_codes": {
+    "5411": "Grocery Stores",
+    "5541": "Service Stations",
+    "5812": "Restaurants",
+    "5912": "Drug Stores",
+    "4814": "Telecom Services",
+    "6012": "Financial Institutions",
+    "7011": "Hotels/Motels",
+    "5691": "Clothing Stores",
+    "5045": "Computers/Peripherals",
+    "8062": "Hospitals",
+    "4899": "Cable/Utilities",
+    "5999": "Miscellaneous Retail",
+    "6051": "Quasi Cash - Money Orders",
+    "6211": "Security Brokers/Dealers",
+    "7995": "Gambling/Betting"
+  },
+  "bank_channels": [
+    "NEFT",
+    "RTGS",
+    "IMPS",
+    "UPI",
+    "Branch Cash",
+    "ATM",
+    "Cheque",
+    "Internet Banking",
+    "Mobile Banking",
+    "POS",
+    "Demand Draft"
+  ],
+  "ppi_channels": [
+    "UPI",
+    "QR Scan",
+    "In-App Transfer",
+    "NFC Tap",
+    "Online"
+  ],
+  "auth_methods": [
+    "OTP",
+    "PIN",
+    "Biometric",
+    "MPIN",
+    "Password"
+  ],
+  "browsers": [
+    "Chrome/124.0",
+    "Safari/17.4",
+    "Firefox/125.0",
+    "Edge/124.0",
+    "SamsungBrowser/24.0"
+  ],
+  "app_versions": [
+    "v8.1.2",
+    "v8.2.0",
+    "v9.0.1",
+    "v9.1.0",
+    "v7.5.3"
+  ],
+  "indian_states": [
+    "Maharashtra",
+    "Delhi",
+    "Karnataka",
+    "Tamil Nadu",
+    "Telangana",
+    "Gujarat",
+    "Rajasthan",
+    "Uttar Pradesh",
+    "West Bengal",
+    "Kerala",
+    "Madhya Pradesh",
+    "Punjab",
+    "Haryana",
+    "Bihar",
+    "Odisha"
+  ],
+  "cities_by_state": {
+    "Maharashtra": [
+      "Mumbai",
+      "Pune",
+      "Nagpur",
+      "Nashik"
+    ],
+    "Delhi": [
+      "New Delhi",
+      "Dwarka",
+      "Rohini",
+      "Saket"
+    ],
+    "Karnataka": [
+      "Bengaluru",
+      "Mysuru",
+      "Hubli",
+      "Mangaluru"
+    ],
+    "Tamil Nadu": [
+      "Chennai",
+      "Coimbatore",
+      "Madurai",
+      "Salem"
+    ],
+    "Telangana": [
+      "Hyderabad",
+      "Warangal",
+      "Nizamabad",
+      "Karimnagar"
+    ],
+    "Gujarat": [
+      "Ahmedabad",
+      "Surat",
+      "Vadodara",
+      "Rajkot"
+    ],
+    "Rajasthan": [
+      "Jaipur",
+      "Jodhpur",
+      "Udaipur",
+      "Kota"
+    ],
+    "Uttar Pradesh": [
+      "Lucknow",
+      "Noida",
+      "Agra",
+      "Varanasi"
+    ],
+    "West Bengal": [
+      "Kolkata",
+      "Howrah",
+      "Siliguri",
+      "Durgapur"
+    ],
+    "Kerala": [
+      "Kochi",
+      "Thiruvananthapuram",
+      "Kozhikode",
+      "Thrissur"
+    ],
+    "Madhya Pradesh": [
+      "Bhopal",
+      "Indore",
+      "Gwalior",
+      "Jabalpur"
+    ],
+    "Punjab": [
+      "Chandigarh",
+      "Ludhiana",
+      "Amritsar",
+      "Jalandhar"
+    ],
+    "Haryana": [
+      "Gurugram",
+      "Faridabad",
+      "Karnal",
+      "Panipat"
+    ],
+    "Bihar": [
+      "Patna",
+      "Gaya",
+      "Muzaffarpur",
+      "Bhagalpur"
+    ],
+    "Odisha": [
+      "Bhubaneswar",
+      "Cuttack",
+      "Rourkela",
+      "Puri"
+    ]
+  },
+  "occupations_individual": [
+    "Salaried - IT",
+    "Salaried - Banking",
+    "Salaried - Government",
+    "Self-Employed - Retail",
+    "Self-Employed - Professional",
+    "Business Owner",
+    "Freelancer",
+    "Student",
+    "Retired",
+    "Agriculture",
+    "Doctor",
+    "Lawyer",
+    "Consultant"
+  ],
+  "entity_types": [
+    "Private Limited",
+    "Public Limited",
+    "LLP",
+    "Partnership",
+    "Trust",
+    "Society",
+    "Sole Proprietorship",
+    "HUF",
+    "Government Body"
+  ],
+  "entity_industries": [
+    "IT Services",
+    "Manufacturing",
+    "Trading",
+    "Real Estate",
+    "Financial Services",
+    "Healthcare",
+    "Education",
+    "Hospitality",
+    "Logistics",
+    "Textiles",
+    "Pharmaceuticals",
+    "Agriculture",
+    "Construction",
+    "Retail",
+    "Import/Export"
+  ]
+}
