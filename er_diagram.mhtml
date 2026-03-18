@@ -1,0 +1,1225 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: file:///C:/Users/VISHNUPRIYA/Downloads/ER_DIAGRAM%20(1).html
+Subject: SmartSentry AML - Entity Relationship Diagram
+Date: Sat, 7 Mar 2026 16:46:07 +0530
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--J4WEJiUM0UaEoveb61QggAN8Pe5oynL6uUBaQcOm6i----"
+
+
+------MultipartBoundary--J4WEJiUM0UaEoveb61QggAN8Pe5oynL6uUBaQcOm6i----
+Content-Type: text/html
+Content-ID: <frame-464A4B434A4703BDD9C9A12097B88E30@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/Users/VISHNUPRIYA/Downloads/ER_DIAGRAM%20(1).html
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-6f503fcf-6ea6-45c8-972c-656f6c12e3d8@mhtml.blink" />
+
+<title>SmartSentry AML - Entity Relationship Diagram</title>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<div class=3D"header">
+  <div class=3D"pill">SmartSentry AML - Schema Reference</div>
+  <h1>Entity <b>Relationship</b> Diagram</h1>
+  <p>Every table - every key - every join path in the synthetic AML dataset=
+</p>
+</div>
+
+<!-- LEGEND -->
+<div class=3D"legend">
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--cust)"=
+></div>customers</div>
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--acc)">=
+</div>accounts</div>
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--txn)">=
+</div>transactions</div>
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--dev)">=
+</div>devices</div>
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--bene)"=
+></div>beneficiaries</div>
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--graph)=
+"></div>graph_edges</div>
+  <div class=3D"li"><div class=3D"lswatch" style=3D"background:var(--graph)=
+"></div>transaction_with_graph_features</div>
+  <div class=3D"li"><span class=3D"ltag tpk">PK</span>Primary Key</div>
+  <div class=3D"li"><span class=3D"ltag tfk">FK</span>Foreign Key (mandator=
+y)</div>
+  <div class=3D"li"><span class=3D"ltag tfn">FK?</span>Foreign Key (nullabl=
+e / XOR)</div>
+</div>
+
+<!-- DIAGRAM -->
+<div class=3D"canvas">
+<div id=3D"diagram" style=3D"height: 4365px;">
+
+  <svg id=3D"svg-overlay" xmlns=3D"http://www.w3.org/2000/svg" viewBox=3D"0=
+ 0 1352 4365" style=3D"width: 1352px; height: 4365px;"><defs>
+      <marker id=3D"arr-cust" markerWidth=3D"8" markerHeight=3D"8" refX=3D"=
+6" refY=3D"4" orient=3D"auto"><path d=3D"M0,1 L7,4 L0,7 Z" fill=3D"var(--cu=
+st)"></path></marker>
+      <marker id=3D"arr-acc" markerWidth=3D"8" markerHeight=3D"8" refX=3D"6=
+" refY=3D"4" orient=3D"auto"><path d=3D"M0,1 L7,4 L0,7 Z" fill=3D"var(--acc=
+)"></path></marker>
+      <marker id=3D"arr-dev" markerWidth=3D"8" markerHeight=3D"8" refX=3D"6=
+" refY=3D"4" orient=3D"auto"><path d=3D"M0,1 L7,4 L0,7 Z" fill=3D"var(--dev=
+)"></path></marker>
+      <marker id=3D"arr-bene" markerWidth=3D"8" markerHeight=3D"8" refX=3D"=
+6" refY=3D"4" orient=3D"auto"><path d=3D"M0,1 L7,4 L0,7 Z" fill=3D"var(--be=
+ne)"></path></marker>
+      <marker id=3D"arr-graph" markerWidth=3D"8" markerHeight=3D"8" refX=3D=
+"6" refY=3D"4" orient=3D"auto"><path d=3D"M0,1 L7,4 L0,7 Z" fill=3D"var(--g=
+raph)"></path></marker>
+      <marker id=3D"arr-fkn" markerWidth=3D"8" markerHeight=3D"8" refX=3D"6=
+" refY=3D"4" orient=3D"auto"><path d=3D"M0,1 L7,4 L0,7 Z" fill=3D"var(--fkn=
+)"></path></marker>
+    </defs><line x1=3D"233.9" y1=3D"434" x2=3D"233.9" y2=3D"446" stroke=3D"=
+var(--cust)" stroke-width=3D"1.8" opacity=3D"0.8" marker-end=3D"url(#arr-cu=
+st)"></line><text x=3D"238.9" y=3D"444" fill=3D"var(--cust)" font-size=3D"9=
+" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D"star=
+t">customer_id</text><text x=3D"223.9" y=3D"432" fill=3D"var(--cust)" font-=
+size=3D"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-ancho=
+r=3D"end">1</text><text x=3D"223.9" y=3D"458" fill=3D"var(--cust)" font-siz=
+e=3D"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=
+=3D"end">N</text><path d=3D"M540,107 C467,107 467,214 394,214" stroke=3D"va=
+r(--cust)" stroke-width=3D"1.8" fill=3D"none" opacity=3D"0.8" marker-end=3D=
+"url(#arr-cust)"></path><text x=3D"532" y=3D"104" fill=3D"var(--cust)" font=
+-size=3D"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anch=
+or=3D"end">N</text><text x=3D"402" y=3D"211" fill=3D"var(--cust)" font-size=
+=3D"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D=
+"start">1</text><path d=3D"M540,127 C467,127 467,482 394,482" stroke=3D"var=
+(--acc)" stroke-width=3D"1.8" fill=3D"none" opacity=3D"0.8" marker-end=3D"u=
+rl(#arr-acc)"></path><text x=3D"532" y=3D"124" fill=3D"var(--acc)" font-siz=
+e=3D"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=
+=3D"end">N</text><text x=3D"402" y=3D"479" fill=3D"var(--acc)" font-size=3D=
+"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D"st=
+art">1</text><path d=3D"M540,147 L494,147 L494,861 L394,861" stroke=3D"var(=
+--fkn)" stroke-width=3D"1.8" fill=3D"none" opacity=3D"0.72" stroke-dasharra=
+y=3D"6,4" marker-end=3D"url(#arr-fkn)"></path><text x=3D"497" y=3D"500" fil=
+l=3D"var(--fkn)" font-size=3D"9" font-family=3D"Fira Code, monospace" opaci=
+ty=3D"0.72" text-anchor=3D"start">nullable</text><text x=3D"532" y=3D"144" =
+fill=3D"var(--fkn)" font-size=3D"9" font-family=3D"Fira Code, monospace" op=
+acity=3D"0.72" text-anchor=3D"end">0..1</text><text x=3D"402" y=3D"858" fil=
+l=3D"var(--fkn)" font-size=3D"9" font-family=3D"Fira Code, monospace" opaci=
+ty=3D"0.72" text-anchor=3D"start">N</text><path d=3D"M812,187 C885,187 885,=
+119.5 958,119.5" stroke=3D"var(--dev)" stroke-width=3D"1.8" fill=3D"none" o=
+pacity=3D"0.8" marker-end=3D"url(#arr-dev)"></path><text x=3D"820" y=3D"184=
+" fill=3D"var(--dev)" font-size=3D"9" font-family=3D"Fira Code, monospace" =
+opacity=3D"0.72" text-anchor=3D"start">N</text><text x=3D"950" y=3D"116.5" =
+fill=3D"var(--dev)" font-size=3D"9" font-family=3D"Fira Code, monospace" op=
+acity=3D"0.72" text-anchor=3D"end">1</text><path d=3D"M812,167 C885,167 885=
+,1419.5 958,1419.5" stroke=3D"var(--bene)" stroke-width=3D"1.8" fill=3D"non=
+e" opacity=3D"0.8" stroke-dasharray=3D"6,4" marker-end=3D"url(#arr-bene)"><=
+/path><text x=3D"820" y=3D"164" fill=3D"var(--bene)" font-size=3D"9" font-f=
+amily=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D"start">0..1<=
+/text><text x=3D"950" y=3D"1416.5" fill=3D"var(--bene)" font-size=3D"9" fon=
+t-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D"end">N</t=
+ext><path d=3D"M958,2698 C885,2698 885,2804 812,2804" stroke=3D"var(--graph=
+)" stroke-width=3D"1.8" fill=3D"none" opacity=3D"0.8" marker-end=3D"url(#ar=
+r-graph)"></path><text x=3D"950" y=3D"2695" fill=3D"var(--graph)" font-size=
+=3D"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D=
+"end">N</text><text x=3D"820" y=3D"2801" fill=3D"var(--graph)" font-size=3D=
+"9" font-family=3D"Fira Code, monospace" opacity=3D"0.72" text-anchor=3D"st=
+art">1</text></svg>
+
+  <!--  CUSTOMERS  -->
+  <div class=3D"tbl" id=3D"t-cust" style=3D"width: 230px; left: 158px; top:=
+ 0px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--cust)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(34,211,160,.1)">=F0=
+=9F=91=A4</div>
+      <span class=3D"tbl-title" style=3D"color:var(--cust)">customers</span=
+>
+      <span class=3D"tbl-ct">20 K rows</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"fr" id=3D"f-cust-pk">
+        <span class=3D"ftag tpk">PK</span>
+        <span class=3D"fname pk">customer_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+ge</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">k=
+yc_level</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+ustomer_risk_rating</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">p=
+ep_flag</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">o=
+ccupation</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">i=
+ndustry</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">i=
+ncome_bracket</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+ountry_risk</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+ccount_type</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+ustomer_since_days</span><span class=3D"ftype">int</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Additional profile fields</div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">h=
+ome_city</span><span class=3D"ftype">string</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">h=
+ome_lat</span><span class=3D"ftype">float</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">h=
+ome_lon</span><span class=3D"ftype">float</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">s=
+hared_kyc_id</span><span class=3D"ftype">hash</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">s=
+hared_phone_hash</span><span class=3D"ftype">hash</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">s=
+hared_email_hash</span><span class=3D"ftype">hash</span></div>
+    </div>
+  </div>
+
+  <!--  ACCOUNTS  -->
+  <div class=3D"tbl" id=3D"t-acc" style=3D"width: 230px; left: 158px; top: =
+452px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--acc)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(79,159,255,.1)">=F0=
+=9F=8F=A6</div>
+      <span class=3D"tbl-title" style=3D"color:var(--acc)">accounts</span>
+      <span class=3D"tbl-ct">25 K rows</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"fr" id=3D"f-acc-pk">
+        <span class=3D"ftag tpk">PK</span>
+        <span class=3D"fname pk">account_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"fr" id=3D"f-acc-fk">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">customer_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+vg_balance</span><span class=3D"ftype">float</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+ccount_open_days</span><span class=3D"ftype">int</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">-&gt; denormalised from customers</div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">kyc_level</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">country_risk</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">income_bracket</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">customer_risk_rating</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">pep_flag</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">occupation</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">industry</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">account_type</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">home_city</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">home_lat</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">home_lon</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">shared_kyc_id</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">shared_phone_hash</span><span class=3D"ftype">copy</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname di=
+m">shared_email_hash</span><span class=3D"ftype">copy</span></div>
+    </div>
+  </div>
+
+  <!--  TRANSACTIONS (centre)  -->
+  <div class=3D"tbl" id=3D"t-txn" style=3D"width: 260px; left: 546px; top: =
+0px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--txn)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(255,112,64,.1)">=F0=
+=9F=92=B3</div>
+      <span class=3D"tbl-title" style=3D"color:var(--txn)">transactions</sp=
+an>
+      <span class=3D"tbl-ct">~1.3 M rows</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"fr">
+        <span class=3D"ftag tpk">PK</span>
+        <span class=3D"fname pk">transaction_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Foreign Keys</div>
+      <div class=3D"fr" id=3D"f-txn-cust">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">customer_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"fr" id=3D"f-txn-sender">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">sender_account_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"fr" id=3D"f-txn-recv">
+        <span class=3D"ftag tfn">FK?</span>
+        <span class=3D"fname fkn">receiver_account_id</span>
+        <span class=3D"ftype">nullable</span>
+      </div>
+      <div class=3D"fr" id=3D"f-txn-bene">
+        <span class=3D"ftag tfn">FK?</span>
+        <span class=3D"fname fkn">beneficiary_id</span>
+        <span class=3D"ftype">nullable</span>
+      </div>
+      <div class=3D"fr" id=3D"f-txn-dev">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">device_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Core Fields</div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">t=
+imestamp</span><span class=3D"ftype">datetime</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+mount</span><span class=3D"ftype">float</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+hannel</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">t=
+ransaction_type</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+ash_flag</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">f=
+raud_type</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">l=
+abel</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Derived / Enriched</div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">h=
+our - is_night - is_weekend</span><span class=3D"ftype">temp</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+mount_to_balance_ratio</span><span class=3D"ftype">ratio</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+ccount_age_days</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">t=
+xn_count_last_1hr / 24hr</span><span class=3D"ftype">vel</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">t=
+otal_amount_last_24hr</span><span class=3D"ftype">vel</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+ust_txn_count_last_1hr</span><span class=3D"ftype">vel</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">c=
+ust_total_amount_last_24hr</span><span class=3D"ftype">vel</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+mount_zscore_30d</span><span class=3D"ftype">stat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">d=
+ormancy_flag</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">h=
+igh_risk_beneficiary</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">r=
+ule_trigger_count</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">w=
+eighted_rule_score</span><span class=3D"ftype">int</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Exact file headers (transactions.csv)</div>
+      <div class=3D"code" style=3D"white-space:pre-wrap;overflow-x:hidden;f=
+ont-size:9px;line-height:1.45">timestamp, transaction_id, customer_id, send=
+er_account_id, receiver_account_id, beneficiary_id, device_id, amount
+channel, debit_credit, transaction_type, cash_flag, fraud_type, label, avg_=
+balance, account_open_days
+kyc_level, country_risk, income_bracket, customer_risk_rating, pep_flag, oc=
+cupation, industry, account_type
+device_age_days, rooted_flag, os_type, vpn_flag, emulator_flag, beneficiary=
+_type, beneficiary_country_risk, hour
+day_of_week, date, month, week_of_year, is_night, is_weekend, is_business_h=
+ours, amount_to_balance_ratio
+is_round_amount, log_amount, high_risk_beneficiary, account_age_days, txn_c=
+ount_last_1hr, txn_count_last_24hr, total_amount_last_24hr, total_amount_la=
+st_7d
+total_amount_last_30d, dormancy_flag, txn_velocity_cumulative, cust_txn_cou=
+nt_last_1hr, cust_txn_count_last_24hr, cust_total_amount_last_24hr, cust_to=
+tal_amount_last_30d, cust_unique_accounts_30d
+rule_large_cash_deposit, rule_cash_just_below_threshold, rule_high_value_tr=
+ansfer, rule_micro_transaction, rule_round_amount_large, rule_night_transac=
+tion, rule_weekend_high_value, rule_dormant_account_activation
+rule_high_acct_velocity_1hr, rule_high_acct_velocity_24hr, rule_high_acct_v=
+elocity_7d, rule_high_acct_volume_24hr, rule_high_acct_volume_7d, rule_amou=
+nt_spike_30d, rule_rapid_burst, rule_high_cust_velocity_1hr
+rule_high_cust_velocity_24hr, rule_high_cust_volume_24hr, rule_high_cust_vo=
+lume_7d, rule_low_kyc_high_amount, rule_new_account_large_txn, rule_high_am=
+ount_to_balance, rule_very_high_risk_customer, rule_pep_high_value
+rule_high_risk_country_sender, rule_corporate_large_cash, rule_high_risk_be=
+neficiary, rule_crypto_transfer, rule_offshore_transfer, rule_high_risk_ben=
+e_country, rule_rooted_device, rule_vpn_proxy_detected
+rule_emulator_detected, rule_new_device_large_txn, rule_atm_high_withdrawal=
+, rule_branch_night_txn, rule_structuring_pattern, rule_multiple_small_cash=
+, rule_high_risk_industry, rule_student_high_value
+rule_unemployed_large_transfer, rule_freelancer_offshore, rule_pep_crypto_t=
+ransfer, rule_very_high_risk_offshore, rule_low_kyc_offshore, rule_low_inco=
+me_large_txn, rule_vpn_offshore, rule_emulator_crypto
+rule_new_account_offshore, rule_new_acct_high_cust_velocity, rule_trigger_c=
+ount, max_rule_severity, weighted_rule_score</div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Exact file headers (transactions_additional_featur=
+es.parquet)</div>
+      <div class=3D"code" style=3D"white-space:pre-wrap;overflow-x:hidden;f=
+ont-size:9px;line-height:1.45">timestamp, transaction_id, customer_id, send=
+er_account_id, receiver_account_id, beneficiary_id, device_id, amount
+channel, debit_credit, transaction_type, cash_flag, synthetic_flow_id, flow=
+_depth, hop_number, fraud_type
+label, avg_balance, account_open_days, kyc_level, country_risk, income_brac=
+ket, customer_risk_rating, pep_flag
+occupation, industry, account_type, home_lat, home_lon, home_city, shared_k=
+yc_id, shared_phone_hash
+shared_email_hash, device_age_days, rooted_flag, os_type, vpn_flag, emulato=
+r_flag, beneficiary_type, beneficiary_country_risk
+ip_address, ip_risk_score, geo_lat, geo_lon, hour, day_of_week, date, month
+week_of_year, is_night, is_weekend, is_business_hours, amount_to_balance_ra=
+tio, is_round_amount, log_amount, high_risk_beneficiary
+account_age_days, txn_count_last_1hr, txn_count_last_24hr, total_amount_las=
+t_24hr, txn_count_last_7d, txn_count_last_30d, total_amount_last_7d, total_=
+amount_last_30d
+txn_velocity_cumulative, dormancy_flag, cust_txn_count_last_1hr, cust_txn_c=
+ount_last_24hr, cust_total_amount_last_24hr, cust_total_amount_last_30d, cu=
+st_unique_accounts_30d, time_since_origin_txn
+balance_before_txn, balance_after_txn, current_balance, running_balance_txn=
+_amount, cumulative_daily_balance_change, fraud_intensity_score, rule_large=
+_cash_deposit, rule_cash_just_below_threshold
+rule_high_value_transfer, rule_micro_transaction, rule_round_amount_large, =
+rule_night_transaction, rule_weekend_high_value, rule_dormant_account_activ=
+ation, rule_high_acct_velocity_1hr, rule_high_acct_velocity_24hr
+rule_high_acct_velocity_7d, rule_high_acct_volume_24hr, rule_high_acct_volu=
+me_7d, rule_amount_spike_30d, rule_rapid_burst, rule_high_cust_velocity_1hr=
+, rule_high_cust_velocity_24hr, rule_high_cust_volume_24hr
+rule_high_cust_volume_7d, rule_low_kyc_high_amount, rule_new_account_large_=
+txn, rule_high_amount_to_balance, rule_very_high_risk_customer, rule_pep_hi=
+gh_value, rule_high_risk_country_sender, rule_corporate_large_cash
+rule_high_risk_beneficiary, rule_crypto_transfer, rule_offshore_transfer, r=
+ule_high_risk_bene_country, rule_rooted_device, rule_vpn_proxy_detected, ru=
+le_emulator_detected, rule_new_device_large_txn
+rule_atm_high_withdrawal, rule_branch_night_txn, rule_structuring_pattern, =
+rule_multiple_small_cash, rule_high_risk_industry, rule_student_high_value,=
+ rule_unemployed_large_transfer, rule_freelancer_offshore
+rule_pep_crypto_transfer, rule_very_high_risk_offshore, rule_low_kyc_offsho=
+re, rule_low_income_large_txn, rule_vpn_offshore, rule_emulator_crypto, rul=
+e_new_account_offshore, rule_new_acct_high_cust_velocity</div>
+    </div>
+  </div>
+
+  <!--  DEVICES  -->
+  <div class=3D"tbl" id=3D"t-dev" style=3D"width: 230px; left: 964px; top: =
+0px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--dev)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(167,139,250,.1)">=F0=
+=9F=93=B1</div>
+      <span class=3D"tbl-title" style=3D"color:var(--dev)">devices</span>
+      <span class=3D"tbl-ct">18 K rows</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"fr" id=3D"f-dev-pk">
+        <span class=3D"ftag tpk">PK</span>
+        <span class=3D"fname pk">device_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">d=
+evice_age_days</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">r=
+ooted_flag</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">o=
+s_type</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">v=
+pn_flag</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">e=
+mulator_flag</span><span class=3D"ftype">bin</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec" style=3D"color:rgba(167,139,250,.45)">no direct FK=
+ to customers</div>
+      <div class=3D"sec">linked via transactions.device_id</div>
+    </div>
+  </div>
+
+  <!--  BENEFICIARIES  -->
+  <div class=3D"tbl" id=3D"t-bene" style=3D"width: 230px; left: 964px; top:=
+ 1324px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--bene)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(244,114,182,.1)">=F0=
+=9F=8F=A7</div>
+      <span class=3D"tbl-title" style=3D"color:var(--bene)">beneficiaries</=
+span>
+      <span class=3D"tbl-ct">30 K rows</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"fr" id=3D"f-bene-pk">
+        <span class=3D"ftag tpk">PK</span>
+        <span class=3D"fname pk">beneficiary_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">b=
+eneficiary_type</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">b=
+eneficiary_country_risk</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec" style=3D"color:rgba(244,114,182,.45)">external ent=
+ities - no customer record</div>
+      <div class=3D"sec">linked via transactions.beneficiary_id</div>
+    </div>
+  </div>
+
+  <!--  GRAPH EDGES  -->
+  <div class=3D"tbl" id=3D"t-graph" style=3D"width: 230px; left: 964px; top=
+: 2600px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--graph)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(34,211,238,.1)">=F0=
+=9F=95=B8</div>
+      <span class=3D"tbl-title" style=3D"color:var(--graph)">graph_edges</s=
+pan>
+      <span class=3D"tbl-ct">~1.3 M rows</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"sec">logical key: transaction_id + source_account_id + =
+target_id</div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr" id=3D"f-graph-txn">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">transaction_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"fr" id=3D"f-graph-src">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">source_account_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"fr" id=3D"f-graph-cust">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">customer_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr" id=3D"f-graph-target">
+        <span class=3D"ftag"></span><span class=3D"fname">target_id</span><=
+span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">t=
+arget_type</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">r=
+elation</span><span class=3D"ftype">cat</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">t=
+imestamp</span><span class=3D"ftype">datetime</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+mount</span><span class=3D"ftype">float</span></div>
+    </div>
+  </div>
+
+  <!--  TRANSACTION GRAPH FEATURES (derived)  -->
+  <div class=3D"tbl" id=3D"t-txn-gf" style=3D"width: 260px; left: 546px; to=
+p: 2888px;">
+    <div class=3D"tbl-bar" style=3D"background:var(--graph)"></div>
+    <div class=3D"tbl-head">
+      <div class=3D"tbl-ico" style=3D"background:rgba(34,211,238,.1)">FX</d=
+iv>
+      <span class=3D"tbl-title" style=3D"color:var(--graph)">transaction_wi=
+th_graph_features</span>
+      <span class=3D"tbl-ct">derived parquet</span>
+    </div>
+    <div class=3D"tbl-body">
+      <div class=3D"fr" id=3D"f-gf-txn">
+        <span class=3D"ftag tfk">FK</span>
+        <span class=3D"fname fk">transaction_id</span>
+        <span class=3D"ftype">string</span>
+      </div>
+      <div class=3D"sep"></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">s=
+ender_in_degree_30d</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">s=
+ender_out_degree_30d</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">p=
+ass_through_ratio_24h</span><span class=3D"ftype">ratio</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">a=
+ccounts_per_device</span><span class=3D"ftype">int</span></div>
+      <div class=3D"fr"><span class=3D"ftag"></span><span class=3D"fname">s=
+hared_device_fraud_count</span><span class=3D"ftype">int</span></div>
+      <div class=3D"sep"></div>
+      <div class=3D"sec">Exact file headers (transaction_with_graph_feature=
+s.parquet)</div>
+      <div class=3D"code" style=3D"white-space:pre-wrap;overflow-x:hidden;f=
+ont-size:9px;line-height:1.45">timestamp, transaction_id, customer_id, send=
+er_account_id, receiver_account_id, beneficiary_id, device_id, amount
+channel, debit_credit, transaction_type, cash_flag, fraud_type, label, avg_=
+balance, account_open_days
+kyc_level, country_risk, income_bracket, customer_risk_rating, pep_flag, oc=
+cupation, industry, account_type
+device_age_days, rooted_flag, os_type, vpn_flag, emulator_flag, beneficiary=
+_type, beneficiary_country_risk, hour
+day_of_week, date, month, week_of_year, is_night, is_weekend, is_business_h=
+ours, amount_to_balance_ratio
+is_round_amount, log_amount, high_risk_beneficiary, account_age_days, txn_c=
+ount_last_1hr, txn_count_last_24hr, total_amount_last_24hr, total_amount_la=
+st_7d
+total_amount_last_30d, dormancy_flag, txn_velocity_cumulative, cust_txn_cou=
+nt_last_1hr, cust_txn_count_last_24hr, cust_total_amount_last_24hr, cust_to=
+tal_amount_last_30d, cust_unique_accounts_30d
+rule_large_cash_deposit, rule_cash_just_below_threshold, rule_high_value_tr=
+ansfer, rule_micro_transaction, rule_round_amount_large, rule_night_transac=
+tion, rule_weekend_high_value, rule_dormant_account_activation
+rule_high_acct_velocity_1hr, rule_high_acct_velocity_24hr, rule_high_acct_v=
+elocity_7d, rule_high_acct_volume_24hr, rule_high_acct_volume_7d, rule_amou=
+nt_spike_30d, rule_rapid_burst, rule_high_cust_velocity_1hr
+rule_high_cust_velocity_24hr, rule_high_cust_volume_24hr, rule_high_cust_vo=
+lume_7d, rule_low_kyc_high_amount, rule_new_account_large_txn, rule_high_am=
+ount_to_balance, rule_very_high_risk_customer, rule_pep_high_value
+rule_high_risk_country_sender, rule_corporate_large_cash, rule_high_risk_be=
+neficiary, rule_crypto_transfer, rule_offshore_transfer, rule_high_risk_ben=
+e_country, rule_rooted_device, rule_vpn_proxy_detected
+rule_emulator_detected, rule_new_device_large_txn, rule_atm_high_withdrawal=
+, rule_branch_night_txn, rule_structuring_pattern, rule_multiple_small_cash=
+, rule_high_risk_industry, rule_student_high_value
+rule_unemployed_large_transfer, rule_freelancer_offshore, rule_pep_crypto_t=
+ransfer, rule_very_high_risk_offshore, rule_low_kyc_offshore, rule_low_inco=
+me_large_txn, rule_vpn_offshore, rule_emulator_crypto
+rule_new_account_offshore, rule_new_acct_high_cust_velocity, rule_trigger_c=
+ount, max_rule_severity, weighted_rule_score, sender_out_degree_30d, sender=
+_total_outflow_30d, sender_unique_counterparties_30d
+sender_repeat_counterparty_ratio, devices_per_account, account_id_x, sender=
+_in_degree_30d, sender_total_inflow_30d, account_id_y, pass_through_ratio_2=
+4h, pass_through_ratio_7d
+outflow_to_inflow_ratio_7d, accounts_per_device, device_shared_high_risk_ra=
+tio, shared_device_fraud_count, avg_time_gap_in_out, receiver_in_degree_30d=
+, receiver_total_inflow_30d, receiver_unique_senders_30d
+receiver_out_degree_30d</div>
+    </div>
+  </div>
+
+</div><!-- /diagram -->
+</div><!-- /canvas -->
+
+<!-- XOR CALLOUT -->
+<div class=3D"xor" style=3D"margin-top:28px">
+  <div class=3D"xor-inner">
+    <div style=3D"font-size:28px;padding-top:2px"></div>
+    <div>
+      <div class=3D"xor-head">XOR Constraint - receiver_account_id vs benef=
+iciary_id</div>
+      <p class=3D"xor-body">
+        Every transaction row has <strong>exactly one</strong> of these two=
+ nullable FK columns set - never both, never neither.
+        The one that's populated tells you whether money moved <em>inside</=
+em> or <em>outside</em> the bank.
+      </p>
+      <div class=3D"code" style=3D"margin-top:10px;white-space:pre-wrap;ove=
+rflow-x:hidden">CHECK (
+  (receiver_account_id IS NULL) &lt;&gt; (beneficiary_id IS NULL)
+)</div>
+      <div class=3D"xor-cases">
+        <div class=3D"xcase">
+          <div class=3D"xcase-title" style=3D"color:var(--acc)">Internal Tr=
+ansfer (40% of rows)</div>
+          <span class=3D"set">receiver_account_id =3D "A4521"</span><br>
+          <span class=3D"nil">beneficiary_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;=3D NULL</span><br><br>
+          Money stays inside the bank.<br>
+          Join accounts -&gt; get full receiver profile.<br>
+          Then join customers -&gt; age, tenure, risk.
+        </div>
+        <div class=3D"xcase">
+          <div class=3D"xcase-title" style=3D"color:var(--bene)">External T=
+ransfer (60% of rows)</div>
+          <span class=3D"nil">receiver_account_id =3D NULL</span><br>
+          <span class=3D"set">beneficiary_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;=3D "B0234"</span><br><br>
+          Money leaves the bank entirely.<br>
+          Join beneficiaries -&gt; type &amp; country risk.<br>
+          No customer record exists for external parties.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JOIN RECIPES -->
+<div class=3D"recipes" style=3D"margin-top:20px;padding-bottom:20px">
+  <div class=3D"recipes-head">Join Recipes</div>
+  <div class=3D"recipes-grid">
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">01 - Transactions -&gt; Customers</div>
+      <div class=3D"rcard-d"><code>customer_id</code> is denormalised into =
+every row - single-key, zero chaining.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>.merge(
+  <span class=3D"ct">customers</span>, <span class=3D"ck">on</span>=3D<span=
+ class=3D"cs">"customer_id"</span>
+)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">02 - Transactions -&gt; Accounts (sender)</div=
+>
+      <div class=3D"rcard-d">Brings in balance, open_days, and all risk att=
+ributes via one join.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>.merge(
+  <span class=3D"ct">accounts</span>,
+  <span class=3D"ck">left_on</span>=3D<span class=3D"cs">"sender_account_id=
+"</span>,
+  <span class=3D"ck">right_on</span>=3D<span class=3D"cs">"account_id"</spa=
+n>
+)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">03 - Transactions -&gt; Accounts (receiver)</d=
+iv>
+      <div class=3D"rcard-d">Internal transfers only. Always <code>how=3D"l=
+eft"</code> - this FK is nullable.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>.merge(
+  <span class=3D"ct">accounts</span>,
+  <span class=3D"ck">left_on</span>=3D<span class=3D"cs">"receiver_account_=
+id"</span>,
+  <span class=3D"ck">right_on</span>=3D<span class=3D"cs">"account_id"</spa=
+n>,
+  <span class=3D"ck">how</span>=3D<span class=3D"cs">"left"</span>
+)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">04 - Transactions -&gt; Devices</div>
+      <div class=3D"rcard-d">Get device risk signals: rooted, VPN, emulator=
+, OS type.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>.merge(
+  <span class=3D"ct">devices</span>, <span class=3D"ck">on</span>=3D<span c=
+lass=3D"cs">"device_id"</span>
+)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">05 - Transactions -&gt; Beneficiaries</div>
+      <div class=3D"rcard-d">External transfers only. Filter first to avoid=
+ NaN rows.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>[
+  <span class=3D"ck">transactions</span>[<span class=3D"cs">"beneficiary_id=
+"</span>].notna()
+].merge(<span class=3D"ct">beneficiaries</span>, <span class=3D"ck">on</spa=
+n>=3D<span class=3D"cs">"beneficiary_id"</span>)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">06 - Sender + Receiver (no column clash)</div>
+      <div class=3D"rcard-d">Prefix both sides to avoid <code>col_x / col_y=
+</code> naming collision.</div>
+      <div class=3D"code">s =3D <span class=3D"ct">accounts</span>.add_pref=
+ix(<span class=3D"cs">"sndr_"</span>)
+r =3D <span class=3D"ct">accounts</span>.add_prefix(<span class=3D"cs">"rcv=
+r_"</span>)
+<span class=3D"ck">transactions</span>
+  .merge(s, <span class=3D"ck">left_on</span>=3D<span class=3D"cs">"sender_=
+account_id"</span>,
+            <span class=3D"ck">right_on</span>=3D<span class=3D"cs">"sndr_a=
+ccount_id"</span>)
+  .merge(r, <span class=3D"ck">left_on</span>=3D<span class=3D"cs">"receive=
+r_account_id"</span>,
+            <span class=3D"ck">right_on</span>=3D<span class=3D"cs">"rcvr_a=
+ccount_id"</span>,
+            <span class=3D"ck">how</span>=3D<span class=3D"cs">"left"</span=
+>)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">07 - Devices -&gt; Customers (indirect)</div>
+      <div class=3D"rcard-d">No direct FK. Transactions is the bridge - alw=
+ays route through it.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>
+  .merge(<span class=3D"ct">devices</span>, <span class=3D"ck">on</span>=3D=
+<span class=3D"cs">"device_id"</span>)
+  .merge(<span class=3D"ct">customers</span>, <span class=3D"ck">on</span>=
+=3D<span class=3D"cs">"customer_id"</span>)
+  .query(<span class=3D"cs">"rooted_flag =3D=3D 1"</span>)</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">08 - Beneficiaries -&gt; Customers (indirect)<=
+/div>
+      <div class=3D"rcard-d">Who sent money to crypto exchanges? Route thro=
+ugh transactions.</div>
+      <div class=3D"code"><span class=3D"ck">transactions</span>
+  .merge(<span class=3D"ct">beneficiaries</span>, <span class=3D"ck">on</sp=
+an>=3D<span class=3D"cs">"beneficiary_id"</span>)
+  .merge(<span class=3D"ct">customers</span>, <span class=3D"ck">on</span>=
+=3D<span class=3D"cs">"customer_id"</span>)
+  .query(<span class=3D"cs">"beneficiary_type =3D=3D 'crypto'"</span>)</div=
+>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">09 - Graph Edges FK Coverage</div>
+      <div class=3D"rcard-d">graph_edges has three FK joins: transactions, =
+accounts (source), and customers.</div>
+      <div class=3D"code" style=3D"white-space:pre-wrap;overflow-x:hidden">=
+<span class=3D"ct">graph_edges</span>
+  .merge(
+    <span class=3D"ck">transactions</span>[["transaction_id"]],
+    <span class=3D"ck">on</span>=3D<span class=3D"cs">"transaction_id"</spa=
+n>
+  )
+  .merge(
+    <span class=3D"ck">accounts</span>[["account_id"]],
+    <span class=3D"ck">left_on</span>=3D<span class=3D"cs">"source_account_=
+id"</span>,
+    <span class=3D"ck">right_on</span>=3D<span class=3D"cs">"account_id"</s=
+pan>
+  )
+  .merge(
+    <span class=3D"ck">customers</span>[["customer_id"]],
+    <span class=3D"ck">on</span>=3D<span class=3D"cs">"customer_id"</span>
+  )</div>
+    </div>
+
+    <div class=3D"rcard">
+      <div class=3D"rcard-h">10 - Customers to Transactions Schema</div>
+      <div class=3D"rcard-d">Cardinality: one customer can have many transa=
+ctions; each transaction maps to one customer.</div>
+      <div class=3D"code" style=3D"white-space:pre-wrap;overflow-x:hidden">=
+<span class=3D"cm">customers.customer_id (PK) 1 --- * transactions.customer=
+_id (FK)</span>
+<span class=3D"ct">customers</span>.merge(
+  <span class=3D"ck">transactions</span>,
+  <span class=3D"ck">on</span>=3D<span class=3D"cs">"customer_id"</span>,
+  <span class=3D"ck">how</span>=3D<span class=3D"cs">"inner"</span>
+)</div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+</body></html>
+------MultipartBoundary--J4WEJiUM0UaEoveb61QggAN8Pe5oynL6uUBaQcOm6i----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600;700&display=swap
+
+@charset "utf-8";
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 300; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2") format("woff2"); unicode-range=
+: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+32=
+9, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,=
+ U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 300; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2") format("woff2"); unicode-range: U=
++0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+32=
+9, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+F=
+FFD; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 400; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2") format("woff2"); unicode-range=
+: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+32=
+9, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,=
+ U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 400; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2") format("woff2"); unicode-range: U=
++0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+32=
+9, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+F=
+FFD; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 500; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2") format("woff2"); unicode-range=
+: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+32=
+9, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,=
+ U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 500; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2") format("woff2"); unicode-range: U=
++0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+32=
+9, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+F=
+FFD; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 600; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2") format("woff2"); unicode-range=
+: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+32=
+9, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,=
+ U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 600; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2") format("woff2"); unicode-range: U=
++0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+32=
+9, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+F=
+FFD; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 700; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2") format("woff2"); unicode-range=
+: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+32=
+9, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,=
+ U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 700; =
+font-display: swap; src: url("https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2=
+ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2") format("woff2"); unicode-range: U=
++0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+32=
+9, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+F=
+FFD; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0NSDulI.woff2") format("woff2"); unicode-range: U+460-52F=
+, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh2dSDulI.woff2") format("woff2"); unicode-range: U+301, U+=
+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0dSDulI.woff2") format("woff2"); unicode-range: U+1F00-1F=
+FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3tSDulI.woff2") format("woff2"); unicode-range: U+370-377=
+, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bhZ_Wmh2uX.woff2") format("woff2"); unicode-range: U+2000-2=
+001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh09SDulI.woff2") format("woff2"); unicode-range: U+100-2BA=
+, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1=
+DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+=
+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 300=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3dSD.woff2") format("woff2"); unicode-range: U+0-FF, U+13=
+1, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-2=
+06F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0NSDulI.woff2") format("woff2"); unicode-range: U+460-52F=
+, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh2dSDulI.woff2") format("woff2"); unicode-range: U+301, U+=
+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0dSDulI.woff2") format("woff2"); unicode-range: U+1F00-1F=
+FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3tSDulI.woff2") format("woff2"); unicode-range: U+370-377=
+, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bhZ_Wmh2uX.woff2") format("woff2"); unicode-range: U+2000-2=
+001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh09SDulI.woff2") format("woff2"); unicode-range: U+100-2BA=
+, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1=
+DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+=
+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 400=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3dSD.woff2") format("woff2"); unicode-range: U+0-FF, U+13=
+1, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-2=
+06F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0NSDulI.woff2") format("woff2"); unicode-range: U+460-52F=
+, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh2dSDulI.woff2") format("woff2"); unicode-range: U+301, U+=
+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0dSDulI.woff2") format("woff2"); unicode-range: U+1F00-1F=
+FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3tSDulI.woff2") format("woff2"); unicode-range: U+370-377=
+, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bhZ_Wmh2uX.woff2") format("woff2"); unicode-range: U+2000-2=
+001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh09SDulI.woff2") format("woff2"); unicode-range: U+100-2BA=
+, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1=
+DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+=
+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 500=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3dSD.woff2") format("woff2"); unicode-range: U+0-FF, U+13=
+1, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-2=
+06F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0NSDulI.woff2") format("woff2"); unicode-range: U+460-52F=
+, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh2dSDulI.woff2") format("woff2"); unicode-range: U+301, U+=
+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh0dSDulI.woff2") format("woff2"); unicode-range: U+1F00-1F=
+FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3tSDulI.woff2") format("woff2"); unicode-range: U+370-377=
+, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bhZ_Wmh2uX.woff2") format("woff2"); unicode-range: U+2000-2=
+001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh09SDulI.woff2") format("woff2"); unicode-range: U+100-2BA=
+, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1=
+DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+=
+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Fira Code"; font-style: normal; font-weight: 600=
+; font-display: swap; src: url("https://fonts.gstatic.com/s/firacode/v27/uU=
+9NCBsR6Z2vfE9aq3bh3dSD.woff2") format("woff2"); unicode-range: U+0-FF, U+13=
+1, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-2=
+06F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+------MultipartBoundary--J4WEJiUM0UaEoveb61QggAN8Pe5oynL6uUBaQcOm6i----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-6f503fcf-6ea6-45c8-972c-656f6c12e3d8@mhtml.blink
+
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css2?family=3DFira+Code:wght@300;=
+400;500;600&family=3DDM+Sans:wght@300;400;500;600;700&display=3Dswap");
+
+*, ::before, ::after { box-sizing: border-box; margin: 0px; padding: 0px; }
+
+:root { --bg: #060a12; --surface: #0c1220; --card: #101826; --card-hover: #=
+131e2e; --border: rgba(255,255,255,0.07); --border-hi: rgba(255,255,255,0.1=
+3); --cust: #22d3a0; --acc: #4f9fff; --txn: #ff7040; --dev: #a78bfa; --bene=
+: #f472b6; --graph: #22d3ee; --pk: #fbbf24; --fk: #60a5fa; --fkn: #d8b4fe; =
+--text: #dde4ef; --muted: #4a5568; --dim: #6b7280; }
+
+html { scroll-behavior: smooth; }
+
+body { background: rgb(6, 10, 18); color: var(--text); font-family: "DM San=
+s", sans-serif; min-height: 100vh; padding-bottom: 80px; }
+
+body::before { content: ""; position: fixed; inset: 0px; background-image: =
+radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px); background=
+-size: 28px 28px; pointer-events: none; z-index: 0; }
+
+.header { position: relative; z-index: 10; text-align: center; padding: 56p=
+x 24px 40px; }
+
+.pill { display: inline-block; font-family: "Fira Code", monospace; font-si=
+ze: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--tx=
+n); border: 1px solid rgba(255, 112, 64, 0.3); background: rgba(255, 112, 6=
+4, 0.06); padding: 5px 16px; border-radius: 99px; margin-bottom: 18px; }
+
+.header h1 { font-size: clamp(28px, 4vw, 46px); font-weight: 700; letter-sp=
+acing: -1.5px; line-height: 1.1; color: var(--text); }
+
+.header h1 b { background-image: ; background-position-x: ; background-posi=
+tion-y: ; background-size: ; background-repeat: ; background-attachment: ; =
+background-origin: ; background-color: ; -webkit-text-fill-color: transpare=
+nt; background-clip: text; font-weight: 700; }
+
+.header p { margin-top: 10px; color: var(--dim); font-size: 13px; font-weig=
+ht: 300; }
+
+.legend { position: relative; z-index: 10; display: flex; flex-wrap: wrap; =
+justify-content: center; gap: 6px 20px; padding: 0px 20px 34px; }
+
+.li { display: flex; align-items: center; gap: 6px; font-size: 11px; color:=
+ var(--dim); }
+
+.lswatch { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+.ltag { font-family: "Fira Code", monospace; font-size: 9.5px; font-weight:=
+ 600; padding: 1px 6px; border-radius: 4px; letter-spacing: 0.3px; }
+
+.tpk { color: var(--pk); background: rgba(251, 191, 36, 0.1); border: 1px s=
+olid rgba(251, 191, 36, 0.2); }
+
+.tfk { color: var(--fk); background: rgba(96, 165, 250, 0.1); border: 1px s=
+olid rgba(96, 165, 250, 0.2); }
+
+.tfn { color: var(--fkn); background: rgba(216, 180, 254, 0.1); border: 1px=
+ solid rgba(216, 180, 254, 0.2); }
+
+.canvas { position: relative; z-index: 2; max-width: 1400px; margin: 0px au=
+to; padding: 0px 24px; }
+
+#diagram { position: relative; width: 100%; }
+
+#svg-overlay { position: absolute; inset: 0px; width: 100%; height: 100%; o=
+verflow: visible; pointer-events: none; z-index: 1; }
+
+.tbl { position: absolute; background: var(--card); border: 1px solid var(-=
+-border-hi); border-radius: 12px; overflow: hidden; z-index: 5; transition:=
+ box-shadow 0.25s, transform 0.2s, border-color 0.2s; box-shadow: rgba(0, 0=
+, 0, 0.4) 0px 2px 12px; }
+
+.tbl:hover { transform: translateY(-3px); box-shadow: rgba(0, 0, 0, 0.6) 0p=
+x 16px 48px; border-color: rgba(255, 255, 255, 0.18); }
+
+.tbl-bar { height: 3px; width: 100%; }
+
+.tbl-head { display: flex; align-items: center; gap: 8px; padding: 11px 14p=
+x 9px; border-bottom: 1px solid var(--border); }
+
+.tbl-ico { width: 24px; height: 24px; border-radius: 5px; display: flex; al=
+ign-items: center; justify-content: center; font-size: 12px; flex-shrink: 0=
+; }
+
+.tbl-title { font-size: 12.5px; font-weight: 600; letter-spacing: 0.1px; }
+
+.tbl-ct { margin-left: auto; font-family: "Fira Code", monospace; font-size=
+: 9px; color: var(--muted); background: rgba(255, 255, 255, 0.04); padding:=
+ 2px 7px; border-radius: 8px; border: 1px solid var(--border); white-space:=
+ nowrap; }
+
+.tbl-body { padding: 5px 0px 7px; }
+
+.fr { display: grid; grid-template-columns: 28px 1fr auto; align-items: cen=
+ter; gap: 4px; padding: 3px 13px 3px 9px; transition: background 0.1s; }
+
+.fr:hover { background: rgba(255, 255, 255, 0.03); }
+
+.ftag { font-family: "Fira Code", monospace; font-size: 8px; font-weight: 6=
+00; text-align: center; padding: 1px 3px; border-radius: 3px; letter-spacin=
+g: 0.3px; }
+
+.fname { font-family: "Fira Code", monospace; font-size: 10.5px; white-spac=
+e: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.fname.pk { color: var(--pk); font-weight: 600; }
+
+.fname.fk { color: var(--fk); }
+
+.fname.fkn { color: var(--fkn); }
+
+.fname.dim { color: var(--muted); font-style: italic; font-size: 10px; }
+
+.ftype { font-family: "Fira Code", monospace; font-size: 8.5px; color: var(=
+--muted); }
+
+.sep { height: 1px; background: var(--border); margin: 4px 11px; }
+
+.sec { font-family: "Fira Code", monospace; font-size: 8.5px; letter-spacin=
+g: 1.2px; text-transform: uppercase; color: var(--muted); padding: 3px 13px=
+ 1px; }
+
+.xor { position: relative; z-index: 10; max-width: 1400px; margin: 20px aut=
+o 0px; padding: 0px 24px; }
+
+.xor-inner { background: var(--surface); border-top: 1px solid rgba(216, 18=
+0, 254, 0.18); border-right: 1px solid rgba(216, 180, 254, 0.18); border-bo=
+ttom: 1px solid rgba(216, 180, 254, 0.18); border-image: initial; border-le=
+ft: 3px solid var(--fkn); border-radius: 12px; padding: 20px 26px; display:=
+ grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
+
+.xor-head { font-family: "Fira Code", monospace; font-size: 10px; font-weig=
+ht: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--fkn=
+); margin-bottom: 8px; }
+
+.xor-body { font-size: 12.5px; color: var(--dim); line-height: 1.65; }
+
+.xor-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; marg=
+in-top: 14px; }
+
+.xcase { background: var(--bg); border: 1px solid var(--border-hi); border-=
+radius: 8px; padding: 12px 14px; font-family: "Fira Code", monospace; font-=
+size: 10.5px; line-height: 1.9; }
+
+.xcase-title { font-size: 11px; font-weight: 600; margin-bottom: 5px; font-=
+family: "DM Sans", sans-serif; }
+
+.set { color: rgb(74, 222, 128); }
+
+.nil { color: var(--muted); }
+
+.recipes { position: relative; z-index: 10; max-width: 1400px; margin: 20px=
+ auto 0px; padding: 0px 24px; }
+
+.recipes-head { font-family: "Fira Code", monospace; font-size: 9.5px; font=
+-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--=
+dim); margin-bottom: 14px; }
+
+.recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, min=
+max(320px, 1fr)); gap: 10px; }
+
+.rcard { background: var(--surface); border: 1px solid var(--border-hi); bo=
+rder-radius: 10px; padding: 14px 16px; }
+
+.rcard-h { font-size: 10.5px; font-weight: 600; letter-spacing: 0.5px; text=
+-transform: uppercase; color: var(--dim); margin-bottom: 5px; }
+
+.rcard-d { font-size: 11.5px; color: var(--muted); margin-bottom: 9px; line=
+-height: 1.5; }
+
+.code { background: var(--bg); border: 1px solid var(--border); border-radi=
+us: 6px; padding: 9px 12px; font-family: "Fira Code", monospace; font-size:=
+ 10px; line-height: 1.8; white-space: pre; overflow-x: auto; }
+
+.ck { color: var(--fk); }
+
+.ct { color: var(--cust); }
+
+.cs { color: rgb(134, 239, 172); }
+
+.cm { color: var(--muted); }
+
+.cp { color: var(--fkn); }
+------MultipartBoundary--J4WEJiUM0UaEoveb61QggAN8Pe5oynL6uUBaQcOm6i------
