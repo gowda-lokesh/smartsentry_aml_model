@@ -1,0 +1,51 @@
+rule_column,group,readable_name,severity,transactions_triggered,pct_of_total
+rule_very_high_risk_customer,KYC / Account,Very High Risk Customer,3,37964,11.3993
+rule_multiple_small_cash,Structuring,Multiple Small Cash,3,18192,5.4624
+rule_amount_spike_30d,Account Velocity,Amount Spike 30d,3,12243,3.6762
+rule_large_cash_deposit,Amount,Large Cash Deposit,3,10753,3.2288
+rule_high_cust_velocity_1hr,Customer Velocity,High Cust Velocity 1hr,3,9161,2.7507
+rule_offshore_transfer,Beneficiary,Offshore Transfer,3,7808,2.3445
+rule_cash_just_below_threshold,Amount,Cash Just Below Threshold,3,4040,1.2131
+rule_emulator_detected,Device / Channel,Emulator Detected,3,3319,0.9966
+rule_pep_high_value,KYC / Account,PEP High Value,3,3220,0.9669
+rule_structuring_pattern,Structuring,Structuring Pattern,3,2999,0.9005
+rule_high_risk_beneficiary,Beneficiary,High Risk Beneficiary,3,2658,0.7981
+rule_low_kyc_high_amount,KYC / Account,Low KYC High Amount,3,1581,0.4747
+rule_very_high_risk_offshore,Combined Combos,Very High Risk + Offshore,3,891,0.2675
+rule_vpn_offshore,Combined Combos,VPN + Offshore,3,246,0.0739
+rule_dormant_account_activation,Time,Dormant Account Activation,3,100,0.03
+rule_low_kyc_offshore,Combined Combos,Low KYC + Offshore,3,78,0.0234
+rule_rapid_burst,Account Velocity,Rapid Burst,3,31,0.0093
+rule_high_acct_velocity_1hr,Account Velocity,High Acct Velocity 1hr,3,0,0.0
+rule_new_account_large_txn,KYC / Account,New Account Large Txn,3,0,0.0
+rule_pep_crypto_transfer,Combined Combos,PEP + Crypto Transfer,3,0,0.0
+rule_emulator_crypto,Combined Combos,Emulator + Crypto,3,0,0.0
+rule_new_account_offshore,Combined Combos,New Account + Offshore,3,0,0.0
+rule_new_acct_high_cust_velocity,Combined Combos,New Acct + High Velocity,3,0,0.0
+rule_high_value_transfer,Amount,High Value Transfer,2,58661,17.6139
+rule_weekend_high_value,Time,Weekend High Value,2,41157,12.358
+rule_night_transaction,Time,Night Transaction,2,33262,9.9874
+rule_low_income_large_txn,Combined Combos,Low Income Large Txn,2,19671,5.9065
+rule_high_cust_volume_7d,Customer Velocity,High Cust Volume 7d,2,16743,5.0274
+rule_high_acct_volume_7d,Account Velocity,High Acct Volume 7d,2,14818,4.4493
+rule_high_cust_volume_24hr,Customer Velocity,High Cust Volume 24hr,2,13251,3.9788
+rule_atm_high_withdrawal,Device / Channel,ATM High Withdrawal,2,10245,3.0762
+rule_unemployed_large_transfer,Occupation / Industry,Unemployed Large Transfer,2,9373,2.8144
+rule_vpn_proxy_detected,Device / Channel,VPN / Proxy Detected,2,9155,2.7489
+rule_high_acct_volume_24hr,Account Velocity,High Acct Volume 24hr,2,8955,2.6889
+rule_high_cust_velocity_24hr,Customer Velocity,High Cust Velocity 24hr,2,8183,2.4571
+rule_student_high_value,Occupation / Industry,Student High Value,2,5196,1.5602
+rule_corporate_large_cash,KYC / Account,Corporate Large Cash,2,5076,1.5242
+rule_branch_night_txn,Device / Channel,Branch Night Txn,2,2847,0.8549
+rule_high_risk_bene_country,Beneficiary,High Risk Bene Country,2,2658,0.7981
+rule_high_risk_country_sender,KYC / Account,High Risk Country Sender,2,800,0.2402
+rule_high_amount_to_balance,KYC / Account,High Amount to Balance,2,546,0.1639
+rule_freelancer_offshore,Occupation / Industry,Freelancer Offshore,2,494,0.1483
+rule_high_acct_velocity_24hr,Account Velocity,High Acct Velocity 24hr,2,3,0.0009
+rule_high_acct_velocity_7d,Account Velocity,High Acct Velocity 7d,2,0,0.0
+rule_crypto_transfer,Beneficiary,Crypto Transfer,2,0,0.0
+rule_rooted_device,Device / Channel,Rooted Device,2,0,0.0
+rule_high_risk_industry,Occupation / Industry,High Risk Industry,1,5700,1.7115
+rule_micro_transaction,Amount,Micro Transaction,1,0,0.0
+rule_round_amount_large,Amount,Round Amount Large,1,0,0.0
+rule_new_device_large_txn,Device / Channel,New Device Large Txn,1,0,0.0
