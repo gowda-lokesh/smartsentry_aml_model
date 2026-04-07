@@ -1,0 +1,6 @@
+category,encoded_value
+BIOMETRIC,0
+MPIN,1
+OTP,2
+PASSWORD,3
+PIN,4

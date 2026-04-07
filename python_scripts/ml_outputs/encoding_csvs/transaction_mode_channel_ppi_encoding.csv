@@ -1,0 +1,7 @@
+category,encoded_value
+IN-APP TRANSFER,0
+MISSING,1
+NFC TAP,2
+ONLINE,3
+QR SCAN,4
+UPI,5

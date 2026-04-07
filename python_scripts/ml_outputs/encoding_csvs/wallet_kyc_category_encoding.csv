@@ -1,0 +1,4 @@
+category,encoded_value
+FULL KYC,0
+MINIMUM KYC,1
+MISSING,2

@@ -1,0 +1,6 @@
+category,encoded_value
+CREDIT CARD,0
+DEBIT CARD,1
+MISSING,2
+NET BANKING,3
+UPI,4

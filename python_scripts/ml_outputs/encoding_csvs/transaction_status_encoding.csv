@@ -1,0 +1,5 @@
+category,encoded_value
+FAILED,0
+PENDING,1
+REVERSED,2
+SUCCESS,3

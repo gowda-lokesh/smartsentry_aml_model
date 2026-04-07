@@ -1,0 +1,7 @@
+category,encoded_value
+BILL PAY,0
+CASH OUT,1
+MISSING,2
+P2M,3
+P2P,4
+RECHARGE,5
