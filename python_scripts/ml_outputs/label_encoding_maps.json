@@ -1,54 +1,82 @@
 {
-  "minor_flag": {
+  "account_category": {
+    "CURRENT": 0,
+    "FIXED DEPOSIT": 1,
+    "NRE": 2,
+    "NRO": 3,
+    "RECURRING DEPOSIT": 4,
+    "SALARY": 5,
+    "SAVINGS": 6
+  },
+  "account_type": {
+    "BASIC": 0,
+    "BSBD": 1,
+    "CORPORATE": 2,
+    "PREMIUM": 3,
+    "REGULAR": 4
+  },
+  "account_wallet_status": {
+    "ACTIVE": 0,
+    "DORMANT": 1
+  },
+  "authentication_method": {
+    "BIOMETRIC": 0,
+    "MPIN": 1,
+    "OTP": 2,
+    "PASSWORD": 3,
+    "PIN": 4
+  },
+  "beneficial_owner_types": {
+    "CONTROL THROUGH OTHER MEANS": 0,
+    "MISSING": 1,
+    "SENIOR MANAGING OFFICIAL": 2,
+    "SHAREHOLDING > 25%": 3
+  },
+  "cash_flag": {
     "N": 0,
     "Y": 1
   },
-  "merchant_category_code": {
-    "4814": 0,
-    "4899": 1,
-    "5045": 2,
-    "5411": 3,
-    "5541": 4,
-    "5691": 5,
-    "5812": 6,
-    "5816": 7,
-    "5817": 8,
-    "5818": 9,
-    "5912": 10,
-    "5966": 11,
-    "5967": 12,
-    "5999": 13,
-    "6012": 14,
-    "6050": 15,
-    "6051": 16,
-    "6211": 17,
-    "7011": 18,
-    "7801": 19,
-    "7802": 20,
-    "7994": 21,
-    "7995": 22,
-    "8062": 23,
-    "MISSING": 24
+  "citizenship": {
+    "DUAL - INDIAN/AE": 0,
+    "DUAL - INDIAN/AU": 1,
+    "DUAL - INDIAN/BH": 2,
+    "DUAL - INDIAN/CA": 3,
+    "DUAL - INDIAN/DE": 4,
+    "DUAL - INDIAN/GB": 5,
+    "DUAL - INDIAN/JP": 6,
+    "DUAL - INDIAN/KW": 7,
+    "DUAL - INDIAN/NL": 8,
+    "DUAL - INDIAN/OM": 9,
+    "DUAL - INDIAN/QA": 10,
+    "DUAL - INDIAN/SG": 11,
+    "DUAL - INDIAN/US": 12,
+    "INDIAN": 13,
+    "MISSING": 14
   },
-  "source_of_funds": {
-    "AGRICULTURE INCOME": 0,
-    "BUSINESS INCOME": 1,
-    "BUSINESS REVENUE": 2,
-    "DONATIONS": 3,
-    "FAMILY SUPPORT": 4,
-    "FOREIGN EMPLOYMENT": 5,
-    "GOVERNMENT GRANT": 6,
-    "INVESTMENT": 7,
-    "INVESTMENT RETURNS": 8,
-    "OVERSEAS BUSINESS": 9,
-    "PENSION": 10,
-    "RENTAL INCOME": 11,
-    "SALARY": 12,
-    "TRADING PROFITS": 13
+  "currency": {
+    "AED": 0,
+    "EUR": 1,
+    "GBP": 2,
+    "INR": 3,
+    "SGD": 4,
+    "USD": 5
   },
-  "refund_chargeback_flag": {
-    "N": 0,
-    "Y": 1
+  "customer_current_risk_score": {
+    "HIGH": 0,
+    "LOW": 1,
+    "MEDIUM": 2
+  },
+  "customer_entity_type": {
+    "GOVERNMENT BODY": 0,
+    "HUF": 1,
+    "INDIVIDUAL": 2,
+    "LLP": 3,
+    "PARTNERSHIP": 4,
+    "PRIVATE LIMITED": 5,
+    "PUBLIC LIMITED": 6,
+    "SOCIETY": 7,
+    "SOLE PROPRIETORSHIP": 8,
+    "TRUST": 9
   },
   "customer_occupation_industry": {
     "AGRICULTURE": 0,
@@ -79,65 +107,17 @@
     "TEXTILES": 25,
     "TRADING": 26
   },
-  "vpn_flag": {
+  "customer_type": {
+    "INDIVIDUAL": 0,
+    "NON-INDIVIDUAL": 1
+  },
+  "emulator_flag": {
     "N": 0,
     "Y": 1
   },
-  "cash_flag": {
+  "hni_flag": {
     "N": 0,
     "Y": 1
-  },
-  "citizenship": {
-    "DUAL - INDIAN/AE": 0,
-    "DUAL - INDIAN/AU": 1,
-    "DUAL - INDIAN/BH": 2,
-    "DUAL - INDIAN/CA": 3,
-    "DUAL - INDIAN/DE": 4,
-    "DUAL - INDIAN/GB": 5,
-    "DUAL - INDIAN/JP": 6,
-    "DUAL - INDIAN/KW": 7,
-    "DUAL - INDIAN/NL": 8,
-    "DUAL - INDIAN/OM": 9,
-    "DUAL - INDIAN/QA": 10,
-    "DUAL - INDIAN/SG": 11,
-    "DUAL - INDIAN/US": 12,
-    "INDIAN": 13,
-    "MISSING": 14
-  },
-  "vkyc_flag": {
-    "N": 0,
-    "Y": 1
-  },
-  "account_category": {
-    "CURRENT": 0,
-    "FIXED DEPOSIT": 1,
-    "NRE": 2,
-    "NRO": 3,
-    "RECURRING DEPOSIT": 4,
-    "SALARY": 5,
-    "SAVINGS": 6
-  },
-  "nationality": {
-    "INDIAN": 0
-  },
-  "transaction_mode_channel_ppi": {
-    "IN-APP TRANSFER": 0,
-    "MISSING": 1,
-    "NFC TAP": 2,
-    "ONLINE": 3,
-    "QR SCAN": 4,
-    "UPI": 5
-  },
-  "beneficial_owner_types": {
-    "CONTROL THROUGH OTHER MEANS": 0,
-    "MISSING": 1,
-    "SENIOR MANAGING OFFICIAL": 2,
-    "SHAREHOLDING > 25%": 3
-  },
-  "passive_nfe": {
-    "MISSING": 0,
-    "N": 1,
-    "Y": 2
   },
   "load_instrument_type": {
     "CREDIT CARD": 0,
@@ -146,71 +126,88 @@
     "NET BANKING": 3,
     "UPI": 4
   },
-  "customer_type": {
-    "INDIVIDUAL": 0,
-    "NON-INDIVIDUAL": 1
+  "merchant_category_code": {
+    "4814": 0,
+    "4899": 1,
+    "5045": 2,
+    "5411": 3,
+    "5541": 4,
+    "5691": 5,
+    "5812": 6,
+    "5816": 7,
+    "5817": 8,
+    "5818": 9,
+    "5912": 10,
+    "5966": 11,
+    "5967": 12,
+    "5999": 13,
+    "6012": 14,
+    "6050": 15,
+    "6051": 16,
+    "6211": 17,
+    "7011": 18,
+    "7801": 19,
+    "7802": 20,
+    "7994": 21,
+    "7995": 22,
+    "8062": 23,
+    "MISSING": 24
   },
-  "authentication_method": {
-    "BIOMETRIC": 0,
-    "MPIN": 1,
-    "OTP": 2,
-    "PASSWORD": 3,
-    "PIN": 4
+  "minor_flag": {
+    "N": 0,
+    "Y": 1
   },
-  "currency": {
-    "AED": 0,
-    "EUR": 1,
-    "GBP": 2,
-    "INR": 3,
-    "SGD": 4,
-    "USD": 5
-  },
-  "customer_entity_type": {
-    "GOVERNMENT BODY": 0,
-    "HUF": 1,
-    "INDIVIDUAL": 2,
-    "LLP": 3,
-    "PARTNERSHIP": 4,
-    "PRIVATE LIMITED": 5,
-    "PUBLIC LIMITED": 6,
-    "SOCIETY": 7,
-    "SOLE PROPRIETORSHIP": 8,
-    "TRUST": 9
+  "nationality": {
+    "INDIAN": 0
   },
   "non_face_to_face_flag": {
     "N": 0,
     "Y": 1
   },
-  "wallet_kyc_category": {
-    "FULL KYC": 0,
-    "MINIMUM KYC": 1,
-    "MISSING": 2
-  },
-  "transaction_status": {
-    "FAILED": 0,
-    "PENDING": 1,
-    "REVERSED": 2,
-    "SUCCESS": 3
-  },
-  "transaction_type_ppi": {
-    "BILL PAY": 0,
-    "CASH OUT": 1,
-    "MISSING": 2,
-    "P2M": 3,
-    "P2P": 4,
-    "RECHARGE": 5
+  "passive_nfe": {
+    "MISSING": 0,
+    "N": 1,
+    "Y": 2
   },
   "pep_flag": {
     "N": 0,
     "Y": 1
   },
-  "hni_flag": {
+  "refund_chargeback_flag": {
     "N": 0,
     "Y": 1
   },
   "residency": {
     "NRI": 0,
     "RESIDENT": 1
+  },
+  "source_of_funds": {
+    "AGRICULTURE INCOME": 0,
+    "BUSINESS INCOME": 1,
+    "BUSINESS REVENUE": 2,
+    "DONATIONS": 3,
+    "FAMILY SUPPORT": 4,
+    "FOREIGN EMPLOYMENT": 5,
+    "GOVERNMENT GRANT": 6,
+    "INVESTMENT": 7,
+    "INVESTMENT RETURNS": 8,
+    "OVERSEAS BUSINESS": 9,
+    "PENSION": 10,
+    "RENTAL INCOME": 11,
+    "SALARY": 12,
+    "TRADING PROFITS": 13
+  },
+  "source_of_funds_wallet": {
+    "BANK TRANSFER": 0,
+    "CREDIT CARD": 1,
+    "DEBIT CARD": 2,
+    "MISSING": 3,
+    "NET BANKING": 4,
+    "UPI": 5
+  },
+  "tax_residency": {
+    "INDIA": 0,
+    "OTHER": 1
   },
   "transaction_mode_channel_bank": {
     "ATM": 0,
@@ -227,40 +224,43 @@
     "SWIFT": 11,
     "UPI": 12
   },
-  "emulator_flag": {
-    "N": 0,
-    "Y": 1
+  "transaction_mode_channel_ppi": {
+    "IN-APP TRANSFER": 0,
+    "MISSING": 1,
+    "NFC TAP": 2,
+    "ONLINE": 3,
+    "QR SCAN": 4,
+    "UPI": 5
+  },
+  "transaction_status": {
+    "FAILED": 0,
+    "PENDING": 1,
+    "REVERSED": 2,
+    "SUCCESS": 3
   },
   "transaction_type_dr_cr": {
     "CR": 0,
     "DR": 1
   },
-  "customer_current_risk_score": {
-    "HIGH": 0,
-    "LOW": 1,
-    "MEDIUM": 2
+  "transaction_type_ppi": {
+    "BILL PAY": 0,
+    "CASH OUT": 1,
+    "MISSING": 2,
+    "P2M": 3,
+    "P2P": 4,
+    "RECHARGE": 5
   },
-  "account_type": {
-    "BASIC": 0,
-    "BSBD": 1,
-    "CORPORATE": 2,
-    "PREMIUM": 3,
-    "REGULAR": 4
+  "vkyc_flag": {
+    "N": 0,
+    "Y": 1
   },
-  "source_of_funds_wallet": {
-    "BANK TRANSFER": 0,
-    "CREDIT CARD": 1,
-    "DEBIT CARD": 2,
-    "MISSING": 3,
-    "NET BANKING": 4,
-    "UPI": 5
+  "vpn_flag": {
+    "N": 0,
+    "Y": 1
   },
-  "account_wallet_status": {
-    "ACTIVE": 0,
-    "DORMANT": 1
-  },
-  "tax_residency": {
-    "INDIA": 0,
-    "OTHER": 1
+  "wallet_kyc_category": {
+    "FULL KYC": 0,
+    "MINIMUM KYC": 1,
+    "MISSING": 2
   }
 }
