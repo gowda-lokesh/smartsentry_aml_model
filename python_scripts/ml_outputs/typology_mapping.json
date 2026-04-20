@@ -1,0 +1,26 @@
+{
+  "typology_to_index": {
+    "Charity Abuse": 0,
+    "Circular Transaction Loop": 1,
+    "Funnel Account Network": 2,
+    "High-Risk Corridor Transfer": 3,
+    "Money Mule Network": 4,
+    "Pass-Through Transit Hub": 5,
+    "Rapid Multi-Hop Layering": 6,
+    "Structuring (Smurfing)": 7,
+    "Third-Party Payment Web": 8,
+    "Underground Banking (Hawala)": 9
+  },
+  "index_to_typology": {
+    "0": "Charity Abuse",
+    "1": "Circular Transaction Loop",
+    "2": "Funnel Account Network",
+    "3": "High-Risk Corridor Transfer",
+    "4": "Money Mule Network",
+    "5": "Pass-Through Transit Hub",
+    "6": "Rapid Multi-Hop Layering",
+    "7": "Structuring (Smurfing)",
+    "8": "Third-Party Payment Web",
+    "9": "Underground Banking (Hawala)"
+  }
+}
