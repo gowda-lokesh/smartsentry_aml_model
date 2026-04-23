@@ -1,27 +1,4 @@
 {
-  "phase1": {
-    "strategy": "Deep+Regularized",
-    "threshold": 0.475,
-    "auc": 0.8825861576766284,
-    "f1": 0.7573911751597088
-  },
-  "phase2": {
-    "config": "Deep+Reg",
-    "accuracy": 0.8018049288441513,
-    "n_classes": 10,
-    "classes": [
-      "Charity Abuse",
-      "Circular Transaction Loop",
-      "Funnel Account Network",
-      "High-Risk Corridor Transfer",
-      "Money Mule Network",
-      "Pass-Through Transit Hub",
-      "Rapid Multi-Hop Layering",
-      "Structuring (Smurfing)",
-      "Third-Party Payment Web",
-      "Underground Banking (Hawala)"
-    ]
-  },
   "features": [
     "rule_acct_closed_90d",
     "rule_age_amount_mismatch",
@@ -256,5 +233,27 @@
     "receiver_acct_outflow_count_1h",
     "sender_cust_inflow_count_24h",
     "sender_cust_inflow_count_1h"
-  ]
+  ],
+  "n_features": 233,
+  "protected_count": 166,
+  "selected_graph_count": 67,
+  "best_strategy": "Deep+Reg",
+  "optimal_threshold": 0.45,
+  "auc_roc": 0.8825861576766284,
+  "f1_score": 0.7565978172634618,
+  "imbalance_ratio": 1.5753017856454163,
+  "n_train": 267100,
+  "n_test": 66775,
+  "isolation_forest": {
+    "auc_roc": 0.494301848580225,
+    "f1_score": 0.38097070196025623,
+    "precision": 0.380056805097106,
+    "recall": 0.38188900458945585,
+    "contamination_rate": 0.3883040059902658,
+    "n_estimators": 200,
+    "agreement_with_lightgbm_pct": 50.460501684762264,
+    "both_flagged_aml": 11240,
+    "iso_only_flagged": 14814,
+    "lgb_only_flagged": 18266
+  }
 }
