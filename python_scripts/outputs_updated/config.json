@@ -13,30 +13,30 @@
   ],
   "date_range_start": "2025-12-01",
   "date_range_end": "2026-03-01",
-  "target_fraud_pct": 0.1,
+  "target_fraud_pct": 0.2,
   "typology_weights": {
-    "Structuring (Smurfing)": 0.12,
-    "Circular Transaction Loop": 0.1,
-    "Funnel Account Network": 0.12,
-    "Pass-Through Transit Hub": 0.1,
-    "Rapid Multi-Hop Layering": 0.1,
-    "Third-Party Payment Web": 0.1,
-    "Money Mule Network": 0.1,
-    "High-Risk Corridor Transfer": 0.08,
-    "Underground Banking (Hawala)": 0.1,
-    "Charity Abuse": 0.08
+    "Structuring (Smurfing)": 0.2,
+    "Circular Transaction Loop": 0.12,
+    "Funnel Account Network": 0.25,
+    "Pass-Through Transit Hub": 0.08,
+    "Rapid Multi-Hop Layering": 0.15,
+    "Third-Party Payment Web": 0.05,
+    "Money Mule Network": 0.05,
+    "High-Risk Corridor Transfer": 0.05,
+    "Underground Banking (Hawala)": 0.03,
+    "Charity Abuse": 0.02
   },
   "avg_txns_per_scenario": {
     "Structuring (Smurfing)": 9,
     "Circular Transaction Loop": 8,
-    "Funnel Account Network": 25,
-    "Pass-Through Transit Hub": 4,
+    "Funnel Account Network": 35,
+    "Pass-Through Transit Hub": 2,
     "Rapid Multi-Hop Layering": 9,
-    "Third-Party Payment Web": 8,
+    "Third-Party Payment Web": 6,
     "Money Mule Network": 12,
-    "High-Risk Corridor Transfer": 5,
-    "Underground Banking (Hawala)": 6,
-    "Charity Abuse": 10
+    "High-Risk Corridor Transfer": 3,
+    "Underground Banking (Hawala)": 4,
+    "Charity Abuse": 8
   },
   "typology_generation": {
     "structuring": {
@@ -371,16 +371,16 @@
   ],
   "fx_probability": 0.03,
   "risk_weights": {
-    "Low": 0.6,
-    "Medium": 0.3,
-    "High": 0.1
+    "Low": 0.4,
+    "Medium": 0.45,
+    "High": 0.15
   },
   "pep_probability": 0.02,
   "hni_probability": 0.05,
-  "minor_probability": 0.03,
+  "minor_probability": 0.01,
   "income_bands": {
     "Low": [
-      100000,
+      200000,
       500000
     ],
     "Medium": [
@@ -641,6 +641,11 @@
     "Salaried - IT",
     "Salaried - Banking",
     "Salaried - Government",
+    "Salaried - Manufacturing",
+    "Salaried - Education",
+    "Salaried - Healthcare",
+    "Salaried - Telecom",
+    "Salaried - Insurance",
     "Self-Employed - Retail",
     "Self-Employed - Professional",
     "Business Owner",
@@ -650,7 +655,9 @@
     "Agriculture",
     "Doctor",
     "Lawyer",
-    "Consultant"
+    "Consultant",
+    "Engineer",
+    "Accountant"
   ],
   "entity_types": [
     "Private Limited",

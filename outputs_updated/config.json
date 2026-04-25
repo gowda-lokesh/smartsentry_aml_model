@@ -13,7 +13,7 @@
   ],
   "date_range_start": "2025-12-01",
   "date_range_end": "2026-03-01",
-  "target_fraud_pct": 0.1,
+  "target_fraud_pct": 0.2,
   "typology_weights": {
     "Structuring (Smurfing)": 0.2,
     "Circular Transaction Loop": 0.12,
@@ -371,16 +371,16 @@
   ],
   "fx_probability": 0.03,
   "risk_weights": {
-    "Low": 0.6,
-    "Medium": 0.3,
-    "High": 0.1
+    "Low": 0.4,
+    "Medium": 0.45,
+    "High": 0.15
   },
   "pep_probability": 0.02,
   "hni_probability": 0.05,
-  "minor_probability": 0.03,
+  "minor_probability": 0.01,
   "income_bands": {
     "Low": [
-      100000,
+      200000,
       500000
     ],
     "Medium": [
@@ -430,7 +430,7 @@
     "5812": "Restaurants",
     "5912": "Drug Stores",
     "4814": "Telecom Services",
-    "6012": "Financial Institutions",
+    "6012": "Cryptocurrency Exchanges",
     "7011": "Hotels/Motels",
     "5691": "Clothing Stores",
     "5045": "Computers/Peripherals",
@@ -439,8 +439,54 @@
     "5999": "Miscellaneous Retail",
     "6051": "Quasi Cash - Money Orders",
     "6211": "Security Brokers/Dealers",
-    "7995": "Gambling/Betting"
+    "7995": "Gambling/Betting",
+    "7994": "Video Game Arcades",
+    "5816": "Digital Goods - Games",
+    "5817": "Digital Goods - Software",
+    "5818": "Digital Goods - Large Digital Marketplace",
+    "7801": "Government Licensed Online Casino",
+    "7802": "Government Licensed Horse Racing",
+    "6050": "Quasi Cash - Crypto",
+    "5967": "Direct Marketing - High Risk",
+    "5966": "Outbound Telemarketing"
   },
+  "high_risk_mccs": [
+    "7995",
+    "7994",
+    "7801",
+    "7802",
+    "6051",
+    "6050",
+    "6012",
+    "5816",
+    "5817",
+    "5818",
+    "5967",
+    "5966"
+  ],
+  "negative_list_names": [
+    "HAWALA TRADERS LLC",
+    "OFFSHORE SHELL CORP",
+    "DARK WEB MERCHANTS",
+    "SANCTIONED ENTITY FZE",
+    "TERROR FINANCE TRUST",
+    "BLOCKED ENTITY PVT LTD"
+  ],
+  "negative_list_devices": [
+    "DEV_BLACKLISTED_001",
+    "DEV_BLACKLISTED_002",
+    "DEV_BLACKLISTED_003"
+  ],
+  "negative_list_ips": [
+    "192.168.99.1",
+    "10.0.0.99",
+    "172.16.99.1"
+  ],
+  "negative_list_vpas": [
+    "scam@upi",
+    "fraud@upi",
+    "blocked@upi"
+  ],
   "bank_channels": [
     "NEFT",
     "RTGS",
@@ -595,6 +641,11 @@
     "Salaried - IT",
     "Salaried - Banking",
     "Salaried - Government",
+    "Salaried - Manufacturing",
+    "Salaried - Education",
+    "Salaried - Healthcare",
+    "Salaried - Telecom",
+    "Salaried - Insurance",
     "Self-Employed - Retail",
     "Self-Employed - Professional",
     "Business Owner",
@@ -604,7 +655,9 @@
     "Agriculture",
     "Doctor",
     "Lawyer",
-    "Consultant"
+    "Consultant",
+    "Engineer",
+    "Accountant"
   ],
   "entity_types": [
     "Private Limited",
