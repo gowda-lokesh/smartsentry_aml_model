@@ -1,3 +1,5 @@
 category,encoded_value
 ACTIVE,0
-DORMANT,1
+CLOSED,1
+DORMANT,2
+FROZEN,3
