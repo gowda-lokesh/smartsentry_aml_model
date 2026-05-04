@@ -1,0 +1,48 @@
+{
+  "phase2": {
+    "best_config": "Deep+Reg",
+    "config_details": {
+      "name": "Deep+Reg",
+      "nl": 127,
+      "md": 10,
+      "mc": 8,
+      "lr": 0.03,
+      "ra": 0.1,
+      "rl": 1.0
+    },
+    "accuracy": 0.7743840487680975,
+    "macro_f1": 0.7479968868773786,
+    "weighted_f1": 0.7770427928166886,
+    "best_iteration": 500,
+    "n_classes": 10,
+    "classes": [
+      "Charity Abuse",
+      "Circular Transaction Loop",
+      "Funnel Account Network",
+      "High-Risk Corridor Transfer",
+      "Money Mule Network",
+      "Pass-Through Transit Hub",
+      "Rapid Multi-Hop Layering",
+      "Structuring (Smurfing)",
+      "Third-Party Payment Web",
+      "Underground Banking (Hawala)"
+    ],
+    "n_features": 151,
+    "n_train": 62992,
+    "n_test": 15748,
+    "all_configs": {
+      "Baseline": {
+        "acc": 0.7690500381000762,
+        "mf1": 0.7428666695839047,
+        "wf1": 0.7718286924112463,
+        "rounds": 500
+      },
+      "Deep+Reg": {
+        "acc": 0.7763525527051054,
+        "mf1": 0.7474613289184782,
+        "wf1": 0.7775963493375284,
+        "rounds": 500
+      }
+    }
+  }
+}
