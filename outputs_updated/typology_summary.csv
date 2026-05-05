@@ -1,11 +1,11 @@
 typology,transaction_count,pct_of_aml
-Charity Abuse,1,0.0
-Circular Transaction Loop,1,0.0
-Funnel Account Network,1,0.0
-High-Risk Corridor Transfer,1,0.0
-Money Mule Network,1,0.0
-Pass-Through Transit Hub,1,0.0
-Rapid Multi-Hop Layering,1,0.0
-Structuring (Smurfing),1,0.0
-Third-Party Payment Web,1,0.0
-Underground Banking (Hawala),1,0.0
+Rapid Multi-Hop Layering,21849,29.99
+High-Risk Corridor Transfer,8001,10.98
+Structuring (Smurfing),7416,10.18
+Charity Abuse,6372,8.75
+Pass-Through Transit Hub,5747,7.89
+Circular Transaction Loop,5468,7.51
+Underground Banking (Hawala),5163,7.09
+Third-Party Payment Web,4348,5.97
+Funnel Account Network,4320,5.93
+Money Mule Network,4170,5.72
