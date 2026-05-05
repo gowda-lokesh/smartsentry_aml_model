@@ -56,7 +56,7 @@ The complete pipeline spans synthetic data generation for model development, gra
 |---|---|---|---|
 | **Data Generation** | `aml_generator_complete_pipeline.ipynb` | CONFIG parameters | `transactions_generated_typology_V2.parquet` |
 | **Typology Detection** | `01__aml_typology_detector.ipynb` | Raw transactions | `stg_transactions_flagged.parquet` |
-| **Rules Engine** | `02__aml_rules_engine.ipynb` | Flagged transactions | `stg_transactions_rules_V2.parquet` |
+| **Rules Engine** | `02__aml_rules_engine.ipynb` | Flagged transactions | `stg_transactions_rules_V3.parquet` |
 | **Feature Engineering** | `03__aml_feature_engineering.ipynb` | Rules output | `stg_transactions_features_V2.parquet` |
 | **Phase 1 Model** | `04__aml_ml_preparation.ipynb` | Features output | Model + predictions + artifacts |
 | **Phase 2 Model** | `05__aml_phase2_typology_classifier.ipynb` | Phase 1 artifacts | Typology probabilities + production tables |
@@ -568,19 +568,6 @@ All plots are saved as PNG files in the output directory for documentation and a
 
 ---
 
-## Future Improvements
-
-- **Graph Neural Networks** for network-level typology detection (Circular, Hawala, Mule)
-- **Entity-level features** (business type, geographic risk) to improve Hawala/Charity classification
-- **Temporal modeling** with true rolling window aggregations for rules (24h/7d windows vs full-period approximations)
-- **XGBoost/CatBoost** ensemble comparison
-- **k-Fold cross-validation** (5-fold) for more robust evaluation
-- **Real-time scoring API** with model serving (FastAPI/Flask)
-- **Explainability** via SHAP values for per-transaction feature attribution
-- **Feedback loop** integration for analyst-confirmed labels to retrain models
-- **Network community detection** to identify transaction clusters before typology classification
-
----
 
 ## Regulatory Alignment
 
@@ -592,15 +579,6 @@ All plots are saved as PNG files in the output directory for documentation and a
 | **FEMA** | Foreign remittance monitoring, cross-border corridor detection |
 | **RBI PPI Guidelines** | Wallet limit monitoring, KYC category-based rules |
 
----
-
-## Contributors
-
-| Role | Name |
-|---|---|
-| ML Engineer | [Your Name] |
-| Domain Expert | [AML Compliance Team] |
-| Data Engineer | [Your Name] |
 
 ---
 
