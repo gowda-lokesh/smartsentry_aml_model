@@ -6,7 +6,7 @@ An end-to-end machine learning pipeline for detecting and classifying money laun
 
 SmartSentry AML is a two-phase detection system designed to identify suspicious financial transactions and classify them into specific money laundering patterns. The framework addresses one of the most critical challenges in banking compliance: distinguishing genuine criminal financial activity from normal business operations across millions of daily transactions.
 
-The system operates in two sequential phases. **Phase 1** performs binary classification — answering the fundamental question "Is this transaction suspicious?" — using a LightGBM gradient boosting model that achieves an AUC of approximately 0.95. Transactions flagged by Phase 1 are then passed to **Phase 2**, which performs multiclass typology classification — answering "What TYPE of money laundering is this?" — across 10 distinct AML patterns with approximately 79% accuracy.
+The system operates in two sequential phases. **Phase 1** performs binary classification — answering the fundamental question "Is this transaction suspicious?" — using a LightGBM gradient boosting model that achieves an AUC of approximately 0.94. Transactions flagged by Phase 1 are then passed to **Phase 2**, which performs **multi-label typology classification** — answering "What TYPE(S) of money laundering is this?" — across 10 distinct AML patterns. Phase 2 reports both a primary typology (the highest-probability class, ~76% accuracy) and the full set of typologies whose probability exceeds a configurable threshold (default 0.30, ~82% recall). The multi-label output reflects real-world AML patterns where a single transaction may legitimately fit multiple money-laundering signatures.
 
 The complete pipeline spans synthetic data generation for model development, graph-based pattern detection for labeling, a 126-rule regulatory compliance engine aligned with RBI and FIU-IND requirements, comprehensive feature engineering covering transaction velocity, account balance behavior, and device/IP risk signals, and finally the two-phase ML modeling framework with hyperparameter tuning, class imbalance handling, and production-ready output generation.
 
@@ -115,15 +115,24 @@ The **training pipeline** uses a typology-aware stratified split that ensures al
 
 ### Module 5: Phase 2 — Typology Classification (`05__aml_phase2_typology_classifier.ipynb`)
 
-Phase 2 is a multiclass classifier that operates exclusively on transactions already flagged as AML by Phase 1. For each flagged transaction, it produces a probability distribution across all 10 typologies — enabling investigators to understand not just that a transaction is suspicious, but what specific pattern of money laundering it most likely represents.
+Phase 2 is a multi-label classifier that operates exclusively on transactions already flagged as AML by Phase 1. For each flagged transaction, it produces a probability distribution across all 10 typologies and emits both a primary prediction (the highest-probability class) and the full set of typologies whose probability crosses a configurable threshold. This dual output reflects how investigators actually reason about money laundering — many real transactions fit more than one signature (a structured cash deposit that is also part of a funnel, a layering hop that is also part of a hawala settlement, etc.) and forcing a single label loses information.
 
 The module loads Phase 1 artifacts (trained model, feature list, train/test splits, metadata) and scores the full dataset with Phase 1 to generate `_phase1_score` as an additional feature for Phase 2. The AML-only subset is then prepared with typology labels, and a stratified split ensures all 10 typologies appear in both training and test sets.
 
-**Typology-discriminating interaction features** are engineered specifically for Phase 2 — these capture signals that distinguish typologies from each other rather than distinguishing AML from clean. Examples include cash × amount (separates Structuring from everything else), cross-border × amount (separates Corridor and Hawala from domestic patterns), inflow/outflow ratio (separates Funnel from Circular), and amount proximity to ₹10,000 (Structuring signal). Account-level scenario features capture the broader context: unique receivers/senders per account, debit-credit ratio, amount coefficient of variation, activity time span, and balanced leg count (discriminates Hawala's matched settlements from Circular's one-directional flow).
+**Typology-discriminating interaction features** are engineered specifically for Phase 2 — these capture signals that distinguish typologies from each other rather than distinguishing AML from clean. Eight interactions are computed: cash × amount (separates Structuring from everything else), cross-border × amount (separates Corridor and Hawala from domestic patterns), per-row rule count (different typologies trigger different rule clusters), counterparties × log(amount) (Funnel/Mule have many, Corridor has few), velocity × balance drain (Pass-Through signal), inflow/outflow ratio (separates Funnel from Circular), proximity to ₹10,000 (Structuring signal), and country-risk × amount (Corridor signal).
 
-**Feature selection** removes features with zero importance for typology classification — many Phase 1 features that excel at separating AML from clean are useless for distinguishing between AML typologies. **Class weights** use inverse-frequency with a rare-class boost (up to 2.5×) for typologies below the median sample count, ensuring the model doesn't ignore rare patterns like Hawala (2,770 transactions) in favor of common ones like Funnel (21,068).
+**Feature selection** trains a quick LightGBM model and removes features with zero gain for typology classification — many Phase 1 features that excel at separating AML from clean are useless for distinguishing between AML typologies. **Class weights** use inverse-frequency with a rare-class boost (up to 2.5×) for typologies below the median sample count, ensuring the model doesn't ignore rare patterns like Hawala in favor of common ones like Funnel or Layering.
 
-Eight hyperparameter configurations are tested with 2,000 maximum rounds and early stopping at 80 patience. The production output table includes the predicted typology, confidence score, investigation priority (Critical/High/Medium/Low), business explanation in plain English, and individual probability columns for each typology — enabling investigators to see alternative hypotheses when the primary prediction confidence is moderate.
+**Hyperparameter tuning** runs three LightGBM configurations in parallel via `ThreadPoolExecutor` (LightGBM releases the GIL during training): Baseline, Deep+Reg (deeper trees with stronger L1/L2), and Wide+Shallow. Each is trained with 500-round boosting and early stopping at 20 patience. The best configuration is chosen by `0.5·accuracy + 0.5·macro_f1` so a strong overall result cannot mask poor recall on rare typologies.
+
+**Multi-label evaluation** is a distinct step. After model selection, the same `y_proba_2` is used to compute both metrics:
+
+- **Primary accuracy** — the argmax prediction matches the true label (~76%).
+- **Multi-label accuracy** — the true label appears in the set of typologies above `TYPOLOGY_THRESHOLD = 0.30` (~82%).
+
+The evaluation cell additionally produces a per-typology recall comparison (primary vs multi-label) and a threshold sensitivity table sweeping from 0.10 to 0.50, so investigators can see the recall/specificity trade-off and pick an operating point that matches their case-load capacity.
+
+**Production output** is built in a single vectorized pass over the full dataset. For each predicted-AML row, the model emits a primary typology, the full set of typologies that crossed the threshold (with confidence percentages inline, e.g. `"Funnel Account Network (87%); Money Mule Network (42%)"`), an investigation priority (Critical / High / Medium / Low), a plain-English business explanation that combines the typology pattern with the specific compliance rules that triggered, individual probability columns for each typology, and audit columns listing both the rule names that fired and a human-readable summary of the top three rules. The full pipeline including rule explanation generation is fully numpy-vectorized and runs in 2–4 minutes on a 4M-row dataset (down from 30+ minutes in the prior per-row implementation).
 
 ---
 
@@ -148,13 +157,16 @@ smartsentry_aml_model/
 │   │   ├── X_train.parquet / X_test.parquet     # Train/test splits
 │   │   └── y_train.parquet / y_test.parquet     # Labels
 │   └── phase2_outputs/                          # Phase 2 model artifacts
-│       ├── phase2_typology_model.txt            # Typology classifier
-│       ├── phase2_metadata.json                 # Class mapping, features
-│       ├── combined_aml_output.parquet          # Full production output
+│       ├── phase2_typology_model.txt            # Trained LightGBM multiclass model
+│       ├── phase1_aml_detection.parquet         # Phase 1 binary output (re-emitted by Phase 2)
+│       ├── phase2_typology_classification.parquet  # Multi-label typology output
+│       ├── combined_aml_output.parquet          # Phase 1 + Phase 2 merged
+│       ├── combined_aml_output.csv              # Same as above, CSV for Excel users
+│       ├── phase2_accuracy_summary.csv          # Headline metrics (primary, multi-label, F1, threshold)
+│       ├── phase2_evaluation.png                # Confusion matrix + recall + threshold sensitivity
+│       ├── model_parameters_full.json           # Full model config + recomputed metrics
 │       └── typology_mapping.json                # Index ↔ typology name
-├── config/                                      # Configuration files
-├── EDA/                                         # Exploratory analysis outputs
-└── README.md
+
 ```
 
 ---
@@ -248,16 +260,16 @@ Controls relative proportion of each AML typology in the generated dataset:
 
 ```python
 "typology_weights": {
-    "Structuring (Smurfing)":       0.12,   # 12% of AML scenarios
+    "Structuring (Smurfing)":       0.10,   # 12% of AML scenarios
     "Circular Transaction Loop":    0.10,
-    "Funnel Account Network":       0.12,
+    "Funnel Account Network":       0.10,
     "Pass-Through Transit Hub":     0.10,
     "Rapid Multi-Hop Layering":     0.10,
     "Third-Party Payment Web":      0.10,
     "Money Mule Network":           0.10,
-    "High-Risk Corridor Transfer":  0.08,
+    "High-Risk Corridor Transfer":  0.10,
     "Underground Banking (Hawala)":  0.10,
-    "Charity Abuse":                0.08,
+    "Charity Abuse":                0.10,
 }
 ```
 
@@ -456,13 +468,17 @@ The detector also includes a **priority-based dedup** system that assigns each t
 
 | Aspect | Detail |
 |---|---|
-| **Algorithm** | LightGBM multiclass |
+| **Algorithm** | LightGBM multiclass (`objective="multiclass"`, `is_unbalance=True`) |
 | **Training Data** | AML transactions only (`is_aml` = 1) |
 | **Classes** | 10 typologies |
+| **Output Mode** | Multi-label — primary typology + all typologies above `TYPOLOGY_THRESHOLD` (default 0.30) |
 | **Class Weights** | Inverse frequency with rare-class boost (up to 2.5×) |
-| **Feature Selection** | Gain-based importance; zero-importance features removed |
-| **Interaction Features** | 8 typology-discriminating + 7 account-level scenario features |
-| **Target Metrics** | Accuracy ≥ 78%, Macro F1 ≥ 0.75 |
+| **Feature Selection** | Gain-based importance; zero-importance features removed via quick 300-round model |
+| **Interaction Features** | 8 typology-discriminating interactions (cash×amt, xborder×amt, rule count, cp×log(amt), drain speed, I/O ratio, ₹10K proximity, country×amt) |
+| **Hyperparameter Tuning** | 3 configs (Baseline, Deep+Reg, Wide+Shallow) in parallel via `ThreadPoolExecutor`, 500 rounds with 20-patience early stopping |
+| **Selection Criterion** | `0.5·accuracy + 0.5·macro_f1` — guards against rare-class neglect |
+| **Reported Metrics** | Primary accuracy (argmax) ≈ 76%, multi-label accuracy (≥0.30) ≈ 82%, macro F1 ≥ 0.75 |
+| **Threshold Calibration** | OOF-guided per-class threshold lowering for biased classes; sensitivity table sweeps 0.10 → 0.50 |
 
 ### Feature Tiers
 
@@ -506,8 +522,27 @@ The detector also includes a **priority-based dedup** system that assigns each t
 | File | Description | Key Columns |
 |---|---|---|
 | `phase1_aml_detection.parquet` | Binary AML scores for all transactions | `fraud_risk_score` (0–100), `alert_source`, `rule_trigger_count` |
-| `phase2_typology_classification.parquet` | Typology probabilities for flagged transactions | `predicted_typology`, `typology_confidence`, `investigation_priority`, `business_explanation` |
+| `phase2_typology_classification.parquet` | Typology probabilities + multi-label flags for flagged transactions | `predicted_typology`, `all_matched_typologies` (e.g. `"Funnel (87%); Mule (42%)"`), `num_typologies_matched`, `typology_confidence`, `investigation_priority`, `rules_triggered_count`, `rules_triggered_list`, `rule_explanation`, `business_explanation`, `prob_<typology>` × 10 |
 | `combined_aml_output.parquet` | Merged Phase 1 + Phase 2 | All columns from both phases |
+
+### Phase 2 Output Fields (Multi-Label)
+
+For every transaction flagged by Phase 1, Phase 2 emits the following columns:
+
+| Column | Description |
+|---|---|
+| `predicted_typology` | Primary typology — the class with the highest probability |
+| `typology_confidence` | Probability of the primary typology (0.0 — 1.0) |
+| `all_matched_typologies` | Semicolon-separated list of every typology whose probability exceeds `TYPOLOGY_THRESHOLD`, with confidence percentages inline. Example: `"Funnel Account Network (87%); Money Mule Network (42%)"`. Always sorted by descending confidence. |
+| `num_typologies_matched` | Count of typologies above threshold (≥ 1) |
+| `prob_<typology>` × 10 | One column per typology with the raw probability — supports custom downstream thresholding |
+| `investigation_priority` | Critical / High / Medium / Low — see below |
+| `rules_triggered_count` | Number of compliance rules that fired for this transaction |
+| `rules_triggered_list` | Semicolon-separated list of `rule_*` column names that fired (full audit trail) |
+| `rule_explanation` | Human-readable summary of the top 3 fired rules (e.g. "Sub-threshold cash structuring detected | FATF/sanctioned country involved | +2 more rules") |
+| `business_explanation` | Combined typology + rule narrative shown to investigators (e.g. `"Multiple inflows from different sources converging into single account | Also flagged: Money Mule Network || Rules: Sub-threshold cash structuring detected | High frequency intrabank transfers"`) |
+
+The multi-label threshold is configurable. The default of 0.30 was chosen from the threshold sensitivity table in evaluation: it adds ~5pp recall over primary-only while keeping the average matched-typologies-per-transaction at ~1.15 (i.e. only ~15% of flagged transactions get a second label). Lowering to 0.10 lifts recall to ~92% but average matches climb to ~1.7 — useful only when investigation cost per case is low.
 
 ### Investigation Priority Logic
 
@@ -562,7 +597,7 @@ Each notebook produces structured console output with progress indicators, diagn
 - **Rules Engine:** Rule trigger diagnostics (% of transactions with ≥1 rule), top 20 most-triggered rules, per-typology rule coverage, rules that never triggered, severity distribution
 - **Feature Engineering:** Feature counts per category, missing value summary, FIS score distribution
 - **Phase 1:** Hyperparameter comparison table, threshold tuning table with eligible zone, per-typology detection rate, feature importance rankings, ROC/PR curves
-- **Phase 2:** Per-typology accuracy with top misclassification, confusion matrix heatmap, accuracy bar chart
+- **Phase 2:** Hyperparameter comparison table (3 configs), best-config selection criterion (`0.5·acc + 0.5·macro_f1`), primary vs multi-label accuracy box, per-typology recall comparison (primary vs multi-label, with status flags ✓ / ⚡ / ⚠), threshold sensitivity table (0.10 → 0.50), confusion matrix heatmap, recall bar chart, threshold-vs-recall curve, multi-label sample examples, alert source distribution, investigation priority distribution, rule-explanation coverage
 
 All plots are saved as PNG files in the output directory for documentation and audit purposes.
 
