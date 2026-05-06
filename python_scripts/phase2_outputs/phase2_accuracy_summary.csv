@@ -1,0 +1,7 @@
+metric,value,note
+primary_accuracy,0.7572575663990118,argmax prediction matches true label
+multi_label_accuracy,0.8177887584928969,true label is in the set of typologies with prob >= 0.3
+macro_f1,0.7457831369272563,macro-averaged F1 (treats all classes equally)
+weighted_f1,0.7671882457360671,F1 weighted by class support
+multi_label_threshold,0.3,probability threshold for multi-label flagging
+n_test_rows,14571.0,number of held-out test transactions
