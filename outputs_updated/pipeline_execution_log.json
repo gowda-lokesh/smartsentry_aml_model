@@ -1,0 +1,59 @@
+{
+  "pipeline_name": "SmartSentry AML",
+  "execution_date": "2026-05-15T13:39:44.291528",
+  "total_elapsed_seconds": 4366.61141371727,
+  "total_elapsed_str": "1:12:46",
+  "notebook_dir": "c:\\Users\\VISHNUPRIYA\\OneDrive\\Desktop\\Freelancing\\AIGEN\\smartsentry_aml_model\\python_scripts",
+  "output_dir": "c:\\Users\\VISHNUPRIYA\\OneDrive\\Desktop\\Freelancing\\AIGEN\\smartsentry_aml_model\\outputs_updated",
+  "stages": [
+    {
+      "stage": "00",
+      "name": "Data Generator",
+      "notebook": "aml_generator_complete_pipeline.ipynb",
+      "status": "SUCCESS",
+      "elapsed_str": "0:00:45",
+      "elapsed_seconds": 45.94515132904053
+    },
+    {
+      "stage": "01",
+      "name": "Typology Detector",
+      "notebook": "01__aml_typology_detector.ipynb",
+      "status": "SUCCESS",
+      "elapsed_str": "0:10:35",
+      "elapsed_seconds": 635.1244194507599
+    },
+    {
+      "stage": "02",
+      "name": "Rules Engine",
+      "notebook": "02__aml_rules_engine.ipynb",
+      "status": "SUCCESS",
+      "elapsed_str": "0:03:32",
+      "elapsed_seconds": 212.45311546325684
+    },
+    {
+      "stage": "03",
+      "name": "Feature Engineering",
+      "notebook": "03__aml_feature_engineering.ipynb",
+      "status": "SUCCESS",
+      "elapsed_str": "0:07:01",
+      "elapsed_seconds": 421.40670442581177
+    },
+    {
+      "stage": "04",
+      "name": "Phase 1: AML Detection",
+      "notebook": "04__aml_ml_preparation.ipynb",
+      "status": "SUCCESS",
+      "elapsed_str": "0:13:02",
+      "elapsed_seconds": 782.5435211658478
+    },
+    {
+      "stage": "05",
+      "name": "Phase 2: Typology Classifier",
+      "notebook": "05__aml_phase2_typology_classifier.ipynb",
+      "status": "SUCCESS",
+      "elapsed_str": "0:37:49",
+      "elapsed_seconds": 2269.1161410808563
+    }
+  ],
+  "overall_status": "SUCCESS"
+}

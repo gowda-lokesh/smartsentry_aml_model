@@ -1,35 +1,31 @@
 rule_column,group,readable_name,severity,regulatory_sn,threshold_type,transactions_triggered,pct_of_total
-rule_integrated_cash_8_5_10L,Cumulative,Integrated Cash 8.5-10L 30d,3,Bank-11,CUM,22168,5.7345
-rule_remit_then_cash_75pct,CrDr Sequence,Remittance then Cash >=75%,3,Bank-21,CUM,9375,2.4252
-rule_negative_list_country,Direct Flag,FATF/Negative List Country,3,"Bank-26|PPI-61,62,63,64",FLAG,6673,1.7262
-rule_structuring_pattern,Cumulative,Structuring Sub-Threshold,3,"Bank-11,16|PPI-3",CUM,4744,1.2272
-rule_foreign_remit_4_5L,Cumulative,Foreign Remit 4-5L 30d,3,Bank-12,CUM,3416,0.8837
-rule_zero_balance_cycling,Lifecycle,Zero Balance Drain Cycling (PPI),3,PPI-31,STATIC,1683,0.4354
-rule_session_integrity,Device,Multi-Auth Multi-Device 30min,3,Bank-69|PPI-58,DYN,1592,0.4118
-rule_ppi_small_kyc_bal_breach,Direct Flag,Small KYC Balance Breach >10K (PPI),3,PPI-2,FLAG,1308,0.3384
-rule_tax_haven_remit,Direct Flag,Tax Haven Remittance,3,Bank-30,FLAG,1103,0.2853
-rule_crypto_then_cash_48h,Device,Crypto then Cash 48h,3,Bank-65|PPI-65,CUM,789,0.2041
-rule_ppi_multi_wallet_device,PPI Wallet,Multi-Wallet Same Device (PPI),3,PPI-43,STATIC,675,0.1746
-rule_pep_large_any,Large Txn DYN,PEP Large Any Type,3,Bank-43,DYN,276,0.0714
-rule_device_hopping,Device,Device/IP Hopping,3,Bank-67|PPI-57,DYN,196,0.0507
-rule_pep_high_velocity,Occupation,PEP + High Velocity/Circular,3,PPI-71,STATIC,144,0.0373
-rule_offshore_entity,Entity,Offshore Entity Transfer,3,Bank-56,DYN,134,0.0347
-rule_npo_receipts_8_5_10L,Cumulative,NPO Receipts 8.5-10L,3,Bank-13,CUM,95,0.0246
-rule_tax_res_mismatch_xborder,Device,Tax Residency Mismatch Cross-Border,3,Bank-63,DYN,95,0.0246
-rule_auth_degrade_high_risk,Device,Auth Degradation + High Risk,3,Bank-62,DYN,92,0.0238
-rule_rapid_burst,Intrabank,Rapid Burst / High Velocity P2P,3,Bank-9|PPI-5,STATIC,83,0.0215
-rule_dormant_activation,Lifecycle,Dormant Account/Wallet Activation,3,"Bank-24,25|PPI-7",STATIC,73,0.0189
-rule_trust_large_cash,Large Txn DYN,Trust Large Cash,3,"Bank-51,54",DYN,52,0.0135
-rule_ppi_w2w_layering,PPI Wallet,Wallet-to-Wallet Layering >3 Hops (PPI),3,PPI-33,STATIC,48,0.0124
-rule_ppi_negative_list_device,Direct Flag,Device/IP/Mobile Negative List (PPI),3,"PPI-65,66",FLAG,44,0.0114
-rule_ppi_refund_abuse,PPI Wallet,Merchant Refund Abuse (PPI),3,PPI-21,FLAG,31,0.008
-rule_shell_company,Device,Shell Company Anomaly,3,Bank-70,STATIC,26,0.0067
-rule_fx_cash_large,Large Txn DYN,FX Cash Large,3,Bank-49,DYN,13,0.0034
-rule_ppi_high_risk_mcc,PPI Wallet,High-Risk MCC >70% Monthly (PPI),3,PPI-12,FLAG,11,0.0028
-rule_ppi_client_reported,Direct Flag,Client-Reported Suspicious (PPI),3,PPI-74,FLAG,7,0.0018
-rule_trust_foreign_remit,Entity,Trust Foreign Remittance,3,Bank-53,DYN,7,0.0018
-rule_ppi_small_kyc_load_breach,Direct Flag,Small KYC Load Breach >10K (PPI),3,PPI-1,FLAG,2,0.0005
-rule_ppi_merchant_passthrough,Entity,Merchant Pass-Through (PPI),3,"PPI-48,49",FLAG,2,0.0005
+rule_negative_list_country,Direct Flag,FATF/Negative List Country,3,"Bank-26|PPI-61,62,63,64",FLAG,1332,1.7228
+rule_remit_then_cash_75pct,CrDr Sequence,Remittance then Cash >=75%,3,Bank-21,CUM,1279,1.6543
+rule_integrated_cash_8_5_10L,Cumulative,Integrated Cash 8.5-10L 30d,3,Bank-11,CUM,940,1.2158
+rule_crypto_then_cash_48h,Device,Crypto then Cash 48h,3,Bank-65|PPI-65,CUM,564,0.7295
+rule_dormant_activation,Lifecycle,Dormant Account/Wallet Activation,3,"Bank-24,25|PPI-7",STATIC,319,0.4126
+rule_ppi_small_kyc_bal_breach,Direct Flag,Small KYC Balance Breach >10K (PPI),3,PPI-2,FLAG,277,0.3583
+rule_foreign_remit_4_5L,Cumulative,Foreign Remit 4-5L 30d,3,Bank-12,CUM,273,0.3531
+rule_tax_haven_remit,Direct Flag,Tax Haven Remittance,3,Bank-30,FLAG,208,0.269
+rule_structuring_pattern,Cumulative,Structuring Sub-Threshold,3,"Bank-11,16|PPI-3",CUM,82,0.1061
+rule_session_integrity,Device,Multi-Auth Multi-Device 30min,3,Bank-69|PPI-58,DYN,72,0.0931
+rule_pep_large_any,Large Txn DYN,PEP Large Any Type,3,Bank-43,DYN,53,0.0686
+rule_npo_receipts_8_5_10L,Cumulative,NPO Receipts 8.5-10L,3,Bank-13,CUM,49,0.0634
+rule_offshore_entity,Entity,Offshore Entity Transfer,3,Bank-56,DYN,38,0.0492
+rule_zero_balance_cycling,Lifecycle,Zero Balance Drain Cycling (PPI),3,PPI-31,STATIC,33,0.0427
+rule_tax_res_mismatch_xborder,Device,Tax Residency Mismatch Cross-Border,3,Bank-63,DYN,31,0.0401
+rule_ppi_multi_wallet_device,PPI Wallet,Multi-Wallet Same Device (PPI),3,PPI-43,STATIC,25,0.0323
+rule_auth_degrade_high_risk,Device,Auth Degradation + High Risk,3,Bank-62,DYN,18,0.0233
+rule_trust_large_cash,Large Txn DYN,Trust Large Cash,3,"Bank-51,54",DYN,15,0.0194
+rule_ppi_negative_list_device,Direct Flag,Device/IP/Mobile Negative List (PPI),3,"PPI-65,66",FLAG,10,0.0129
+rule_fx_cash_large,Large Txn DYN,FX Cash Large,3,Bank-49,DYN,4,0.0052
+rule_trust_foreign_remit,Entity,Trust Foreign Remittance,3,Bank-53,DYN,3,0.0039
+rule_device_hopping,Device,Device/IP Hopping,3,Bank-67|PPI-57,DYN,3,0.0039
+rule_pep_high_velocity,Occupation,PEP + High Velocity/Circular,3,PPI-71,STATIC,3,0.0039
+rule_ppi_high_risk_mcc,PPI Wallet,High-Risk MCC >70% Monthly (PPI),3,PPI-12,FLAG,2,0.0026
+rule_ppi_small_kyc_load_breach,Direct Flag,Small KYC Load Breach >10K (PPI),3,PPI-1,FLAG,1,0.0013
+rule_ppi_client_reported,Direct Flag,Client-Reported Suspicious (PPI),3,PPI-74,FLAG,1,0.0013
+rule_rapid_burst,Intrabank,Rapid Burst / High Velocity P2P,3,Bank-9|PPI-5,STATIC,1,0.0013
 rule_rapid_load_transfer,CrDr Sequence,Rapid Load then Transfer (PPI),3,"PPI-4,51",CUM,0,0.0
 rule_new_wallet_high_value,Lifecycle,New Wallet <7d High Value (PPI),3,PPI-13,STATIC,0,0.0
 rule_short_lived_wallet,Lifecycle,Short-Lived Wallet High Throughput (PPI),3,PPI-37,STATIC,0,0.0
@@ -38,33 +34,35 @@ rule_ppi_adverse_media,Direct Flag,Adverse Media Match (PPI),3,PPI-67,FLAG,0,0.0
 rule_dormant_75pct_drain,Dormant React,Dormant 75% Drain 7d,3,Bank-45,STATIC,0,0.0
 rule_dormant_cash_30pct,Dormant React,Dormant Cash >30% Income,3,Bank-50,PCT,0,0.0
 rule_crypto_nft_large,Entity,Crypto/NFT Large,3,Bank-55,DYN,0,0.0
+rule_ppi_merchant_passthrough,Entity,Merchant Pass-Through (PPI),3,"PPI-48,49",FLAG,0,0.0
 rule_vpn_emu_new_city,Device,VPN/Emu + New City + Large,3,Bank-68,DYN,0,0.0
+rule_shell_company,Device,Shell Company Anomaly,3,Bank-70,STATIC,0,0.0
 rule_ppi_multi_bene_day,PPI Wallet,P2P >15 Unique Beneficiaries/Day (PPI),3,PPI-14,STATIC,0,0.0
+rule_ppi_refund_abuse,PPI Wallet,Merchant Refund Abuse (PPI),3,PPI-21,FLAG,0,0.0
+rule_ppi_w2w_layering,PPI Wallet,Wallet-to-Wallet Layering >3 Hops (PPI),3,PPI-33,STATIC,0,0.0
 rule_ppi_multi_wallet_kyc,PPI Wallet,Multi-Wallet Same PAN/Aadhaar (PPI),3,PPI-44,FLAG,0,0.0
 rule_ppi_cluster_alert,PPI Wallet,Cluster-Level Multi-Wallet Alert (PPI),3,PPI-75,FLAG,0,0.0
-rule_multiple_parties_cash,Cumulative,Multiple Parties Cash Deposit 7d,2,Bank-16,STATIC,26376,6.8231
-rule_vpn_emulator_detected,Device,VPN/Proxy/Emulator/TOR Detected,2,Bank-62|PPI-36,FLAG,15431,3.9918
-rule_high_freq_foreign,Intrabank,High Freq Foreign Remittance 7d,2,Bank-20,STATIC,12451,3.2209
-rule_monthly_limit_exhaustion,Lifecycle,Monthly Limit Exhaustion (PPI),2,PPI-35,STATIC,9494,2.456
-rule_minor_anomalous,Occupation,Minor Anomalous Profile,2,PPI-73,STATIC,8839,2.2865
-rule_remit_then_transfer,CrDr Sequence,Remittance then Transfer Out,2,Bank-23,CUM,6903,1.7857
-rule_ppi_high_risk_mcc_cum,PPI Wallet,High-Risk MCC >30K/Month (PPI),2,PPI-39,FLAG,2516,0.6509
-rule_credit_then_cash,CrDr Sequence,Credit then Cash Withdrawal,2,Bank-18,CUM,1188,0.3073
-rule_new_device_new_loc,Device,New Device + New City + Large,2,Bank-66|PPI-19,DYN,1140,0.2949
-rule_large_cash_individual,Large Txn DYN,Large Cash (Individual),2,Bank-35,DYN,922,0.2385
-rule_series_credits_7d,Frequency,Series of Credits 7d,2,"Bank-3,5",DYN,358,0.0926
-rule_large_cash_business,Large Txn DYN,Large Cash (Business),2,Bank-34,DYN,346,0.0895
-rule_off_hours_activity,Frequency,Off-Hours High Activity,2,Bank-42|PPI-9,DYN,261,0.0675
-rule_partnership_sleeping,Large Txn DYN,Partnership Sleeping Partner Large,2,Bank-44,DYN,187,0.0484
-rule_freq_2x_individual,Frequency,Freq >2x Baseline (Individual),2,Bank-2,DYN,166,0.0429
-rule_large_foreign_indiv,Large Txn DYN,Large Foreign Remit (Individual),2,Bank-47,DYN,118,0.0305
-rule_geo_mismatch_2000km,Device,Geo Mismatch >2000km (PPI),2,PPI-70,STATIC,88,0.0228
-rule_cross_entity_common,Frequency,Cross-Entity Common Person,2,Bank-10,DYN,61,0.0158
-rule_large_foreign_biz,Large Txn DYN,Large Foreign Remit (Business),2,Bank-48,DYN,43,0.0111
-rule_ppi_mcc_switch,PPI Wallet,Merchant MCC Switch (PPI),2,PPI-32,FLAG,42,0.0109
-rule_freq_2x_business,Frequency,Freq >2x Baseline (Business),2,Bank-1,DYN,36,0.0093
-rule_ppi_cashback_cycling,PPI Wallet,Cashback Cycling (PPI),2,PPI-54,FLAG,23,0.0059
-rule_round_amount_struct_7d,Cumulative,Round Amount Structuring >50K/7d,2,PPI-26,CUM,3,0.0008
+rule_multiple_parties_cash,Cumulative,Multiple Parties Cash Deposit 7d,2,Bank-16,STATIC,4838,6.2576
+rule_vpn_emulator_detected,Device,VPN/Proxy/Emulator/TOR Detected,2,Bank-62|PPI-36,FLAG,3055,3.9514
+rule_minor_anomalous,Occupation,Minor Anomalous Profile,2,PPI-73,STATIC,1165,1.5068
+rule_monthly_limit_exhaustion,Lifecycle,Monthly Limit Exhaustion (PPI),2,PPI-35,STATIC,792,1.0244
+rule_credit_then_cash,CrDr Sequence,Credit then Cash Withdrawal,2,Bank-18,CUM,580,0.7502
+rule_ppi_high_risk_mcc_cum,PPI Wallet,High-Risk MCC >30K/Month (PPI),2,PPI-39,FLAG,426,0.551
+rule_remit_then_transfer,CrDr Sequence,Remittance then Transfer Out,2,Bank-23,CUM,347,0.4488
+rule_new_device_new_loc,Device,New Device + New City + Large,2,Bank-66|PPI-19,DYN,246,0.3182
+rule_large_cash_individual,Large Txn DYN,Large Cash (Individual),2,Bank-35,DYN,172,0.2225
+rule_large_cash_business,Large Txn DYN,Large Cash (Business),2,Bank-34,DYN,80,0.1035
+rule_off_hours_activity,Frequency,Off-Hours High Activity,2,Bank-42|PPI-9,DYN,56,0.0724
+rule_freq_2x_individual,Frequency,Freq >2x Baseline (Individual),2,Bank-2,DYN,39,0.0504
+rule_partnership_sleeping,Large Txn DYN,Partnership Sleeping Partner Large,2,Bank-44,DYN,33,0.0427
+rule_large_foreign_indiv,Large Txn DYN,Large Foreign Remit (Individual),2,Bank-47,DYN,30,0.0388
+rule_high_freq_foreign,Intrabank,High Freq Foreign Remittance 7d,2,Bank-20,STATIC,30,0.0388
+rule_geo_mismatch_2000km,Device,Geo Mismatch >2000km (PPI),2,PPI-70,STATIC,18,0.0233
+rule_cross_entity_common,Frequency,Cross-Entity Common Person,2,Bank-10,DYN,14,0.0181
+rule_freq_2x_business,Frequency,Freq >2x Baseline (Business),2,Bank-1,DYN,12,0.0155
+rule_large_foreign_biz,Large Txn DYN,Large Foreign Remit (Business),2,Bank-48,DYN,11,0.0142
+rule_series_credits_7d,Frequency,Series of Credits 7d,2,"Bank-3,5",DYN,0,0.0
+rule_round_amount_struct_7d,Cumulative,Round Amount Structuring >50K/7d,2,PPI-26,CUM,0,0.0
 rule_acct_closed_90d,Lifecycle,Account Closed Within 90d,2,Bank-17,STATIC,0,0.0
 rule_new_indiv_cash_30pct,New Acct Income,New Individual Cash >30% Income,2,Bank-36,PCT,0,0.0
 rule_new_biz_cash_30pct,New Acct Income,New Business Cash >30%,2,Bank-39,PCT,0,0.0
@@ -78,42 +76,43 @@ rule_ppi_load_then_spend,PPI Wallet,Load then P2M/P2P <30min,2,PPI-11,STATIC,0,0
 rule_ppi_split_transfers,PPI Wallet,Split Transfer Pattern (PPI),2,PPI-17,STATIC,0,0.0
 rule_ppi_new_bene_burst,PPI Wallet,P2P >10 New Beneficiaries 7d (PPI),2,PPI-18,STATIC,0,0.0
 rule_ppi_multi_source_day,PPI Wallet,Multi Load Sources Same Day (PPI),2,PPI-29,STATIC,0,0.0
+rule_ppi_mcc_switch,PPI Wallet,Merchant MCC Switch (PPI),2,PPI-32,FLAG,0,0.0
 rule_ppi_load_fail_alt,PPI Wallet,Load Fail then Alt Success (PPI),2,PPI-38,FLAG,0,0.0
 rule_ppi_shared_contact,PPI Wallet,Shared Contact Cluster (PPI),2,PPI-45,FLAG,0,0.0
 rule_ppi_multi_wallet_funding,PPI Wallet,Multi-Wallet Same Funding (PPI),2,PPI-46,FLAG,0,0.0
 rule_ppi_shared_ip_cluster,PPI Wallet,Shared IP Wallet Cluster (PPI),2,PPI-47,FLAG,0,0.0
 rule_ppi_upi_carousel,PPI Wallet,UPI Handle Carousel (PPI),2,PPI-52,FLAG,0,0.0
 rule_ppi_promo_referral,PPI Wallet,Promo Abuse Referral Loop (PPI),2,PPI-53,FLAG,0,0.0
-rule_large_cr_dr_individual,CrDr Sequence,Large Cr then Dr (Individual) 30d,1,Bank-15,DYN,235575,60.9398
-rule_age_amount_mismatch,New Acct Income,Age <25 High Value,1,PPI-28,STATIC,45672,11.8147
-rule_large_cr_dr_business,CrDr Sequence,Large Cr then Dr (Business) 30d,1,Bank-14,DYN,34318,8.8776
-rule_low_income_large,Occupation,Low Income Large Txn,1,,STATIC,28096,7.268
-rule_intra_high_freq,Intrabank,Intrabank High Freq Same Customer,1,Bank-19,STATIC,26948,6.9711
-rule_multi_channel_24h,Device,Multi-Channel >=4 in 24h,1,Bank-61|PPI-61,STATIC,24800,6.4154
-rule_attempted_failed,Direct Flag,Attempted/Failed Transaction,1,Bank-58|PPI-8,FLAG,18579,4.8061
-rule_sole_prop_personal,Direct Flag,Sole Prop Personal Account,1,"Bank-27,28,29",FLAG,16656,4.3087
-rule_unemployed_large,Occupation,Unemployed Large Transfer,1,,STATIC,14154,3.6614
-rule_unusual_type_spike,Lifecycle,Unusual Txn Type Spike,1,Bank-22,STATIC,11155,2.8856
-rule_student_high_value,Occupation,Student High Value,1,,STATIC,7135,1.8457
-rule_repeated_counterparty_7d,Frequency,Repeated Counterparty 7d,1,"Bank-7,8",DYN,6212,1.607
-rule_high_risk_industry,Occupation,High Risk Industry,1,,FLAG,5373,1.3899
-rule_ppi_kyc_expiry_limit,PPI Wallet,KYC Expiry + Limit 95% (PPI),1,PPI-23,STATIC,4425,1.1447
-rule_ppi_kyc_behavior_breach,PPI Wallet,Small KYC Behavioral Breach (PPI),1,PPI-41,STATIC,4305,1.1136
-rule_large_intra_same_cust,New Acct Income,Large Intrabank Same Customer,1,Bank-52,DYN,3253,0.8415
-rule_large_intra_individual,Large Txn DYN,Large Intrabank (Individual),1,Bank-33,DYN,2957,0.7649
-rule_bo_address_mismatch,Entity,BO Address != Reg Office,1,Bank-64,DYN,2653,0.6863
-rule_ppi_bene_concentration,PPI Wallet,Single Beneficiary >60% (PPI),1,PPI-25,STATIC,2113,0.5466
-rule_ppi_name_mismatch,PPI Wallet,Customer-Beneficiary Name Mismatch (PPI),1,PPI-40,FLAG,2026,0.5241
-rule_freelancer_offshore,Occupation,Freelancer Offshore,1,,STATIC,1338,0.3461
-rule_large_intra_business,Large Txn DYN,Large Intrabank (Business),1,Bank-32,DYN,708,0.1831
-rule_series_debits_7d,Frequency,Series of Debits 7d,1,"Bank-4,6",DYN,691,0.1788
-rule_nri_suspicious_domestic,Occupation,NRI Suspicious Domestic (PPI),1,PPI-68,STATIC,272,0.0704
-rule_ppi_cross_state_p2p,Device,Cross-State P2P >5 Cities/24h (PPI),1,PPI-27,STATIC,171,0.0442
-rule_balance_parking,Lifecycle,Balance Parking High Bal Low Activity (PPI),1,PPI-15,STATIC,146,0.0378
-rule_dormant_activation_gen,Dormant React,Dormant Activation General,1,"Bank-24,25",STATIC,75,0.0194
-rule_dormant_business_15d,Lifecycle,Dormant Business 15d,1,Bank-24,STATIC,43,0.0111
-rule_ppi_digital_content,PPI Wallet,High-Risk Digital Content (PPI),1,PPI-50,FLAG,11,0.0028
-rule_ppi_voucher_abuse,PPI Wallet,Voucher Abuse Low-Value Freq (PPI),1,PPI-55,STATIC,8,0.0021
+rule_ppi_cashback_cycling,PPI Wallet,Cashback Cycling (PPI),2,PPI-54,FLAG,0,0.0
+rule_large_cr_dr_individual,CrDr Sequence,Large Cr then Dr (Individual) 30d,1,Bank-15,DYN,6636,8.5832
+rule_low_income_large,Occupation,Low Income Large Txn,1,,STATIC,5688,7.357
+rule_unusual_type_spike,Lifecycle,Unusual Txn Type Spike,1,Bank-22,STATIC,5046,6.5266
+rule_attempted_failed,Direct Flag,Attempted/Failed Transaction,1,Bank-58|PPI-8,FLAG,3757,4.8594
+rule_age_amount_mismatch,New Acct Income,Age <25 High Value,1,PPI-28,STATIC,3444,4.4546
+rule_sole_prop_personal,Direct Flag,Sole Prop Personal Account,1,"Bank-27,28,29",FLAG,3355,4.3394
+rule_unemployed_large,Occupation,Unemployed Large Transfer,1,,STATIC,2847,3.6824
+rule_large_cr_dr_business,CrDr Sequence,Large Cr then Dr (Business) 30d,1,Bank-14,DYN,1489,1.9259
+rule_student_high_value,Occupation,Student High Value,1,,STATIC,1480,1.9143
+rule_high_risk_industry,Occupation,High Risk Industry,1,,FLAG,1098,1.4202
+rule_large_intra_individual,Large Txn DYN,Large Intrabank (Individual),1,Bank-33,DYN,598,0.7735
+rule_bo_address_mismatch,Entity,BO Address != Reg Office,1,Bank-64,DYN,540,0.6985
+rule_ppi_kyc_expiry_limit,PPI Wallet,KYC Expiry + Limit 95% (PPI),1,PPI-23,STATIC,534,0.6907
+rule_ppi_kyc_behavior_breach,PPI Wallet,Small KYC Behavioral Breach (PPI),1,PPI-41,STATIC,441,0.5704
+rule_ppi_name_mismatch,PPI Wallet,Customer-Beneficiary Name Mismatch (PPI),1,PPI-40,FLAG,363,0.4695
+rule_balance_parking,Lifecycle,Balance Parking High Bal Low Activity (PPI),1,PPI-15,STATIC,358,0.463
+rule_dormant_activation_gen,Dormant React,Dormant Activation General,1,"Bank-24,25",STATIC,324,0.4191
+rule_dormant_business_15d,Lifecycle,Dormant Business 15d,1,Bank-24,STATIC,290,0.3751
+rule_freelancer_offshore,Occupation,Freelancer Offshore,1,,STATIC,259,0.335
+rule_ppi_bene_concentration,PPI Wallet,Single Beneficiary >60% (PPI),1,PPI-25,STATIC,235,0.304
+rule_large_intra_business,Large Txn DYN,Large Intrabank (Business),1,Bank-32,DYN,141,0.1824
+rule_multi_channel_24h,Device,Multi-Channel >=4 in 24h,1,Bank-61|PPI-61,STATIC,106,0.1371
+rule_repeated_counterparty_7d,Frequency,Repeated Counterparty 7d,1,"Bank-7,8",DYN,75,0.097
+rule_nri_suspicious_domestic,Occupation,NRI Suspicious Domestic (PPI),1,PPI-68,STATIC,51,0.066
+rule_intra_high_freq,Intrabank,Intrabank High Freq Same Customer,1,Bank-19,STATIC,23,0.0297
+rule_large_intra_same_cust,New Acct Income,Large Intrabank Same Customer,1,Bank-52,DYN,5,0.0065
+rule_ppi_digital_content,PPI Wallet,High-Risk Digital Content (PPI),1,PPI-50,FLAG,3,0.0039
+rule_ppi_cross_state_p2p,Device,Cross-State P2P >5 Cities/24h (PPI),1,PPI-27,STATIC,1,0.0013
+rule_series_debits_7d,Frequency,Series of Debits 7d,1,"Bank-4,6",DYN,0,0.0
 rule_loan_repay_cash,Direct Flag,Loan Repayment Cash,1,Bank-31,FLAG,0,0.0
 rule_insurance_lump,Direct Flag,Insurance Premium Lump Sum,1,Bank-57,FLAG,0,0.0
 rule_new_indiv_noncash_50pct,New Acct Income,New Individual Non-Cash >50% Income,1,Bank-37,PCT,0,0.0
@@ -124,4 +123,5 @@ rule_ip_geo_change,Device,IP Geo Change from 30d Pattern (PPI),1,PPI-20,STATIC,0
 rule_ppi_single_source_load,PPI Wallet,Repeated Load Single Source (PPI),1,PPI-16,STATIC,0,0.0
 rule_ppi_load_source_change,PPI Wallet,Load Source Change >5/30d (PPI),1,PPI-24,STATIC,0,0.0
 rule_ppi_small_kyc_cross_state,PPI Wallet,Small KYC Cross-State P2P (PPI),1,PPI-42,STATIC,0,0.0
+rule_ppi_voucher_abuse,PPI Wallet,Voucher Abuse Low-Value Freq (PPI),1,PPI-55,STATIC,0,0.0
 rule_ppi_high_risk_region,PPI Wallet,High-Risk Domestic Region (PPI),1,PPI-69,FLAG,0,0.0
