@@ -184,9 +184,10 @@ smartsentry_aml_model/
 git clone <repository-url>
 cd smartsentry_aml_model
 
-pip install pandas numpy lightgbm scikit-learn imbalanced-learn \
-            pyarrow matplotlib seaborn
+pip install -r requirements.txt
 ```
+
+Pipeline paths and parameters are centralized in `config/settings.yaml` and `config/generator_config.json`. Notebooks load them via `config/loader.py` — see `config/README.md`.
 
 ### Required Packages
 

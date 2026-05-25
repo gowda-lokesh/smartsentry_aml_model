@@ -1,0 +1,79 @@
+================================================================================
+STDOUT
+================================================================================
+Phase 1 ML — RUN_MODE = PREDICT
+Output dir: C:\Users\VISHNUPRIYA\OneDrive\Desktop\Freelancing\AIGEN\smartsentry_aml_model\python_scripts\ml_outputs
+Connected to 'smartsentry_aml' — PostgreSQL 18.3 on aarch64-unknown-linux-gnu
+Reading public.stg_transactions_features...
+  chunk 1: 50,000 rows loaded
+  chunk 2: 77,314 rows loaded
+Completed: 77,314 rows x 323 cols
+<ArrowStringArray>
+[nan, 'Cash Out', 'P2M', 'Bill Pay', 'Recharge', 'P2P', 'Load']
+Length: 7, dtype: str
+<ArrowStringArray>
+['', 'Cash Out', 'P2M', 'Bill Pay', 'Recharge', 'P2P', 'Load']
+Length: 7, dtype: str
+  is_aml distribution: 0=0  1=0  (0.0%)
+==========================================================================================
+FEATURE CLASSIFICATION — 3-Tier Strategy
+==========================================================================================
+
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  TIER 1 — PROTECTED (always included, no selection)                    │
+  │    Rule flags (binary):           130                                  │
+  │    Core numeric scores:             6                                  │
+  │    Categorical (to encode):        34                                  │
+  ├─────────────────────────────────────────────────────────────────────────┤
+  │  TIER 2 — SELECTABLE (feature selection applied)                       │
+  │    Graph/velocity/balance/IP:      78                                  │
+  ├─────────────────────────────────────────────────────────────────────────┤
+  │  TIER 3 — EXCLUDED                                                     │
+  │    Labels:                          5                                  │
+  │    Identifiers:                    46                                  │
+  │    Post-hoc / leakage:              9                                  │
+  │    Typology/convergence/temporal:    3                                  │
+  │    Internal working:                0                                  │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  Typology-derived columns EXCLUDED (would cause leakage):
+    ✗ convergence_risk
+    ✗ temporal_risk
+    ✗ typology_signal
+Encoding categorical features...
+  Loaded encoders from PostgreSQL (34 columns)
+  Skipping multi-typology debug (predict mode — no test split exists).
+transaction_id                                  str
+timestamp                                       str
+datestamp                                    object
+transaction_amount                          float64
+currency                                        str
+                                       ...         
+loaded_at                       datetime64[us, UTC]
+rule_integrated_cash_8_5_10L                  int64
+rule_foreign_remit_4_5L                       int64
+rule_npo_receipts_8_5_10L                     int64
+rule_cc_cash_1L                               int64
+Length: 323, dtype: object
+======================================================================
+Phase 1 INFERENCE
+======================================================================
+Loading bundle: C:\Users\VISHNUPRIYA\OneDrive\Desktop\Freelancing\AIGEN\smartsentry_aml_model\python_scripts\ml_outputs\phase1_model_bundle.joblib
+  model loaded: phase1_model_bundle
+  Model:       Booster
+  Features:    230
+  Threshold:   0.65
+  Inference matrix: (77314, 230)
+Predicting...
+  Predicted AML:  17,286 (22.36%)
+  Predicted clean: 60,028
+Table truncated: phase1_model_output
+Loaded 77,314 rows into phase1_model_output (replace)
+Rules output written: 77,314 rows x 359 cols
+
+Phase 1 inference complete.
+
+
+================================================================================
+STDERR
+================================================================================

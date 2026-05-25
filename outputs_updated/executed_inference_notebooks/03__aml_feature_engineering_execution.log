@@ -1,0 +1,142 @@
+================================================================================
+STDOUT
+================================================================================
+Connected to 'smartsentry_aml' â€” PostgreSQL 18.3 on aarch64-unknown-linux-gnu
+Reading public.stg_transactions_rules...
+  chunk 1: 50,000 rows loaded
+  chunk 2: 77,314 rows loaded
+Completed: 77,314 rows x 232 cols
+<ArrowStringArray>
+[nan, 'Cash Out', 'Bill Pay', 'P2M', 'Recharge', 'P2P', 'Load']
+Length: 7, dtype: str
+<ArrowStringArray>
+['', 'Cash Out', 'Bill Pay', 'P2M', 'Recharge', 'P2P', 'Load']
+Length: 7, dtype: str
+Run mode: PREDICT
+Index(['transaction_id', 'timestamp', 'datestamp', 'transaction_amount',
+       'currency', 'transaction_type_dr_cr', 'transaction_mode_channel_bank',
+       'cash_flag', 'transaction_type_ppi', 'transaction_mode_channel_ppi',
+       ...
+       'rule_ppi_cluster_alert', 'rule_score', 'rules_triggered',
+       'rules_triggered_count', 'alert_level', 'loaded_at',
+       'rule_integrated_cash_8_5_10L', 'rule_foreign_remit_4_5L',
+       'rule_npo_receipts_8_5_10L', 'rule_cc_cash_1L'],
+      dtype='str', length=232)
+  Pre-labeled AML transactions: 0 (0.00%)
+Key columns:
+  Account         -> customer_account_number
+  Counterparty    -> counterparty_account_number
+  CIF             -> customer_cif_id
+  Amount          -> transaction_amount
+  Type            -> transaction_type_dr_cr
+  Rule Score      -> rule_score
+Datetime parsed. Valid: 77,314
+Computing sender account velocity features...
+  Sender acct: 3,000/4,657...
+  Sender account velocity: 20 columns done
+Computing sender customer velocity features...
+  Sender cust: 2,000/3,251...
+  Sender customer velocity: 20 columns done
+Computing sender balance tracking...
+  Sender balance: 6 columns done
+Computing receiver account velocity + balance features...
+  Building receiver lookup tables...
+  Mapping receiver metrics from counterparty's sender data...
+  Receiver velocity + balance: 26 columns done
+Computing volume balance ratios...
+  Volume balance ratios: 2 columns done
+Computing IP risk score...
+
+IP Risk Score Distribution:
+  Min:    0.000
+  Median: 0.025
+  Mean:   0.067
+  P95:    0.175
+  Max:    0.425
+
+Flag trigger rates:
+  ip_flag_vpn                      3.07%
+  ip_flag_emulator                 0.89%
+  ip_flag_night                    8.99%
+  ip_flag_country_high_risk        0.98%
+  ip_flag_cross_border             5.12%
+  ip_flag_shared_ip               59.67%
+  ip_flag_geo_mismatch             0.00%
+  ip_flag_kyc_verified            66.40%
+
+  IP risk score: 9 columns done (1 score + 8 component flags)
+Computing typology signal (10 sub-signals)...
+
+Typology signal distribution:
+  Zero (no pattern):  75,924 (98.2%)
+  > 0 (some pattern): 1,390 (1.8%)
+  > 0.2 (multi):      0
+  Mean: 0.0018  Max: 0.1800
+
+Sub-signal trigger rates:
+  structuring     :   0.25%
+  circular        :   0.02%
+  funnel          :   0.00%
+  passthrough     :   0.00%
+  layering        :   0.00%
+  third_party     :   0.01%
+  mule            :   0.00%
+  corridor        :   1.41%
+  hawala          :   0.11%
+  charity         :   0.00%
+
+  Typology signal: 11 columns done (1 composite + 10 sub-signals)
+Computing convergence risk...
+  Mean: 0.2003  Median: 0.1767  Max: 0.7067
+  > 0.5: 1,565 txns
+  Convergence risk: 6 columns done (1 composite + 5 components)
+Computing temporal risk...
+  Mean: 0.0465  Max: 0.8000
+  Night: 6,951  Bursts: 1
+  Temporal risk: 6 columns done (1 composite + 5 components)
+Computing Fraud Intensity Score (4 components, no normalization)...
+
+FIS Distribution:
+  Band              Count       %
+  --------------------------------
+  critical          3,849   4.98%
+  high              4,861   6.29%
+  medium            9,127  11.81%
+  low              15,919  20.59%
+  very_low         43,558  56.34%
+
+  Component weights: rule=35, behaviour=30, ip=18, device=17
+  Total weights: 100 (raw score IS the 0-100 score, no normalization)
+
+  Score stats:
+    min=0.00  median=8.09  mean=20.89  max=505.24
+
+  AML   FIS: mean=nan  median=nan  p75=nan
+  Clean FIS: mean=20.2  median=8.1  p75=29.9
+  Separation: nanx
+
+  Fraud Intensity Score: 3 columns done (raw, score, band)
+DONEEE
+transaction_id                   str
+timestamp                        str
+datestamp                     object
+transaction_amount           float64
+currency                         str
+                              ...   
+tr_burst                     float64
+tr_cust_velocity_spike       float64
+fraud_intensity_score_raw    float64
+fraud_intensity_score        float64
+fis_band                         str
+Length: 354, dtype: object
+Dropped 11 internal columns + 20 FIS intermediate columns = 31 total
+(77314, 323)
+Table truncated: stg_transactions_features
+Loaded 77,314 rows into stg_transactions_features (replace)
+Rules output written: 77,314 rows x 323 cols
+DONEEE
+
+
+================================================================================
+STDERR
+================================================================================

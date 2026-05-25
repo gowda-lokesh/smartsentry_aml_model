@@ -1,0 +1,126 @@
+# SmartSentry AML — pipeline settings (from python_scripts orchestrators & ML notebooks)
+# Paths are relative to the repository root unless overridden by environment variables.
+
+project:
+  name: smartsentry-aml
+  python_min: "3.10"
+
+# ── Directory layout (matches notebook os.path.join patterns) ─────────────────
+paths:
+  notebook_dir: python_scripts          # run notebooks from this folder (os.getcwd())
+  outputs_dir: outputs_updated          # parent of notebook_dir
+  phase1_dir:  ml_outputs
+  phase2_dir: phase2_outputs
+  executed_notebooks: outputs_updated/executed_notebooks
+  executed_inference_notebooks: outputs_updated/executed_inference_notebooks
+  # Snapshot written by aml_generator_complete_pipeline.ipynb
+  generator_config_json: config/generator_config.json
+  # Written on each generator run (optional sync target)
+  generator_runtime_json: outputs_updated/config.json
+
+generator:
+  master_seed: 42
+
+# Environment variable overrides (used in notebooks today)
+environment:
+  AML_PIPELINE_MODE: train              # train | predict — training vs inference orchestrator
+  AML_RUN_MODE: train                   # train | predict — Phase 1 / Phase 2 notebook mode
+  AML_DATA_DIR: null                    # optional; defaults to paths.outputs_dir
+  AML_PHASE1_DIR: null                  # optional; defaults to paths.phase1_dir
+  AML_PHASE2_DIR: null                  # optional; defaults to paths.phase2_dir
+  AML_INPUT_FILE: null                  # inference: features parquet for Phase 1 scoring
+  AML_INFERENCE_INPUT: null             # inference orchestrator: raw input parquet
+
+# ── Training pipeline (00__aml_pipeline_orchestrator.ipynb) ───────────────────
+orchestrator:
+  timeout_minutes: 60
+  stop_on_failure: true
+  save_executed_notebooks: true
+  nbconvert_timeout_seconds: 14400      # 4 hours per notebook
+  kernel_name: python3
+  pipeline:
+    - id: "00"
+      notebook: aml_generator_complete_pipeline.ipynb
+      outputs: [transactions_generated_typology.parquet]
+    - id: "01"
+      notebook: 01__aml_typology_detector.ipynb
+      outputs: [stg_transactions_flagged.parquet]
+    - id: "02"
+      notebook: 02__aml_rules_engine.ipynb
+      outputs: [stg_transactions_rules.parquet]
+    - id: "03"
+      notebook: 03__aml_feature_engineering.ipynb
+      outputs: [stg_transactions_features.parquet]
+    - id: "04"
+      notebook: 04__aml_ml_preparation.ipynb
+      outputs:
+        - ml_outputs/final_lgb_model.txt
+        - ml_outputs/phase1_model_bundle.joblib
+        - ml_outputs/model_metadata.json
+    - id: "05"
+      notebook: 05__aml_phase2_typology_classifier.ipynb
+      outputs:
+        - phase2_outputs/phase2_typology_model.txt
+        - phase2_outputs/phase2_model_bundle.joblib
+        - phase2_outputs/combined_aml_output.parquet
+
+# ── Inference pipeline (00b__aml_inference_orchestrator.ipynb) ────────────────
+inference:
+  timeout_minutes: 60
+  stop_on_failure: true
+  save_executed_notebooks: true
+  default_input: outputs_updated/inference_input.parquet
+  required_bundles:
+    - ml_outputs/phase1_model_bundle.joblib
+    - phase2_outputs/phase2_model_bundle.joblib
+  pipeline:
+    - id: "02"
+      notebook: 02__aml_rules_engine.ipynb
+      output: stg_transactions_rules.parquet
+    - id: "03"
+      notebook: 03__aml_feature_engineering.ipynb
+      output: stg_transactions_features.parquet
+    - id: "04"
+      notebook: 04__aml_ml_preparation.ipynb
+      output: ml_outputs/df_ml_phase_1.parquet
+    - id: "05"
+      notebook: 05__aml_phase2_typology_classifier.ipynb
+      output: phase2_outputs/predictions_output.parquet
+
+# ── Phase 1 ML (04__aml_ml_preparation.ipynb) ─────────────────────────────────
+phase1:
+  run_mode: train                       # AML_RUN_MODE
+  target_column: is_aml
+  imbalance: smote                      # also tests class weights in notebook
+  output_artifacts:
+    - final_lgb_model.txt
+    - phase1_model_bundle.joblib
+    - model_metadata.json
+    - label_encoding_maps.pkl
+    - X_train.parquet
+    - X_test.parquet
+    - y_train.parquet
+    - y_test.parquet
+
+# ── Phase 2 ML (05__aml_phase2_typology_classifier.ipynb) ─────────────────────
+phase2:
+  run_mode: train
+  typology_threshold: 0.30              # multi-label probability cutoff
+  num_typologies: 10
+  hyperparameter_tuning:
+    max_workers: 4                      # ThreadPoolExecutor
+    boosting_rounds: 500
+    early_stopping_patience: 20
+  output_artifacts:
+    - phase2_typology_model.txt
+    - phase2_model_bundle.joblib
+    - combined_aml_output.parquet
+    - phase2_typology_classification.parquet
+    - predictions_output.parquet
+
+# ── Intermediate parquet names between stages ─────────────────────────────────
+artifacts:
+  transactions_generated: transactions_generated_typology.parquet
+  flagged: stg_transactions_flagged.parquet
+  rules: stg_transactions_rules.parquet
+  features: stg_transactions_features.parquet
