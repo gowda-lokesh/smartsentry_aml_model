@@ -1,0 +1,108 @@
+# Typology detector thresholds (01__aml_typology_detector.ipynb — DETECT_CONFIG v7)
+# Primary source remains the notebook; this file documents the baseline literals.
+
+version: v7
+description: "84% total recall baseline — Layering over-detects by design"
+
+typology_priority:  # dedup order (most specific first)
+  - structuring
+  - hawala
+  - high_risk_corridor
+  - passthrough
+  - circular
+  - funnel
+  - money_mule
+  - third_party_web
+  - charity_abuse
+  - layering
+
+structuring:
+  cash_threshold: 10000
+  amount_floor_pct: 0.65
+  time_window_days: 14
+  consolidation_window_days: 8
+  min_source_accounts: 3
+  max_links_per_deposit: 3
+  require_convergence: true
+
+circular:
+  time_window_days: 19
+  min_loop_size: 3
+  max_loop_size: 8
+  amount_tolerance_pct: 0.25
+  min_amount: 15000
+  max_other_txns_between_parties: 999
+  min_total_cycle_amount: 12500
+  search_limit: 200000
+  exclude_hawala_signature: true
+  require_closed_loop: true
+
+funnel:
+  time_window_days: 6
+  min_unique_senders: 20
+  outflow_window_days: 11
+  outflow_retention_pct: 0.07
+  min_total_inflow: 150000
+  require_single_sink: true
+
+passthrough:
+  time_gap_minutes: 105
+  retention_pct: 0.08
+  min_amount: 140000
+  min_occurrences: 1
+  require_different_counterparties: true
+  max_net_position_ratio: 0.50
+  require_inflow_before_outflow: true
+
+layering:
+  max_chain_hours: 72
+  min_hops: 3
+  max_hops: 15
+  amount_decay_tolerance: 0.20
+  min_amount: 20000
+  search_limit: 600000
+  require_sequential_chain: true
+
+third_party_web:
+  time_window_days: 11
+  min_unique_payers: 8
+  per_payment_amount_range: [10000, 100000]
+  min_total_inflow: 600000
+  payment_channels: [NEFT, IMPS, UPI]
+  payment_hour_range: [9, 18]
+  require_unrelated_parties: true
+
+money_mule:
+  min_mules: 3
+  controller_amount_range: [16000, 240000]
+  forward_pct_range: [0.75, 0.99]
+  forward_delay_hours: 48
+  channels: [IMPS, UPI, NEFT]
+  hour_range: [0, 23]
+  require_star_pattern: true
+
+high_risk_corridor:
+  amount_range: [50000, 500000]
+  target_countries: [AE, PK, BD, NP, LK, MM, AF]
+  min_transfers_per_account: 3
+  time_window_days: 125
+  channels: [RTGS, NEFT, SWIFT]
+  hour_range: [10, 17]
+
+hawala:
+  num_parties_range: [2, 5]
+  amount_range: [70000, 1300000]
+  amount_tolerance_pct: 0.25
+  time_window_days: 17
+  require_balanced_legs: true
+
+charity_abuse:
+  min_donors: 18
+  donation_amount_range: [1000, 50000]
+  donation_window_days: 16
+  diversion_window_days: 12
+  diversion_retention_pct: 0.25
+  min_total_donation: 45000
+  donation_channels: [UPI, NEFT, IMPS]
+  diversion_hour_range: [8, 18]
+  require_post_collection_diversion: true

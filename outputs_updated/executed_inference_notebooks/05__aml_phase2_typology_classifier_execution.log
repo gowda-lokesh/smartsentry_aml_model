@@ -1,0 +1,47 @@
+================================================================================
+STDOUT
+================================================================================
+Libraries loaded
+Connected to 'smartsentry_aml' â€” PostgreSQL 18.3 on aarch64-unknown-linux-gnu
+Loading Phase 1 artifacts...
+  model loaded: phase1_model_bundle
+  Phase 1 model loaded â€” 230 features, threshold 0.65
+Reading public.phase1_model_output...
+  chunk 1: 50,000 rows loaded
+  chunk 2: 77,314 rows loaded
+Completed: 77,314 rows x 361 cols
+<ArrowStringArray>
+[nan, 'Cash Out', 'P2M', 'Bill Pay', 'Recharge', 'P2P', 'Load']
+Length: 7, dtype: str
+<ArrowStringArray>
+['', 'Cash Out', 'P2M', 'Bill Pay', 'Recharge', 'P2P', 'Load']
+Length: 7, dtype: str
+  Using pre-computed _phase1_score: range [0.0000, 0.9999]
+  Phase 2 feature count: 231 (Phase 1 features + phase1_score)
+======================================================================
+Phase 2 INFERENCE â€” loading saved model bundle
+======================================================================
+  model loaded: phase2_model_bundle
+  Model:     Booster
+  Features:  148
+  Classes:   10
+  Threshold: 0.3
+  Interaction features materialised onto df_ml
+
+â”€â”€ Step 5: Build Production Output â”€â”€
+
+
+================================================================================
+STDERR
+================================================================================
+Traceback (most recent call last):
+  File "C:\Users\VISHNUPRIYA\OneDrive\Desktop\Freelancing\AIGEN\smartsentry_aml_model\python_scripts\05__aml_phase2_typology_classifier.py", line 837, in <module>
+    rule_matrix_np = df_ml[rule_cols].fillna(0).to_numpy(dtype=np.int8)
+  File "C:\Users\VISHNUPRIYA\AppData\Roaming\Python\Python313\site-packages\pandas\core\frame.py", line 2081, in to_numpy
+    result = self._mgr.as_array(dtype=dtype, copy=copy, na_value=na_value)
+  File "C:\Users\VISHNUPRIYA\AppData\Roaming\Python\Python313\site-packages\pandas\core\internals\managers.py", line 1864, in as_array
+    arr = self._interleave(dtype=dtype, na_value=na_value)
+  File "C:\Users\VISHNUPRIYA\AppData\Roaming\Python\Python313\site-packages\pandas\core\internals\managers.py", line 1923, in _interleave
+    result[rl.indexer] = arr
+    ~~~~~~^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: ''
