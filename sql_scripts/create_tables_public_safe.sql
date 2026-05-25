@@ -1,6 +1,5 @@
 -- ========================================================================
 -- SmartSentry AML — table definitions  (schema: public)
--- Generated from Datatables_Schema.xlsx
 -- ========================================================================
 -- Every statement uses IF NOT EXISTS: a table that already exists is left
 -- untouched (PostgreSQL prints a harmless 'skipping' notice). No table or
@@ -51,7 +50,7 @@ CREATE TABLE IF NOT EXISTS customers (
     professional_experience_years              INTEGER,
     source_of_funds                            VARCHAR(64),
     _nri_country                               TEXT,
-    customer_risk_score                        NUMERIC(12,6),
+    customer_risk_score                        TEXT,
     pep_flag                                   VARCHAR(32),
     hni_flag                                   VARCHAR(32),
     minor_flag                                 VARCHAR(32),
@@ -67,7 +66,7 @@ CREATE TABLE IF NOT EXISTS customers (
     address_place_of_business                  TEXT,
     address_beneficial_owners                  TEXT,
     entity_identification_doc_no               VARCHAR(32),
-    cif_beneficial_owners                      BIGINT,
+    cif_beneficial_owners                      VARCHAR(64),
     name_beneficial_owners                     VARCHAR(64),
     PRIMARY KEY (customer_cif)
 );
@@ -111,7 +110,7 @@ CREATE INDEX IF NOT EXISTS idx_wallets_customer_cif ON wallets (customer_cif);
 CREATE INDEX IF NOT EXISTS idx_wallets_wallet_status ON wallets (wallet_status);
 
 -- ─── transactions_generated_typology  (97 columns) ───
-CREATE TABLE IF NOT EXISTS transactions_generated_typology (
+CREATE TABLE IF NOT EXISTS stg_transactions_generated_typology (
     transaction_id                             VARCHAR(32) NOT NULL,
     timestamp                                  VARCHAR(32),
     datestamp                                  DATE,
@@ -131,7 +130,7 @@ CREATE TABLE IF NOT EXISTS transactions_generated_typology (
     beneficiary_wallet_id_vpa                  VARCHAR(64),
     merchant_id                                VARCHAR(32),
     merchant_name                              VARCHAR(64),
-    merchant_category_code                     INTEGER,
+    merchant_category_code                     VARCHAR(32),
     merchant_location                          VARCHAR(64),
     refund_chargeback_flag                     VARCHAR(32),
     customer_account_number                    VARCHAR(32),
@@ -150,7 +149,7 @@ CREATE TABLE IF NOT EXISTS transactions_generated_typology (
     counterparty_name                          VARCHAR(64),
     sender_country_code                        VARCHAR(32),
     receiver_country_code                      VARCHAR(32),
-    customer_current_risk_score                NUMERIC(12,6),
+    customer_current_risk_score                TEXT,
     customer_type                              VARCHAR(64),
     customer_entity_type                       VARCHAR(64),
     account_category                           VARCHAR(64),
@@ -166,7 +165,7 @@ CREATE TABLE IF NOT EXISTS transactions_generated_typology (
     citizenship                                VARCHAR(32),
     residency                                  VARCHAR(32),
     date_of_incorporation                      DATE,
-    place_of_incorporation                     NUMERIC(12,6),
+    place_of_incorporation                     TEXT,
     beneficial_owner_types                     VARCHAR(64),
     passive_nfe                                VARCHAR(32),
     address_registered_office                  TEXT,
@@ -180,7 +179,7 @@ CREATE TABLE IF NOT EXISTS transactions_generated_typology (
     credit_summation_period                    NUMERIC(20,2),
     debit_summation_period                     NUMERIC(20,2),
     professional_experience_years              INTEGER,
-    cif_beneficial_owners                      BIGINT,
+    cif_beneficial_owners                      VARCHAR(64),
     name_beneficial_owners                     VARCHAR(64),
     mobile_number                              VARCHAR(32),
     pan                                        VARCHAR(32),
@@ -211,7 +210,7 @@ CREATE TABLE IF NOT EXISTS transactions_generated_typology (
     typology_group_id                          VARCHAR(64),
     PRIMARY KEY (transaction_id)
 );
-ALTER TABLE transactions_generated_typology ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE stg_transactions_generated_typology ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── stg_transactions_flagged  (97 columns) ───
 CREATE TABLE IF NOT EXISTS stg_transactions_flagged (
@@ -253,7 +252,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_flagged (
     counterparty_name                          VARCHAR(64),
     sender_country_code                        VARCHAR(32),
     receiver_country_code                      VARCHAR(32),
-    customer_current_risk_score                NUMERIC(12,6),
+    customer_current_risk_score                TEXT,
     customer_type                              VARCHAR(64),
     customer_entity_type                       VARCHAR(64),
     account_category                           VARCHAR(64),
@@ -269,7 +268,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_flagged (
     citizenship                                VARCHAR(32),
     residency                                  VARCHAR(32),
     date_of_incorporation                      DATE,
-    place_of_incorporation                     NUMERIC(12,6),
+    place_of_incorporation                     TEXT,
     beneficial_owner_types                     VARCHAR(64),
     passive_nfe                                VARCHAR(32),
     address_registered_office                  TEXT,
@@ -283,7 +282,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_flagged (
     credit_summation_period                    NUMERIC(20,2),
     debit_summation_period                     NUMERIC(20,2),
     professional_experience_years              INTEGER,
-    cif_beneficial_owners                      BIGINT,
+    cif_beneficial_owners                      VARCHAR(64),
     name_beneficial_owners                     VARCHAR(64),
     mobile_number                              VARCHAR(32),
     pan                                        VARCHAR(32),
@@ -356,7 +355,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_rules (
     counterparty_name                          VARCHAR(64),
     sender_country_code                        VARCHAR(32),
     receiver_country_code                      VARCHAR(32),
-    customer_current_risk_score                NUMERIC(12,6),
+    customer_current_risk_score                TEXT,
     customer_type                              VARCHAR(64),
     customer_entity_type                       VARCHAR(64),
     account_category                           VARCHAR(32),
@@ -386,7 +385,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_rules (
     credit_summation_period                    NUMERIC(20,2),
     debit_summation_period                     NUMERIC(20,2),
     professional_experience_years              INTEGER,
-    cif_beneficial_owners                      TEXT,
+    cif_beneficial_owners                      VARCHAR(64),
     name_beneficial_owners                     TEXT,
     mobile_number                              VARCHAR(32),
     pan                                        VARCHAR(32),
@@ -542,6 +541,10 @@ CREATE TABLE IF NOT EXISTS stg_transactions_rules (
     rule_ppi_high_risk_region                  SMALLINT,
     rule_ppi_cluster_alert                     SMALLINT,
     rule_score                                 SMALLINT,
+    rule_integrated_cash_8_5_10L               BIGINT,
+    rule_foreign_remit_4_5L                    BIGINT,
+    rule_npo_receipts_8_5_10L                  BIGINT,
+    rule_cc_cash_1L                            BIGINT,
     rules_triggered                            TEXT,
     rules_triggered_count                      INTEGER,
     alert_level                                VARCHAR(32),
@@ -589,7 +592,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_features (
     counterparty_name                          VARCHAR(64),
     sender_country_code                        VARCHAR(32),
     receiver_country_code                      VARCHAR(32),
-    customer_current_risk_score                NUMERIC(12,6),
+    customer_current_risk_score                TEXT,
     customer_type                              VARCHAR(64),
     customer_entity_type                       VARCHAR(64),
     account_category                           VARCHAR(32),
@@ -619,7 +622,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_features (
     credit_summation_period                    NUMERIC(20,2),
     debit_summation_period                     NUMERIC(20,2),
     professional_experience_years              INTEGER,
-    cif_beneficial_owners                      TEXT,
+    cif_beneficial_owners                      VARCHAR(64),
     name_beneficial_owners                     TEXT,
     mobile_number                              VARCHAR(32),
     pan                                        VARCHAR(32),
@@ -775,6 +778,10 @@ CREATE TABLE IF NOT EXISTS stg_transactions_features (
     rule_ppi_high_risk_region                  SMALLINT,
     rule_ppi_cluster_alert                     SMALLINT,
     rule_score                                 SMALLINT,
+    rule_integrated_cash_8_5_10L               BIGINT,
+    rule_foreign_remit_4_5L                    BIGINT,
+    rule_npo_receipts_8_5_10L                  BIGINT,
+    rule_cc_cash_1L                            BIGINT,
     rules_triggered                            TEXT,
     rules_triggered_count                      INTEGER,
     alert_level                                VARCHAR(32),
@@ -863,7 +870,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_features (
     ip_flag_shared_ip                          SMALLINT,
     ip_flag_geo_mismatch                       SMALLINT,
     ip_flag_kyc_verified                       SMALLINT,
-    typology_signal                            INTEGER,
+    typology_signal                            numeric(12,6),
     convergence_risk                           NUMERIC(12,6),
     temporal_risk                              NUMERIC(12,6),
     fraud_intensity_score_raw                  NUMERIC(12,6),
@@ -874,7 +881,7 @@ CREATE TABLE IF NOT EXISTS stg_transactions_features (
 ALTER TABLE stg_transactions_features ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── df_ml_phase_1  (354 columns) ───
-CREATE TABLE IF NOT EXISTS df_ml_phase_1 (
+CREATE TABLE IF NOT EXISTS phase1_model_output (
     transaction_id                             VARCHAR(32) NOT NULL,
     timestamp                                  VARCHAR(32),
     datestamp                                  DATE,
@@ -1099,6 +1106,10 @@ CREATE TABLE IF NOT EXISTS df_ml_phase_1 (
     rule_ppi_high_risk_region                  SMALLINT,
     rule_ppi_cluster_alert                     SMALLINT,
     rule_score                                 SMALLINT,
+    rule_integrated_cash_8_5_10L               BIGINT,
+    rule_foreign_remit_4_5L                    BIGINT,
+    rule_npo_receipts_8_5_10L                  BIGINT,
+    rule_cc_cash_1L                            BIGINT,
     rules_triggered                            TEXT,
     rules_triggered_count                      INTEGER,
     alert_level                                VARCHAR(32),
@@ -1231,10 +1242,10 @@ CREATE TABLE IF NOT EXISTS df_ml_phase_1 (
     predicted_aml                              INTEGER,
     PRIMARY KEY (transaction_id)
 );
-ALTER TABLE df_ml_phase_1 ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE phase1_model_output ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── combined_aml_output  (25 columns) ───
-CREATE TABLE IF NOT EXISTS combined_aml_output (
+CREATE TABLE IF NOT EXISTS phase2_generated_transactions_final_output (
     transaction_id                             VARCHAR(32) NOT NULL,
     customer_id                                VARCHAR(32),
     amount                                     NUMERIC(20,2),
@@ -1262,12 +1273,12 @@ CREATE TABLE IF NOT EXISTS combined_aml_output (
     prob_underground_banking_hawala            NUMERIC(12,6),
     PRIMARY KEY (transaction_id)
 );
-ALTER TABLE combined_aml_output ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
-CREATE INDEX IF NOT EXISTS idx_combined_aml_output_investigation_priority ON combined_aml_output (investigation_priority);
-CREATE INDEX IF NOT EXISTS idx_combined_aml_output_predicted_typology ON combined_aml_output (predicted_typology);
+ALTER TABLE phase2_generated_transactions_final_output ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+CREATE INDEX IF NOT EXISTS idx_phase2_generated_transactions_final_output_investigation_priority ON phase2_generated_transactions_final_output (investigation_priority);
+CREATE INDEX IF NOT EXISTS idx_phase2_generated_transactions_final_output_predicted_typology ON phase2_generated_transactions_final_output (predicted_typology);
 
 -- ─── predictions_output  (25 columns) ───
-CREATE TABLE IF NOT EXISTS predictions_output (
+CREATE TABLE IF NOT EXISTS phase2_final_predictions_output (
     transaction_id                             VARCHAR(32) NOT NULL,
     customer_id                                VARCHAR(32),
     amount                                     NUMERIC(20,2),
@@ -1295,12 +1306,12 @@ CREATE TABLE IF NOT EXISTS predictions_output (
     prob_underground_banking_hawala            NUMERIC(12,6),
     PRIMARY KEY (transaction_id)
 );
-ALTER TABLE predictions_output ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
-CREATE INDEX IF NOT EXISTS idx_predictions_output_investigation_priority ON predictions_output (investigation_priority);
-CREATE INDEX IF NOT EXISTS idx_predictions_output_predicted_typology ON predictions_output (predicted_typology);
+ALTER TABLE phase2_final_predictions_output ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+CREATE INDEX IF NOT EXISTS idx_phase2_final_predictions_output_investigation_priority ON phase2_final_predictions_output (investigation_priority);
+CREATE INDEX IF NOT EXISTS idx_phase2_final_predictions_output_predicted_typology ON phase2_final_predictions_output (predicted_typology);
 
 -- ─── x_train  (230 columns) ───
-CREATE TABLE IF NOT EXISTS x_train (
+CREATE TABLE IF NOT EXISTS x_train_phase1 (
     rule_acct_closed_90d                       SMALLINT,
     rule_age_amount_mismatch                   SMALLINT,
     rule_attempted_failed                      SMALLINT,
@@ -1432,7 +1443,7 @@ CREATE TABLE IF NOT EXISTS x_train (
     annual_income                              NUMERIC(20,2),
     credit_summation_period                    NUMERIC(20,2),
     debit_summation_period                     NUMERIC(20,2),
-    professional_experience_years              INTEGER,
+    professional_experience_years              NUMERIC(20,2),
     account_category_enc                       INTEGER,
     account_type_enc                           INTEGER,
     account_wallet_status_enc                  INTEGER,
@@ -1530,12 +1541,16 @@ CREATE TABLE IF NOT EXISTS x_train (
     ip_flag_shared_ip                          SMALLINT,
     sender_acct_inflow_count_1h                NUMERIC(20,2),
     sender_cust_inflow_count_1h                NUMERIC(20,2),
-    sender_cust_inflow_count_24h               NUMERIC(20,2)
+    sender_cust_inflow_count_24h               NUMERIC(20,2),
+    rule_cc_cash_1L                            BIGINT,
+    rule_foreign_remit_4_5L                    BIGINT,
+    rule_integrated_cash_8_5_10L               BIGINT,
+    rule_npo_receipts_8_5_10L                  BIGINT
 );
-ALTER TABLE x_train ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE x_train_phase1 ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── x_test  (230 columns) ───
-CREATE TABLE IF NOT EXISTS x_test (
+CREATE TABLE IF NOT EXISTS x_test_phase1 (
     rule_acct_closed_90d                       SMALLINT,
     rule_age_amount_mismatch                   SMALLINT,
     rule_attempted_failed                      SMALLINT,
@@ -1765,26 +1780,30 @@ CREATE TABLE IF NOT EXISTS x_test (
     ip_flag_shared_ip                          SMALLINT,
     sender_acct_inflow_count_1h                NUMERIC(20,2),
     sender_cust_inflow_count_1h                NUMERIC(20,2),
-    sender_cust_inflow_count_24h               NUMERIC(20,2)
+    sender_cust_inflow_count_24h               NUMERIC(20,2),
+    rule_cc_cash_1L                            BIGINT,
+    rule_foreign_remit_4_5L                    BIGINT,
+    rule_integrated_cash_8_5_10L               BIGINT,
+    rule_npo_receipts_8_5_10L                  BIGINT
 );
-ALTER TABLE x_test ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE x_test_phase1 ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── y_train  (1 columns) ───
-CREATE TABLE IF NOT EXISTS y_train (
+CREATE TABLE IF NOT EXISTS y_train_phase1 (
     is_aml                                     INTEGER
 
 );
-ALTER TABLE y_train ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE y_train_phase1 ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── y_test  (1 columns) ───
-CREATE TABLE IF NOT EXISTS y_test (
+CREATE TABLE IF NOT EXISTS y_test_phase1 (
     is_aml                                     INTEGER
 
 );
-ALTER TABLE y_test ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE y_test_phase1 ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
 
 -- ─── run_dashboard  (35 columns) ───
-CREATE TABLE IF NOT EXISTS run_dashboard (
+CREATE TABLE IF NOT EXISTS perfomance_metrics_dashboard (
     run_id                                     VARCHAR(32) NOT NULL,
     timestamp                                  TIMESTAMP,
     mode                                       VARCHAR(32),
@@ -1798,13 +1817,13 @@ CREATE TABLE IF NOT EXISTS run_dashboard (
     p1_f1_score                                NUMERIC(12,6),
     p1_precision                               NUMERIC(12,6),
     p1_recall                                  NUMERIC(12,6),
-    p1_tp                                      INTEGER,
-    p1_fp                                      INTEGER,
-    p1_fn                                      INTEGER,
-    p1_tn                                      INTEGER,
-    p1_n_features                              INTEGER,
-    p1_n_train                                 INTEGER,
-    p1_n_test                                  INTEGER,
+    p1_tp                                      NUMERIC(12,6),
+    p1_fp                                      NUMERIC(12,6),
+    p1_fn                                      NUMERIC(12,6),
+    p1_tn                                      NUMERIC(12,6),
+    p1_n_features                              NUMERIC(12,6),
+    p1_n_train                                 NUMERIC(12,6),
+    p1_n_test                                  NUMERIC(12,6),
     p1_imbalance                               NUMERIC(20,2),
     p2_best_config                             VARCHAR(32),
     p2_accuracy_primary                        NUMERIC(20,4),
@@ -1812,16 +1831,163 @@ CREATE TABLE IF NOT EXISTS run_dashboard (
     p2_multilabel_thresh                       NUMERIC(20,4),
     p2_macro_f1                                NUMERIC(12,6),
     p2_weighted_f1                             NUMERIC(12,6),
-    p2_n_classes                               INTEGER,
-    p2_n_train                                 INTEGER,
-    p2_n_test                                  INTEGER,
-    n_rules                                    INTEGER,
-    n_features_eng                             INTEGER,
-    n_phase1_scored                            INTEGER,
-    n_phase2_predictions                       INTEGER,
-    n_aml_predicted                            INTEGER,
+    p2_n_classes                               NUMERIC(12,6),
+    p2_n_train                                 NUMERIC(12,6),
+    p2_n_test                                  NUMERIC(12,6),
+    n_rules                                    NUMERIC(12,6),
+    n_features_eng                             NUMERIC(12,6),
+    n_phase1_scored                            NUMERIC(12,6),
+    n_phase2_predictions                       NUMERIC(12,6),
+    n_aml_predicted                            NUMERIC(12,6),
     PRIMARY KEY (run_id)
 );
-ALTER TABLE run_dashboard ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
-CREATE INDEX IF NOT EXISTS idx_run_dashboard_mode ON run_dashboard (mode);
-CREATE INDEX IF NOT EXISTS idx_run_dashboard_timestamp ON run_dashboard (timestamp);
+ALTER TABLE perfomance_metrics_dashboard ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+CREATE INDEX IF NOT EXISTS idx_perfomance_metrics_dashboard_mode ON perfomance_metrics_dashboard (mode);
+CREATE INDEX IF NOT EXISTS idx_perfomance_metrics_dashboard_timestamp ON perfomance_metrics_dashboard (timestamp);
+
+CREATE TABLE IF NOT EXISTS model_parameters_full (
+    run_id      VARCHAR(32)  NOT NULL DEFAULT 'default',
+    parameter   VARCHAR(64)  NOT NULL,
+    value       TEXT,
+    loaded_at   TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    PRIMARY KEY (run_id, parameter)
+);
+
+CREATE INDEX IF NOT EXISTS idx_model_params_run ON model_parameters_full (run_id);
+CREATE TABLE IF NOT EXISTS model_parameters_full_phase2 (
+    run_id      VARCHAR(32)  NOT NULL DEFAULT 'default',
+    parameter   VARCHAR(64)  NOT NULL,
+    value       TEXT,
+    loaded_at   TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    PRIMARY KEY (run_id, parameter)
+);
+
+CREATE INDEX IF NOT EXISTS idx_model_params_phase2_run ON model_parameters_full_phase2 (run_id);
+
+
+CREATE TABLE IF NOT EXISTS pipeline_execution_log (
+    run_id              VARCHAR(32)   NOT NULL,
+    pipeline_mode       VARCHAR(16)   NOT NULL,        -- 'train' or 'predict'
+    execution_date      TIMESTAMPTZ   NOT NULL,
+    overall_status      VARCHAR(16)   NOT NULL,        -- 'SUCCESS' / 'FAILED'
+    total_elapsed_sec   NUMERIC(12,2),
+    total_elapsed_str   VARCHAR(16),
+    stages_total        INTEGER,
+    stages_succeeded    INTEGER,
+    stages_failed       INTEGER,
+    stage_detail        JSONB,                          -- per-stage status/timing
+    notebook_dir        TEXT,
+    loaded_at           TIMESTAMPTZ   NOT NULL DEFAULT now(),
+    PRIMARY KEY (run_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_pipeline_log_date ON pipeline_execution_log (execution_date);
+CREATE INDEX IF NOT EXISTS idx_pipeline_log_mode ON pipeline_execution_log (pipeline_mode);
+
+CREATE TABLE IF NOT EXISTS transaction_temp (
+    transaction_id                             VARCHAR(32) NOT NULL,
+    timestamp                                  VARCHAR(32),
+    datestamp                                  DATE,
+    transaction_amount                         NUMERIC(20,2),
+    currency                                   VARCHAR(32),
+    transaction_type_dr_cr                     VARCHAR(32),
+    transaction_mode_channel_bank              VARCHAR(64),
+    cash_flag                                  VARCHAR(32),
+    transaction_type_ppi                       TEXT,
+    transaction_mode_channel_ppi               TEXT,
+    transaction_status                         VARCHAR(32),
+    wallet_balance_before                      TEXT,
+    wallet_balance_after                       TEXT,
+    source_of_funds_wallet                     TEXT,
+    load_instrument_type                       TEXT,
+    load_source_account_card_details           TEXT,
+    beneficiary_wallet_id_vpa                  VARCHAR(64),
+    merchant_id                                VARCHAR(32),
+    merchant_name                              VARCHAR(64),
+    merchant_category_code                     VARCHAR(32),
+    merchant_location                          VARCHAR(64),
+    refund_chargeback_flag                     VARCHAR(32),
+    customer_account_number                    VARCHAR(32),
+    account_wallet_status                      VARCHAR(32),
+    non_face_to_face_flag                      VARCHAR(32),
+    pep_flag                                   VARCHAR(32),
+    hni_flag                                   VARCHAR(32),
+    minor_flag                                 VARCHAR(32),
+    customer_branch_ifsc_code                  VARCHAR(32),
+    customer_cif_id                            VARCHAR(32),
+    customer_cif_creation_date                 DATE,
+    annual_income                              NUMERIC(20,2),
+    counterparty_account_number                VARCHAR(32),
+    counterparty_branch_ifsc_swift             VARCHAR(32),
+    customer_name                              VARCHAR(64),
+    counterparty_name                          VARCHAR(64),
+    sender_country_code                        VARCHAR(32),
+    receiver_country_code                      VARCHAR(32),
+    customer_current_risk_score                TEXT,
+    customer_type                              VARCHAR(64),
+    customer_entity_type                       VARCHAR(64),
+    account_category                           VARCHAR(64),
+    account_type                               VARCHAR(32),
+    account_wallet_opening_date                DATE,
+    customer_occupation_industry               VARCHAR(64),
+    vkyc_flag                                  VARCHAR(32),
+    kyc_update_date                            DATE,
+    account_wallet_inoperative_date            DATE,
+    source_of_funds                            VARCHAR(64),
+    tax_residency                              VARCHAR(32),
+    nationality                                VARCHAR(32),
+    citizenship                                VARCHAR(32),
+    residency                                  VARCHAR(32),
+    date_of_incorporation                      DATE,
+    place_of_incorporation                     TEXT,
+    beneficial_owner_types                     VARCHAR(64),
+    passive_nfe                                VARCHAR(32),
+    address_registered_office                  TEXT,
+    address_place_of_business                  TEXT,
+    address_beneficial_owners                  TEXT,
+    address_individual_customer                TEXT,
+    date_of_birth                              DATE,
+    father_spouse_name                         VARCHAR(64),
+    identification_proof_doc_no                VARCHAR(64),
+    entity_identification_proof_doc_no         VARCHAR(32),
+    credit_summation_period                    NUMERIC(20,2),
+    debit_summation_period                     NUMERIC(20,2),
+    professional_experience_years              INTEGER,
+    cif_beneficial_owners                      VARCHAR(64),
+    name_beneficial_owners                     VARCHAR(64),
+    mobile_number                              VARCHAR(32),
+    pan                                        VARCHAR(32),
+    aadhaar_number                             VARCHAR(32),
+    email_id                                   VARCHAR(41),
+    wallet_kyc_category                        TEXT,
+    wallet_account_id                          VARCHAR(64),
+    escrow_account_linked                      TEXT,
+    transaction_limit_per_txn                  TEXT,
+    daily_transaction_limit                    TEXT,
+    monthly_transaction_limit                  TEXT,
+    annual_transaction_limit                   TEXT,
+    maximum_wallet_balance_limit               TEXT,
+    device_id_fingerprint                      VARCHAR(42),
+    ip_address                                 TEXT,
+    geo_location_city_country                  VARCHAR(64),
+    gps_coordinates_lat                        NUMERIC(20,4),
+    gps_coordinates_lon                        NUMERIC(20,4),
+    browser_app_information                    VARCHAR(64),
+    session_id                                 VARCHAR(34),
+    authentication_method                      VARCHAR(64),
+    vpn_flag                                   VARCHAR(32),
+    emulator_flag                              VARCHAR(32),
+    customer_address_lat                       NUMERIC(20,4),
+    customer_address_lon                       NUMERIC(20,4),
+    is_aml                                     INTEGER,
+    aml_typology                               TEXT,
+    typology_group_id                          VARCHAR(64),
+    PRIMARY KEY (transaction_id)
+);
+ALTER TABLE transaction_temp ADD COLUMN IF NOT EXISTS loaded_at TIMESTAMPTZ DEFAULT now();
+
+CREATE TABLE IF NOT EXISTS model_encoders (
+    run_id TEXT,
+    encoder_name TEXT,
+    encoder_blob BYTEA
+);
