@@ -2,10 +2,10 @@
 STDOUT
 ================================================================================
 Libraries loaded
-Connected to 'smartsentry_aml' â€” PostgreSQL 18.3 on aarch64-unknown-linux-gnu
+Connected to 'smartsentry_aml' — PostgreSQL 18.3 on aarch64-unknown-linux-gnu
 Loading Phase 1 artifacts...
   model loaded: phase1_model_bundle
-  Phase 1 model loaded â€” 230 features, threshold 0.65
+  Phase 1 model loaded — 230 features, threshold 0.65
 Reading public.phase1_model_output...
   chunk 1: 50,000 rows loaded
   chunk 2: 77,314 rows loaded
@@ -19,7 +19,7 @@ Length: 7, dtype: str
   Using pre-computed _phase1_score: range [0.0000, 0.9999]
   Phase 2 feature count: 231 (Phase 1 features + phase1_score)
 ======================================================================
-Phase 2 INFERENCE â€” loading saved model bundle
+Phase 2 INFERENCE — loading saved model bundle
 ======================================================================
   model loaded: phase2_model_bundle
   Model:     Booster
@@ -28,20 +28,94 @@ Phase 2 INFERENCE â€” loading saved model bundle
   Threshold: 0.3
   Interaction features materialised onto df_ml
 
-â”€â”€ Step 5: Build Production Output â”€â”€
+── Step 5: Build Production Output ──
+  [   0.1s] rule matrix built
+  [   0.2s] phase1_output built
+  [   0.2s] predicted-AML rows: 17,286
+  [   0.2s] building rule text for 32,834 rows...
+  [   0.4s] rule explanations done
+  [   0.4s] running model_p2.predict...
+  [   2.3s] predict done, shape=(17286, 10)
+  [   2.3s] building per-row typology text...
+  [   2.4s] typology text built
+  [   2.4s] priorities assigned
+  [   2.4s] combining final explanations...
+  [   2.5s] explanations combined
+  [   2.5s] phase2_output built
+
+  Phase 1: 77,314 rows | Phase 2: 77,314 rows
+  Alert Sources: Rule + ML Confirmed: 8,878 | Rule Triggered: 23,956 | ML Behavioural Alert: 8,408 | Normal: 36,072
+
+  Multi-Label Statistics:
+    Transactions with AML prediction:  17,286
+    With 1 typology matched:           14,386
+    With 2 typologies matched:         2,871
+    With 3+ typologies matched:        29
+
+  Predicted Typology Distribution (primary):
+  Typology                                    Count       %  Avg Matched
+  ──────────────────────────────────────────────────────────────────────
+  Charity Abuse                               1,828   10.6%        1.26
+  Circular Transaction Loop                     420    2.4%        1.54
+  Funnel Account Network                        640    3.7%        1.40
+  High-Risk Corridor Transfer                 1,646    9.5%        1.00
+  Money Mule Network                          2,581   14.9%        1.24
+  Pass-Through Transit Hub                    1,034    6.0%        1.08
+  Rapid Multi-Hop Layering                    3,705   21.4%        1.19
+  Structuring (Smurfing)                      1,660    9.6%        1.01
+  Third-Party Payment Web                     2,231   12.9%        1.17
+  Underground Banking (Hawala)                1,541    8.9%        1.12
+
+  Investigation Priority Distribution:
+    Critical        8,129 (10.5%)
+    High            8,832 (11.4%)
+    Medium         24,281 (31.4%)
+    Low            36,072 (46.7%)
+
+  Sample Phase 2 Output (multi-label examples):
+    TXN213WMJXORU8MF8LT: Charity Abuse (50%); Funnel Account Network (45%)
+      Priority=High | Suspicious donation patterns with high-value transfers to trust/society accounts | Also flagged: Funnel Account Network
+    TXND6BY2QOZQ1GPPHYZ: Circular Transaction Loop (47%); Rapid Multi-Hop Layering (40%)
+      Priority=High | Funds returning to originating account through circular transfer chain | Also flagged: Rapid Multi-Hop Layering || Rules: Large Intra Indivi
+    TXNNPVVV0ZKSD06ELR7: Money Mule Network (51%); Rapid Multi-Hop Layering (34%)
+      Priority=High | Account receiving and forwarding funds with rapid turnover pattern | Also flagged: Rapid Multi-Hop Layering
+    TXNHLU23ELT0P33AXJU: Rapid Multi-Hop Layering (43%); Money Mule Network (33%)
+      Priority=High | Sequential rapid transfers across multiple accounts to obscure trail | Also flagged: Money Mule Network
+    TXNU27NB8PORDEOMUGL: Charity Abuse (46%); Funnel Account Network (33%)
+      Priority=High | Suspicious donation patterns with high-value transfers to trust/society accounts | Also flagged: Funnel Account Network
+    TXNGUYDWVAA90XTPYWN: Charity Abuse (53%); Funnel Account Network (32%)
+      Priority=High | Suspicious donation patterns with high-value transfers to trust/society accounts | Also flagged: Funnel Account Network
+    TXNRICYZ9NF45E5BUDN: Rapid Multi-Hop Layering (58%); Money Mule Network (33%)
+      Priority=Critical | Sequential rapid transfers across multiple accounts to obscure trail | Also flagged: Money Mule Network || Rules: Retired/unemployed large t
+    TXNFMSGKOUFYSRAJZFI: Third-Party Payment Web (44%); Rapid Multi-Hop Layering (41%)
+      Priority=High | Complex web of transfers through multiple third-party intermediaries | Also flagged: Rapid Multi-Hop Layering || Rules: Student high-value t
+  [   2.6s] DONE
+
+── Saving inference outputs ──
+
+Error loading table: duplicate key value violates unique constraint "phase2_final_predictions_output_pkey"
+DETAIL:  Key (transaction_id)=(TXN52PGAXLM8J9DKZHM) already exists.
+CONTEXT:  COPY phase2_final_predictions_output, line 1
+
 
 
 ================================================================================
 STDERR
 ================================================================================
 Traceback (most recent call last):
-  File "C:\Users\VISHNUPRIYA\OneDrive\Desktop\Freelancing\AIGEN\smartsentry_aml_model\python_scripts\05__aml_phase2_typology_classifier.py", line 837, in <module>
-    rule_matrix_np = df_ml[rule_cols].fillna(0).to_numpy(dtype=np.int8)
-  File "C:\Users\VISHNUPRIYA\AppData\Roaming\Python\Python313\site-packages\pandas\core\frame.py", line 2081, in to_numpy
-    result = self._mgr.as_array(dtype=dtype, copy=copy, na_value=na_value)
-  File "C:\Users\VISHNUPRIYA\AppData\Roaming\Python\Python313\site-packages\pandas\core\internals\managers.py", line 1864, in as_array
-    arr = self._interleave(dtype=dtype, na_value=na_value)
-  File "C:\Users\VISHNUPRIYA\AppData\Roaming\Python\Python313\site-packages\pandas\core\internals\managers.py", line 1923, in _interleave
-    result[rl.indexer] = arr
-    ~~~~~~^^^^^^^^^^^^
-ValueError: invalid literal for int() with base 10: ''
+  File "C:\Users\VISHNUPRIYA\OneDrive\Desktop\Freelancing\AIGEN\smartsentry_aml_model\python_scripts\05__aml_phase2_typology_classifier.py", line 1606, in <module>
+    write_table_fast(combined, "phase2_final_predictions_output", mode="append")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\VISHNUPRIYA\OneDrive\Desktop\Freelancing\AIGEN\smartsentry_aml_model\python_scripts\05__aml_phase2_typology_classifier.py", line 1397, in write_table_fast
+    cur.copy_expert(
+    ~~~~~~~~~~~~~~~^
+        copy_sql.as_string(cur),
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+        buffer
+        ^^^^^^
+    )
+    ^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "phase2_final_predictions_output_pkey"
+DETAIL:  Key (transaction_id)=(TXN52PGAXLM8J9DKZHM) already exists.
+CONTEXT:  COPY phase2_final_predictions_output, line 1
+

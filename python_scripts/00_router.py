@@ -105,7 +105,7 @@ def run_pipeline(choice):
     # CHANGED COMMAND FROM nbconvert TO python execution
     # =========================================================
     cmd = [
-        sys.executable, "-u"
+        sys.executable, "-u",
         target_nb,
     ]
 
